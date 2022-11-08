@@ -11,6 +11,4 @@ main.exe: $(OBJ_FILES)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p obj
-	g++ $(CFLAGS) -c  -o $@ -L –lboost_system$<
-
-
+	g++ $(CFLAGS) -c -lm -o $@ $<
