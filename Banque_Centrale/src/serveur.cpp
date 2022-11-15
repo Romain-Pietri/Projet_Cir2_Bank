@@ -58,6 +58,10 @@ string lire(string message){
 void push_BDD(string message){
     //TODO
 }
+string find_bdd_xml(string message){
+      //TODO
+      return "0";
+}
 
 string readmessage(string message, std::vector<Agence> &agences){
       //type de message : Id demande/info demande;
@@ -110,19 +114,34 @@ string readmessage(string message, std::vector<Agence> &agences){
                   break;
             case '3'://recherhce d'un client
                   message.erase(0,2);
+                  res=find_bdd_xml(message);
+                  return res;
                   //TODO
                   break;
-            case '4'://recherche du dernier ID Client
+            case '4'://Recherche et connection
                   message.erase(0,2);
-                  //TODO
+                  //res=find_bdd_xml_id_banque(message);
+                  if(res=="-1"){return "-1";}
+                  else{
+                        //va dans le fichier agence+res et execute client
+                        std::system(("cd.. &&  cd agence"+res+" && ./client").c_str());
+                        return "0";
+                  }
                   break;
-            case '8'://Serveur client opérationnel
+
+            case '8':
                   message.erase(0,2);
                   //TODO
                   break;
             case '9'://Serveur client Fermeture
                   message.erase(0,2);
-                  //TODO
+                  
+                  for(int i=0;i<agences.size();i++){
+                        if(agences[i].getid()==stoi(message)){
+                              agences.erase(agences.begin()+i);
+                              break;
+                        }
+                  }
                   break;
             
       }
