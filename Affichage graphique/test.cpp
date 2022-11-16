@@ -12,10 +12,11 @@ class Input_text{
         bool vide;
         string text;
         bool clicked;
+        bool ispassword;
 
 
     public :
-        Input_text(int posxd, int posyd, int posxf, int posyf){
+        Input_text(int posxd, int posyd, int posxf, int posyf,bool ispassword=false){
             this->posxd = posxd;
             this->posyd = posyd;
             this->posxf = posxf;
@@ -23,6 +24,7 @@ class Input_text{
             this->vide = true;
             this->text = "";
             clicked=false;
+            this->ispassword = ispassword;
         }
         void ajoute_char(char c){
             if(this->vide){
@@ -57,7 +59,17 @@ class Input_text{
             
             sf::Text text;
             text.setFont(font);
-            text.setString(this->text);
+            if(this->ispassword){
+                string s = "";
+                for(int i=0;i<this->text.size();i++){
+                    s += "*";
+                }
+                text.setString(s);
+            }
+            else{
+                text.setString(this->text);
+            }
+            
             text.setCharacterSize(24);
             text.setFillColor(sf::Color(0, 0, 0));
             
@@ -203,7 +215,7 @@ int main()
     shape.setFillColor(sf::Color::Green);
 
     Carre carre(10, 10, 200, 100, 1, 255, 0, 0, "14023", 255, 255, 255);
-    Input_text input(10, 110, 200, 200);
+    Input_text input(10, 110, 200, 200,true);
     bool bugged=false;
     while (window.isOpen())
     {
