@@ -55,9 +55,7 @@ string lire(string message){
 }
 
 
-void push_BDD(string message){
-    //TODO
-}
+
 string find_bdd_xml(string message){
       //TODO
       return "0";
@@ -102,22 +100,29 @@ string readmessage(string message, std::vector<Agence> &agences){
                   }
                   break;
 
+
             case '1'://Mise a jour de BDD apres demande du serveur
                   message.erase(0,2);
                   //push_BDD(message);
                   cout<<"BDD mise a jour"<<endl;
 
                   break;
+
+
             case '2'://Ajout d'un client
                   message.erase(0,2);
                   //TODO
                   break;
+
+
             case '3'://recherhce d'un client
                   message.erase(0,2);
                   res=find_bdd_xml(message);
                   return res;
                   //TODO
                   break;
+
+
             case '4'://Recherche et connection
                   message.erase(0,2);
                   //res=find_bdd_xml_id_banque(message);
@@ -128,11 +133,19 @@ string readmessage(string message, std::vector<Agence> &agences){
                         return "0";
                   }
                   break;
+            case '5'://suprime un client
+                  message.erase(0,2);
+
+
+                  break;
+
 
             case '8':
                   message.erase(0,2);
                   //TODO
                   break;
+
+
             case '9'://Serveur client Fermeture
                   message.erase(0,2);
                   
