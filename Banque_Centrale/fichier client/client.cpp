@@ -82,8 +82,10 @@ void client(){
 }
 int main() {
       //creer un thread pour le serveur
+
       std::thread t1(client);
       t1.join();
+
       
    return 0;
 }

@@ -66,20 +66,30 @@ class Input_text{
                 }
                 text.setString(s);
             }
-            else{
+            else if(!this->vide){
                 text.setString(this->text);
             }
-            
+            else{text.setString("Entrez le texte");}
             text.setCharacterSize(24);
             text.setFillColor(sf::Color(0, 0, 0));
             
-            text.setPosition(posxd+(posxf-posxd)/2-text.getLocalBounds().width/2, posyd+(posyf-posyd)/2-text.getLocalBounds().height/2-5);
+            text.setPosition(18, posyd+(posyf-posyd)/2-text.getLocalBounds().height/2-5);
             window.draw(text);
         }
         void afficher(sf::RenderWindow &window){
             sf::RectangleShape rectangle(sf::Vector2f(posxf-posxd, posyf-posyd));
-            rectangle.setFillColor(sf::Color(255, 255, 255));
+            sf::RectangleShape rectangle2(sf::Vector2f(posxf-posxd+6, posyf-posyd+6));
+            rectangle2.setFillColor(sf::Color(50,50,50));
+            if(clicked){
+                rectangle.setFillColor(sf::Color(200, 200, 200));
+            }
+            else{
+                rectangle.setFillColor(sf::Color(120, 120, 120));
+            }
+            //rectangle.setFillColor(sf::Color(255, 255, 255));
             rectangle.setPosition(posxd, posyd);
+            rectangle2.setPosition(posxd-3, posyd-3);
+            window.draw(rectangle2);
             window.draw(rectangle);
             afficherText(window);
         }
@@ -100,6 +110,7 @@ class Input_text{
 
 
 class Carre{
+
     private:
         int posxd;//position x début
         int posyd;//position y début
@@ -114,6 +125,7 @@ class Carre{
         int gt;
         int bt;
         string text;//texte du carré
+        bool clicked;
     public:
     Carre(){
         this->posxd = 0;
@@ -128,6 +140,7 @@ class Carre{
         this->gt = 0;
         this->bt = 0;
         this->text = "";
+        this->clicked=false;
     }
     Carre(int posxd, int posyd, int posxf, int posyf, int id, int r, int g, int b, string text, int rt, int gt, int bt){//constructeur bien badass
         this->posxd = posxd;
@@ -145,6 +158,7 @@ class Carre{
         carre.setSize(sf::Vector2f(posxf-posxd, posyf-posyd));
         carre.setPosition(posxd, posyd);
         carre.setFillColor(sf::Color(r, g, b));
+        clicked=false;
     }
     Carre(int posxd, int posyd, int posxf, int posyf, int id, int r, int g, int b){
         this->posxd = posxd;
@@ -159,6 +173,7 @@ class Carre{
         carre.setPosition(posxd, posyd);
         carre.setFillColor(sf::Color(r, g, b));
         this->text="";
+        clicked=false;
     }
     void setter(int posxd,int posyd,int posxf,int posyf,int id,int r,int g,int b,string text,int rt,int gt,int bt){
         this->posxd = posxd;
@@ -194,6 +209,12 @@ class Carre{
         window.draw(text);
     }
     void afficher(sf::RenderWindow &window){//appelle cette fonction pour afficher le carrer #obligatoire
+        if(clicked){
+            carre.setFillColor(sf::Color::Green);
+        }
+        else{
+            carre.setFillColor(sf::Color(r, g, b));
+        }
         window.draw(carre);
         afficherText(window);
     }
@@ -207,7 +228,11 @@ class Carre{
         }
         return false;
     }
+    void setclicked(bool a){
+        this->clicked=a;
+    }
 };
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(400, 400), "SFML works!",sf::Style::Close);
@@ -215,7 +240,7 @@ int main()
     shape.setFillColor(sf::Color::Green);
 
     Carre carre(10, 10, 200, 100, 1, 255, 0, 0, "14023", 255, 255, 255);
-    Input_text input(10, 110, 200, 200,true);
+    Input_text input(10, 110, 390, 150);
     bool bugged=false;
     while (window.isOpen())
     {
@@ -230,8 +255,13 @@ int main()
                     }
                     else{input.setClicked(false);}
                     if(carre.isbind(event.mouseButton.x, event.mouseButton.y)){
-                        cout << "carre bind" << endl;
+                        carre.setclicked(true);
                     }
+                }
+            }
+            if(event.type==sf::Event::MouseButtonReleased){
+                if(event.mouseButton.button==sf::Mouse::Left){
+                    carre.setclicked(false);
                 }
             }
          
