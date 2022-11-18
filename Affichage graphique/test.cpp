@@ -81,7 +81,7 @@ class Input_text{
             sf::RectangleShape rectangle2(sf::Vector2f(posxf-posxd+6, posyf-posyd+6));
             rectangle2.setFillColor(sf::Color(50,50,50));
             if(clicked){
-                rectangle.setFillColor(sf::Color(200, 200, 200));
+                rectangle.setFillColor(sf::Color(200, 200, 220));
             }
             else{
                 rectangle.setFillColor(sf::Color(120, 120, 120));
