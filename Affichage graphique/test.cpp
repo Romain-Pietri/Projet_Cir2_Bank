@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <vector>
 using namespace std;
 //g++ test.cpp -o ok.exe  -lsfml-graphics -lsfml-window -lsfml-system 
 
@@ -233,36 +234,65 @@ class Carre{
     }
 };
 
+
+
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(400, 400), "SFML works!",sf::Style::Close);
+    sf::RenderWindow window(sf::VideoMode(900, 800), "SFML works!",sf::Style::Close);
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
-
     Carre carre(10, 10, 200, 100, 1, 255, 0, 0, "14023", 255, 255, 255);
+    Carre carre2(10, 110, 200, 200, 2, 255, 0, 0, "14023", 255, 255, 255);
+    Carre carre3(10, 210, 200, 300, 3, 255, 0, 0, "14023", 255, 255, 255);
+    Carre carre4(10, 310, 200, 400, 4, 255, 0, 0, "14023", 255, 255, 255);
+    Carre carre5(10, 410, 200, 500, 5, 255, 0, 0, "14023", 255, 255, 255);
+
     Input_text input(10, 110, 390, 150);
+    vector <Carre> Boutons;
+    Boutons.push_back(carre);
+    Boutons.push_back(carre2);
+    Boutons.push_back(carre3);
+    Boutons.push_back(carre4);
+    Boutons.push_back(carre5);
+
     bool bugged=false;
     while (window.isOpen())
     {
         sf::Event event;
+        
         while (window.pollEvent(event))
         {
-
+            
             if(event.type==sf::Event::MouseButtonPressed){
                 if(event.mouseButton.button==sf::Mouse::Left){
                     if(input.isbind(event.mouseButton.x, event.mouseButton.y)){
                         input.setClicked(true);
                     }
                     else{input.setClicked(false);}
-                    if(carre.isbind(event.mouseButton.x, event.mouseButton.y)){
-                        carre.setclicked(true);
+                    for(int i=0;i<Boutons.size();i++){
+                        if(Boutons[i].isbind(event.mouseButton.x, event.mouseButton.y)){
+                            Boutons[i].setclicked(true);
+                            if(Boutons[i].getId()==2){
+                                
+                                window.close();
+                            }
+
+                        }
+                        else{
+                            Boutons[i].setclicked(false);
+                        }
                     }
                 }
             }
             if(event.type==sf::Event::MouseButtonReleased){
                 if(event.mouseButton.button==sf::Mouse::Left){
-                    carre.setclicked(false);
+                    for(int i=0;i<Boutons.size();i++){
+                        if(Boutons[i].isbind(event.mouseButton.x, event.mouseButton.y)){
+                            Boutons[i].setclicked(false);
+                        }
+                    }
                 }
+                
             }
          
             if(event.type==sf::Event::TextEntered){
@@ -287,7 +317,9 @@ int main()
         }
 
         window.clear();
-        carre.afficher(window);
+        for(int i=0;i<Boutons.size();i++){
+            Boutons[i].afficher(window);
+        }
         //carre.afficherText(window);
         //window.draw(shape);
         input.afficher(window);

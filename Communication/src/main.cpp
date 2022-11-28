@@ -188,12 +188,20 @@ vector<Client> reader(){
         //parcours les noeuds xml et affiche les comptes banquaires
         
     }
-    cout<<"All values loaded"<<endl;
+    cout<<"All values loaded"<<endl;    
     
+<<<<<<< Updated upstream
     return Bdd_client;
 }
 
 int create_password(string password){
+=======
+}
+
+int main(void)
+{
+   
+>>>>>>> Stashed changes
     //creer un password
     password="passworelfkdddddddddddddddddddddddddddslkvbdslbd";
     unsigned int hashpassword=hash(password.c_str());
