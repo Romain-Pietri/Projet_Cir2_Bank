@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Mybankdata>
-<<<<<<< Updated upstream
 <client id="1">
 <name>John</name>
 <surname>Smith</surname>
@@ -25,31 +24,4 @@
 <idcompte_epargne2>3</idcompte_epargne2>
 <solde_epargne2>3000</solde_epargne2>
 </client>
-=======
-    <client id="1">
-        <name>John</name>
-        <surname>Smith</surname>
-        <age>25</age>
-        <password>1234</password>
-        <idcompte_courant>1</idcompte_courant>
-        <solde_courant>1000</solde_courant>
-        <idcompte_epargne1>2</idcompte_epargne1>
-        <solde_epargne1>2000</solde_epargne1>
-        <idcompte_epargne2>3</idcompte_epargne2>
-        <solde_epargne2>3000</solde_epargne2>
-    </client>
-
-    <client id="2">
-        <name>Eric</name>
-        <surname>Smith</surname>
-        <age>25</age>
-        <password>1234</password>
-        <idcompte_courant>4</idcompte_courant>
-        <solde_courant>1000</solde_courant>
-        <idcompte_epargne1>5</idcompte_epargne1>
-        <solde_epargne1>2000</solde_epargne1>
-        <idcompte_epargne2>6</idcompte_epargne2>
-        <solde_epargne2>3000</solde_epargne2>
-    </client>
->>>>>>> Stashed changes
 </Mybankdata>
