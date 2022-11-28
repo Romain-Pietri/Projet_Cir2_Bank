@@ -190,24 +190,12 @@ vector<Client> reader(){
     }
     cout<<"All values loaded"<<endl;    
     
-<<<<<<< Updated upstream
+
     return Bdd_client;
 }
 
-int create_password(string password){
-=======
-}
 
-int main(void)
-{
-   
->>>>>>> Stashed changes
-    //creer un password
-    password="passworelfkdddddddddddddddddddddddddddslkvbdslbd";
-    unsigned int hashpassword=hash(password.c_str());
-    cout<<"Hashed password : "<<hashpassword<<" Password de base "<<password<<endl;
-    return 0;
-}
+
 
 //ecrire un fichier xml
 void writer(vector<Client> Bdd_client){
