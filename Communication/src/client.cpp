@@ -1,7 +1,14 @@
 #include "client.hpp"
 #include "xml_parser.hpp"
+#include <string>
+#include <iostream>
+#include <vector>
 //g++ client.cpp -o client -L –lboost_system
-
+using std::vector;
+using std::cout;
+using std::endl;
+using std::thread;
+using std::string;
 
 string recup_info(){   
       string id;
@@ -31,13 +38,21 @@ void send_to_serveur(string message){
       boost::asio::write( socket, boost::asio::buffer(msg), error );      
 }
 
+string string_client(Client client){
+      return std::to_string(client.get_id())+"/"+client.get_name()+"/"+client.get_surname()+"/"+std::to_string(client.get_age())+"/"+client.get_password()+"/"+std::to_string(client.get_idcompte_courant())+"/"+std::to_string(client.get_solde_courant())+"/"+std::to_string(client.get_idcompte_epargne1())+"/"+std::to_string(client.get_solde_epargne1())+"/"+std::to_string(client.get_idcompte_epargne2())+"/"+std::to_string(client.get_solde_epargne2())+"\n";
+}
+
 string bdd_to_str(vector<Client> &Bdd_client){
       string message;
       for(int i=0; i<Bdd_client.size(); i++){
-            message+=Bdd_client[i]
+            
+            message+=string_client(Bdd_client[i]);
       }
+      return message;
+      
+}
 
-void client(vector<Client> &Bdd_client){
+void client_thread(vector<Client> &Bdd_client){
       string id= recup_info();
       cout<<id<<endl;
       
@@ -68,8 +83,7 @@ void client(vector<Client> &Bdd_client){
                         send_to_serveur("1/"+id+"/"+bdd_to_str(Bdd_client));
                   }
             }
-     std::this_thread::sleep_for(std::chrono::seconds(3));
-     
+     sleep(3);
      
      }
 }
@@ -82,5 +96,4 @@ int main() {
 
       
    return 0;
-}
-*/
+}*/
