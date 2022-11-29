@@ -4,7 +4,7 @@
 #include "RapidXml/rapidxml.hpp"
 #include "RapidXml/rapidxml_utils.hpp"
 #include "RapidXml/rapidxml_print.hpp"
-
+#include <string>
 #include <fstream>
 #include <time.h>   
 #include "xml_parser.hpp"
@@ -225,4 +225,53 @@ void writer(vector<Client> Bdd_client){
 
 }
     
+int recherche_client(vector<Client> Bdd_client,int id){
+    for(int i=0;i<Bdd_client.size();i++){
+        if(Bdd_client[i].get_id()==id){
+            return i;
+        }
+    }
+    return -1;
+    
+}
+//chercher un client dans la bdd et afficher ses informations
 
+        
+    
+    
+
+  /*  int id=-1;
+    string id1;
+    for(int i=0;i<Bdd_client.size();i++){
+        if(Bdd_client[i].get_name()==name && Bdd_client[i].get_surname()==surname){
+            id=Bdd_client[i].get_id();
+            cout<<"id: "<<id<<endl;
+        Bdd_client[i].print();
+            id1=Bdd_client[i].get_password();
+            cout<<"\n password "<<id1<<endl;
+         Bdd_client[i].print();
+            id=Bdd_client[i].get_idcompte_courant();
+            cout<<"\n id compte courant "<<id<<endl;
+      Bdd_client[i].print();
+            id=Bdd_client[i].get_solde_courant();
+            cout<<"\n solde courant"<<id<<endl;
+     Bdd_client[i].print();
+            id=Bdd_client[i].get_idcompte_epargne1();
+            cout<<"\n id compte epargne1"<<id<<endl;
+       Bdd_client[i].print();
+            id=Bdd_client[i].get_solde_epargne1();
+            cout<<"\n solde epargne1"<<id<<endl;
+           Bdd_client[i].print();
+            id=Bdd_client[i].get_idcompte_epargne2();
+            cout<<"\n id compte epargne2"<<id<<endl;
+            Bdd_client[i].print();
+            id=Bdd_client[i].get_solde_epargne2();
+            cout<<"\n solde epargne2"<<id<<endl;
+            Bdd_client[i].print();
+
+            
+        }
+    }*/
+ 
+
+            

@@ -15,7 +15,7 @@
 <client id="2">
 <name>Thomichou</name>
 <surname>Smith</surname>
-<age>25</age>
+<age>20</age>
 <password>12345</password>
 <idcompte_courant>4</idcompte_courant>
 <solde_courant>1000</solde_courant>

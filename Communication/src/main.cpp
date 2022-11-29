@@ -1,13 +1,19 @@
-
-#include <thread>
+#include <iostream>
+#include <fstream>
 #include <vector>
-#include "moteur.hpp"
+#include "RapidXml/rapidxml.hpp"
+#include "RapidXml/rapidxml_utils.hpp"
+#include "RapidXml/rapidxml_print.hpp"
+#include <string>
+#include <fstream>
 #include "xml_parser.hpp"
 #include "client.hpp"
 using std::vector;
 using std::cout;
 using std::endl;
-using std::thread;
+using std::vector;
+using namespace rapidxml;
+using std::string;
 
 int main(){
     vector<Client> Bdd_client=reader();
@@ -21,4 +27,6 @@ int main(){
     t4.join();
     return 0;
 
+
+        return 0;
 }

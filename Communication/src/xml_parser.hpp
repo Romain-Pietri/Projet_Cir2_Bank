@@ -56,3 +56,4 @@ unsigned int hash(const char* str);
 vector<Client> reader();
 int create_password(string password);
 void writer(vector<Client> Bdd_client);
+int recherche_client(vector<Client> Bdd_client,int id);
