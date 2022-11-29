@@ -30,7 +30,7 @@ Client::Client(){
     solde_epargne2=0;
 }
 
-Client::Client(int id,string name,string surname,int age,string password,int idcompte_courant,int solde_courant,int idcompte_epargne1,int solde_epargne1,int idcompte_epargne2,int solde_epargne2){
+Client::Client(int id,string name,string surname,int age,string password,int idcompte_courant,unsigned int solde_courant,int idcompte_epargne1,unsigned int solde_epargne1,int idcompte_epargne2,unsigned int solde_epargne2){
     this->id=id;
     this->name=name;
     this->surname=surname;
@@ -61,19 +61,19 @@ void Client::set_password(string password){
 void Client::set_idcompte_courant(int idcompte_courant){
         this->idcompte_courant=idcompte_courant;
 }
-void Client::set_solde_courant(int solde_courant){
+void Client::set_solde_courant(unsigned int solde_courant){
         this->solde_courant=solde_courant;
 }
 void Client::set_idcompte_epargne1(int idcompte_epargne1){
         this->idcompte_epargne1=idcompte_epargne1;
 }
-void Client::set_solde_epargne1(int solde_epargne1){
+void Client::set_solde_epargne1(unsigned int solde_epargne1){
         this->solde_epargne1=solde_epargne1;
 }
 void Client::set_idcompte_epargne2(int idcompte_epargne2){
         this->idcompte_epargne2=idcompte_epargne2;
 }
-void Client::set_solde_epargne2(int solde_epargne2){
+void Client::set_solde_epargne2(unsigned int solde_epargne2){
         this->solde_epargne2=solde_epargne2;
 }
 int Client::get_id(){
@@ -94,19 +94,19 @@ string Client::get_password(){
 int Client::get_idcompte_courant(){
         return idcompte_courant;
 }
-int Client::get_solde_courant(){
+unsigned int Client::get_solde_courant(){
         return solde_courant;
 }
 int Client::get_idcompte_epargne1(){
         return idcompte_epargne1;
 }
-int Client::get_solde_epargne1(){
+unsigned int Client::get_solde_epargne1(){
         return solde_epargne1;
 }
 int Client::get_idcompte_epargne2(){
         return idcompte_epargne2;
 }
-int Client::get_solde_epargne2(){
+unsigned int Client::get_solde_epargne2(){
         return solde_epargne2;
 }
 void Client::print(){
@@ -154,11 +154,11 @@ vector<Client> reader(){
     int age;
     string password;
     int idcompte_courant;
-    int solde_courant;
+    unsigned int solde_courant;
     int idcompte_epargne1;
-    int solde_epargne1;
+    unsigned int solde_epargne1;
     int idcompte_epargne2;
-    int solde_epargne2;
+    unsigned int solde_epargne2;
 
     //parcours les noeuds xml et affiche le nom, l'id, et les différents comptes banquaires 
     for(xml_node<> *node = dims->first_node("client"); node; node = node->next_sibling()){
