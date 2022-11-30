@@ -2,11 +2,14 @@
 #include <boost/asio.hpp>
 #include <thread>
 #include <vector>
+#include "xml_parser.hpp"
+#include <string>
 using namespace boost::asio;
 using ip::tcp;
 using std::string;
 using std::cout;
 using std::endl;
+using std::stoi;
 
 
 class Agence{
@@ -45,7 +48,7 @@ void send_(tcp::socket & socket, const string& message) {
 
 string lire(string message){
       string res="";
-      for(int i=0;i<message.size();i++){
+      for(int i=0;i<message.size();++i){
             if(message[i]=='/'){
                   break;
             }
@@ -54,14 +57,112 @@ string lire(string message){
       return res;
 }
 
+bool ishere(vector<Client> &Bdd_client,int id){
+      for(int i=0;i<Bdd_client.size();i++){
+            if(Bdd_client[i].get_id()==id){
+                  return true;
+            }
+      }
+      return false;
+}
+int getindex(vector<Client> &Bdd_client,int id){
+      for(int i=0;i<Bdd_client.size();i++){
+            if(Bdd_client[i].get_id()==id){
+                  return i;
+            }
+      }
+      return -1;
+}
+string getbefore(string message){
+      string res="";
+      for(int i=0;i<message.size();++i){
+            if(message[i]=='\n'){
+                  break;
+            }
+            res+=message[i];
+      }
+      return res;
+}
 
+void push_BDD(string message,vector<Client> &Bdd_client){
+      cout<<"merde"<<endl;
+      
+      cout<<message<<endl;
+      cout<<"ici"<<endl;
+      int id_agence=stoi(lire(message));
+      message.erase(0,lire(message).size()+1);
+      int id;
+      string nom;
+      string prenom;
+      int age;
+      string password;
+      int idcompte_courant;
+      unsigned int solde_courant;
+      int idcompte_epargne1;
+      unsigned int solde_epargne1;
+      int idcompte_epargne2;
+      unsigned int solde_epargne2;
+     
+      int j;
+      for(int i=0;i<message.size();++i){
+            
+            id=stoi(lire(message));
+            
+            message.erase(0,lire(message).size()+1);
+            nom=lire(message);
+            message.erase(0,lire(message).size()+1);
+            prenom=lire(message);
+            message.erase(0,lire(message).size()+1);
+            age=stoi(lire(message));
+            message.erase(0,lire(message).size()+1);
+            password=lire(message);
+            message.erase(0,lire(message).size()+1);
+            idcompte_courant=stoi(lire(message));
+
+            message.erase(0,lire(message).size()+1);
+            solde_courant=stoi(lire(message));
+
+            message.erase(0,lire(message).size()+1);
+            idcompte_epargne1=stoi(lire(message));
+            message.erase(0,lire(message).size()+1);
+            solde_epargne1=stoi(lire(message));
+            message.erase(0,lire(message).size()+1);
+            idcompte_epargne2=stoi(lire(message));
+            message.erase(0,lire(message).size()+1);
+            solde_epargne2=stoi(lire(message));
+            message.erase(0,getbefore(message).size()+1);
+
+           
+
+            if(ishere(Bdd_client,id)){
+                  j=getindex(Bdd_client,id);
+                  Bdd_client[j].set_id(id);
+                  Bdd_client[j].set_name(nom);
+                  Bdd_client[j].set_surname(prenom);
+                  Bdd_client[j].set_age(age);
+                  Bdd_client[j].set_password(password);
+                  Bdd_client[j].set_idcompte_courant(idcompte_courant);
+                  Bdd_client[j].set_solde_courant(solde_courant);
+                  Bdd_client[j].set_idcompte_epargne1(idcompte_epargne1);
+                  Bdd_client[j].set_solde_epargne1(solde_epargne1);
+                  Bdd_client[j].set_idcompte_epargne2(idcompte_epargne2);
+                  Bdd_client[j].set_solde_epargne2(solde_epargne2);
+            }
+            else{
+            Bdd_client.push_back(Client(id,id_agence,nom,prenom,age,password,idcompte_courant,solde_courant,idcompte_epargne1,solde_epargne1,idcompte_epargne2,solde_epargne2));
+            }
+            cout<<message<<endl;
+
+      }
+      writer(Bdd_client);
+}
 
 string find_bdd_xml(string message){
       //TODO
       return "0";
 }
 
-string readmessage(string message, std::vector<Agence> &agences){
+string readmessage(string message, std::vector<Agence> &agences,vector<Client> &clients){
       //type de message : Id demande/info demande;
       string res;
 
@@ -102,8 +203,11 @@ string readmessage(string message, std::vector<Agence> &agences){
 
 
             case '1'://Mise a jour de BDD apres demande du serveur
+                  cout<<"hello"<<endl;
                   message.erase(0,2);
-                  //push_BDD(message);
+                  cout<<"message : "<<message<<endl;
+                  push_BDD(message,clients);
+
                   cout<<"BDD mise a jour"<<endl;
 
                   break;
@@ -165,6 +269,7 @@ string readmessage(string message, std::vector<Agence> &agences){
 int main() {
       cout<<"Serveur en ligne"<<endl;
       std::vector<Agence> agences;
+      vector<Client> Bdd_client=reader();
       string renvoie;
 
     while(1){
@@ -177,8 +282,8 @@ int main() {
       acceptor_.accept(socket_);
       //read operation
       string message = read_(socket_);
-      cout << message << endl;
-      renvoie=readmessage(message,agences);
+      //cout << message << endl;
+      renvoie=readmessage(message,agences, Bdd_client);
       
       if(renvoie=="0"){
             send_(socket_, "ok");
