@@ -1,8 +1,19 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
+#include <unistd.h>
+#include "tinyxml/tinyxml.h"
+#include "tinyxml/tinyxml.cpp"
+#include "tinyxml/tinyxmlerror.cpp"
+#include "tinyxml/tinyxmlparser.cpp"
+#include "tinyxml/tinystr.h"
+#include "tinyxml/tinystr.cpp"
+#include <list>
+TiXmlDocument doc("testxml.xml");
+
 using namespace std;
 //g++ test.cpp -o ok.exe  -lsfml-graphics -lsfml-window -lsfml-system 
+
 
 class Input_text{
     private:
@@ -193,6 +204,9 @@ class Carre{
         carre.setPosition(posxd, posyd);
         carre.setFillColor(sf::Color(r, g, b));
     }
+    void setter_carre(string txt){
+        this->text = txt;
+    }
     void afficherText(sf::RenderWindow &window){
         sf::Font font;
         if (!font.loadFromFile("police.otf"))
@@ -209,8 +223,9 @@ class Carre{
         text.setPosition(posxd+(posxf-posxd)/2-text.getLocalBounds().width/2, posyd+(posyf-posyd)/2-text.getLocalBounds().height/2-5);
         window.draw(text);
     }
-    void afficher(sf::RenderWindow &window){//appelle cette fonction pour afficher le carrer #obligatoire
+    void afficher(sf::RenderWindow &window){//appelle cette fonction pour afficher le carre #obligatoire
         if(clicked){
+           
             carre.setFillColor(sf::Color::Green);
         }
         else{
@@ -218,6 +233,7 @@ class Carre{
         }
         window.draw(carre);
         afficherText(window);
+
     }
    
     int getId(){
@@ -234,35 +250,63 @@ class Carre{
     }
 };
 
+class client{
+    public:
+        string id,name;
+};
 
-
-int main()
-{
+int main(){
     sf::RenderWindow window(sf::VideoMode(900, 800), "SFML works!",sf::Style::Close);
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
-    Carre carre(10, 10, 200, 100, 1, 255, 0, 0, "14023", 255, 255, 255);
-    Carre carre2(10, 110, 200, 200, 2, 255, 0, 0, "14023", 255, 255, 255);
-    Carre carre3(10, 210, 200, 300, 3, 255, 0, 0, "14023", 255, 255, 255);
-    Carre carre4(10, 310, 200, 400, 4, 255, 0, 0, "14023", 255, 255, 255);
-    Carre carre5(10, 410, 200, 500, 5, 255, 0, 0, "14023", 255, 255, 255);
 
-    Input_text input(10, 110, 390, 150);
+    Carre texte_bienvenu(420, 50, 480, 150, 3, 255, 243, 216, "Bienvenue ! Que voulez vous faire ?", 115, 0, 0);
+    Carre fond(0,0,900,800,2, 255,243,216);
+    Carre texte_banque(450, 10, 450, 50, 1, 255, 243, 216, "NotStonksBank", 115, 0, 0);
+    Carre texte_recherche(10,150,390,200, 4, 255, 243, 216, "Rechercher une banque", 115, 0, 0);
+    Input_text input(10, 240, 390, 280);
+
     vector <Carre> Boutons;
-    Boutons.push_back(carre);
-    Boutons.push_back(carre2);
-    Boutons.push_back(carre3);
-    Boutons.push_back(carre4);
-    Boutons.push_back(carre5);
-
+   
     bool bugged=false;
-    while (window.isOpen())
-    {
-        sf::Event event;
+    if(!doc.LoadFile()){
+        cout<< "erreur lors du chargement" << endl;
+        cout << "error #" << doc.ErrorId() << " : " << doc.ErrorDesc() << endl;
+        return 1;
+    }
+    TiXmlHandle hdl(&doc);
+    TiXmlElement *elem = hdl.FirstChildElement().FirstChildElement().Element();
+    client cl;
+    if(!elem){
+        cerr << "le nœud à atteindre n'existe pas" << endl;
+        return 2;
+    }
+    list<client> user_list;
+    vector<string> liste;
+    vector<Carre> Affichage;
+    //list<client>::iterator i;
+    while (elem){
+       cl.name = elem->Attribute("name");
+      //  cout<<cl.name;
+        cl.id = elem->Attribute("id");
+        user_list.push_back(cl);
+        // string txt = elem->Attribute("name");
+        // liste.push_back(txt);
+        //cout<<"coucou?"<<endl;
+        //Carre txt(420, 500, 480, 550, 3, 255, 243, 216, "test", 115, 0, 0);
+        elem = elem->NextSiblingElement(); // iteration 
         
+    }
+    
+    
+    Carre txt(40, 250, 480, 300, 5, 255, 243, 216, "", 115, 0, 0);
+    
+    while (window.isOpen()){
+        sf::Event event;
+        //cout<<"fenetre"<<endl;
         while (window.pollEvent(event))
         {
-            
+           // cout<<"heloo?"<<endl;
             if(event.type==sf::Event::MouseButtonPressed){
                 if(event.mouseButton.button==sf::Mouse::Left){
                     if(input.isbind(event.mouseButton.x, event.mouseButton.y)){
@@ -272,11 +316,6 @@ int main()
                     for(int i=0;i<Boutons.size();i++){
                         if(Boutons[i].isbind(event.mouseButton.x, event.mouseButton.y)){
                             Boutons[i].setclicked(true);
-                            if(Boutons[i].getId()==2){
-                                
-                                window.close();
-                            }
-
                         }
                         else{
                             Boutons[i].setclicked(false);
@@ -307,24 +346,50 @@ int main()
                         }
                         else{
                            
-                        input.ajoute_char(event.text.unicode);
-                        cout<<input.getText()<<endl;}
+                            input.ajoute_char(event.text.unicode);
+                            cout<<input.getText()<<endl;
+                        }
                     }
                 }
             }
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed){
                 window.close();
+            }
         }
+        list<client>::iterator i;
+        string txt_inte = "";
+        for(i=user_list.begin(); i!=user_list.end(); i++){
+          // cout << i->name << " "<< i->id << endl;
+           txt_inte += i->name + " " + i->id;
 
-        window.clear();
-        for(int i=0;i<Boutons.size();i++){
-            Boutons[i].afficher(window);
+           txt_inte += "\n";
+
+      
         }
+        txt.setter_carre(txt_inte);
+        window.clear();
+        
+        fond.afficher(window);
+        
+
+        // for(int i=0;i<Boutons.size();i++){
+        //     Boutons[i].afficher(window);
+        // }
+        // for(int i = 0; i<Affichage.size();i++){
+        //     Affichage[i].afficher(window);
+        
+        // }
+        txt.afficher(window);
+        texte_banque.afficher(window);
+        texte_bienvenu.afficher(window);
+        texte_recherche.afficher(window);
         //carre.afficherText(window);
         //window.draw(shape);
-        input.afficher(window);
+        //input.afficher(window);
         window.display();
-    }
-
+        
+        
+       
+    } 
     return 0;
 }
