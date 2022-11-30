@@ -1,39 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <Mybankdata>
-<client id="1">
-<name>John</name>
-<surname>Smith</surname>
-<age>25</age>
-<password>1234</password>
-<idcompte_courant>1</idcompte_courant>
-<solde_courant>1000</solde_courant>
-<idcompte_epargne1>2</idcompte_epargne1>
-<solde_epargne1>534510270</solde_epargne1>
-<idcompte_epargne2>3</idcompte_epargne2>
-<solde_epargne2>311070515</solde_epargne2>
-</client>
-<client id="2">
-<name>Thomichou</name>
-<surname>Smith</surname>
-<age>20</age>
-<password>12345</password>
-<idcompte_courant>4</idcompte_courant>
-<solde_courant>1000</solde_courant>
-<idcompte_epargne1>5</idcompte_epargne1>
-<solde_epargne1>2927702350</solde_epargne1>
-<idcompte_epargne2>6</idcompte_epargne2>
-<solde_epargne2>1660190061</solde_epargne2>
-</client>
-<client id="3">
-<name>Eric</name>
-<surname>Smith</surname>
-<age>25</age>
-<password>1234</password>
-<idcompte_courant>7</idcompte_courant>
-<solde_courant>1000</solde_courant>
-<idcompte_epargne1>8</idcompte_epargne1>
-<solde_epargne1>131360863</solde_epargne1>
-<idcompte_epargne2>9</idcompte_epargne2>
-<solde_epargne2>1660190061</solde_epargne2>
-</client>
+    <client id="1">
+        <name>John</name>
+        <surname>Smith</surname>
+        <age>25</age>
+        <address>123 Main Street</address>
+        <password>1234</password>
+        
+        <phone>555-123-4567</phone>
+        <idcompte_courant>1</idcompte_courant>
+        <solde_courant>1000</solde_courant>
+        <idcompte_epargne1>2</idcompte_epargne1>
+        <solde_epargne1>2000</solde_epargne1>
+        <idcompte_epargne2>3</idcompte_epargne2>
+        <solde_epargne2>3000</solde_epargne2>
+    </client>
+
+    <client id="2">
+        <name>Eric</name>
+        <surname>Smith</surname>
+        <age>25</age>
+        <address>123 Main Street</address>
+        <city>Anytown</city>
+        <state>NY</state>
+        <zip>12345</zip>
+        <phone>555-123-4567</phone>
+        <idcompte_courant>4</idcompte_courant>
+        <solde_courant>1000</solde_courant>
+        <idcompte_epargne1>5</idcompte_epargne1>
+        <solde_epargne1>2000</solde_epargne1>
+        <idcompte_epargne2>6</idcompte_epargne2>
+        <solde_epargne2>3000</solde_epargne2>
+    </client>
 </Mybankdata>
