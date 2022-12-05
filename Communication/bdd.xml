@@ -8,6 +8,7 @@
 <idcompte_courant>1</idcompte_courant>
 <solde_courant>1000</solde_courant>
 <idcompte_epargne1>2</idcompte_epargne1>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 <solde_epargne1>534510270</solde_epargne1>
 <idcompte_epargne2>3</idcompte_epargne2>
@@ -17,6 +18,11 @@
 <idcompte_epargne2>3</idcompte_epargne2>
 <solde_epargne2>2729</solde_epargne2>
 >>>>>>> Stashed changes
+=======
+<solde_epargne1>534510270</solde_epargne1>
+<idcompte_epargne2>3</idcompte_epargne2>
+<solde_epargne2>311070515</solde_epargne2>
+>>>>>>> parent of 1dc6ee0... Push bdd serveur ok
 </client>
 <client id="2">
 <name>Thomichou</name>
@@ -26,6 +32,7 @@
 <idcompte_courant>4</idcompte_courant>
 <solde_courant>1000</solde_courant>
 <idcompte_epargne1>5</idcompte_epargne1>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 <solde_epargne1>2927702350</solde_epargne1>
 <idcompte_epargne2>6</idcompte_epargne2>
@@ -35,6 +42,11 @@
 <idcompte_epargne2>6</idcompte_epargne2>
 <solde_epargne2>60094</solde_epargne2>
 >>>>>>> Stashed changes
+=======
+<solde_epargne1>2927702350</solde_epargne1>
+<idcompte_epargne2>6</idcompte_epargne2>
+<solde_epargne2>1660190061</solde_epargne2>
+>>>>>>> parent of 1dc6ee0... Push bdd serveur ok
 </client>
 <client id="3">
 <name>Eric</name>
@@ -44,6 +56,7 @@
 <idcompte_courant>7</idcompte_courant>
 <solde_courant>1000</solde_courant>
 <idcompte_epargne1>8</idcompte_epargne1>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 <solde_epargne1>131360863</solde_epargne1>
 <idcompte_epargne2>9</idcompte_epargne2>
@@ -53,5 +66,10 @@
 <idcompte_epargne2>9</idcompte_epargne2>
 <solde_epargne2>71940</solde_epargne2>
 >>>>>>> Stashed changes
+=======
+<solde_epargne1>131360863</solde_epargne1>
+<idcompte_epargne2>9</idcompte_epargne2>
+<solde_epargne2>1660190061</solde_epargne2>
+>>>>>>> parent of 1dc6ee0... Push bdd serveur ok
 </client>
 </Mybankdata>
