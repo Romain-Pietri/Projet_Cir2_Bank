@@ -127,8 +127,22 @@ void push_BDD(string message,vector<Client> &Bdd_client){
             message.erase(0,getbefore(message).size()+1);
 
            
+            cout<<"id : "<<id<<endl;
+            cout<<"nom : "<<nom<<endl;
+            cout<<"prenom : "<<prenom<<endl;
+            cout<<"age : "<<age<<endl;
+            cout<<"password : "<<password<<endl;
+            cout<<"idcompte_courant : "<<idcompte_courant<<endl;
+            cout<<"solde_courant : "<<solde_courant<<endl;
+            cout<<"idcompte_epargne1 : "<<idcompte_epargne1<<endl;
+            cout<<"solde_epargne1 : "<<solde_epargne1<<endl;
+            cout<<"idcompte_epargne2 : "<<idcompte_epargne2<<endl;
+            cout<<"solde_epargne2 : "<<solde_epargne2<<endl;
+            cout<<"id_agence : "<<id_agence<<endl;
+            cout<<"----------------------------------"<<endl;
 
             if(ishere(id,Bdd_client)){
+                  cout<<"client deja existant"<<endl;
                   j=getindex(id,Bdd_client);
                   Bdd_client[j].set_id(id);
                   Bdd_client[j].set_name(nom);
@@ -147,6 +161,7 @@ void push_BDD(string message,vector<Client> &Bdd_client){
             }
             
       }
+      cout<<"hello";
       writer(Bdd_client);
       
 }
@@ -157,7 +172,7 @@ string find_bdd_xml(string message,vector<Client> Client){
       return "0";
 }
 
-string readmessage(string message, std::vector<Agence> &agences){
+string readmessage(string message, std::vector<Agence> &agences, std::vector<Client> &Bdd_client){
       //type de message : Id demande/info demande;
       string res;
 
@@ -199,7 +214,7 @@ string readmessage(string message, std::vector<Agence> &agences){
 
             case '1'://Mise a jour de BDD apres demande du serveur
                   message.erase(0,2);
-                  //push_BDD(message);
+                  push_BDD(message,Bdd_client);
                   cout<<"BDD mise a jour"<<endl;
 
                   break;
@@ -262,6 +277,9 @@ int main() {
       cout<<"Serveur en ligne"<<endl;
       std::vector<Agence> agences;
       string renvoie;
+      std::vector<Client> Bdd_client;
+      Bdd_client=reader();
+
 
     while(1){
       boost::asio::io_service io_service;
@@ -274,7 +292,7 @@ int main() {
       //read operation
       string message = read_(socket_);
       cout << message << endl;
-      renvoie=readmessage(message,agences);
+      renvoie=readmessage(message,agences,Bdd_client);
       
       if(renvoie=="0"){
             send_(socket_, "ok");
