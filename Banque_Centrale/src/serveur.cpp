@@ -55,9 +55,82 @@ string lire(string message){
 }
 
 
+<<<<<<< Updated upstream
+=======
+void push_BDD(string message,vector<Client> &Bdd_client){
+      
+      int id_agence=stoi(lire(message));
+      message.erase(0,lire(message).size()+1);
+      int id;
+      string nom;
+      string prenom;
+      int age;
+      string password;
+      int idcompte_courant;
+      unsigned int solde_courant;
+      int idcompte_epargne1;
+      unsigned int solde_epargne1;
+      int idcompte_epargne2;
+      unsigned int solde_epargne2;
+     
+      int j;
+      for(int i=0;i<message.size();++i){
+            
+            id=stoi(lire(message));
+            
+            message.erase(0,lire(message).size()+1);
+            nom=lire(message);
+            message.erase(0,lire(message).size()+1);
+            prenom=lire(message);
+            message.erase(0,lire(message).size()+1);
+            age=stoi(lire(message));
+            message.erase(0,lire(message).size()+1);
+            password=lire(message);
+            message.erase(0,lire(message).size()+1);
+            idcompte_courant=stoi(lire(message));
 
-string find_bdd_xml(string message){
-      //TODO
+            message.erase(0,lire(message).size()+1);
+            solde_courant=stoi(lire(message));
+
+            message.erase(0,lire(message).size()+1);
+            idcompte_epargne1=stoi(lire(message));
+            message.erase(0,lire(message).size()+1);
+            solde_epargne1=stoi(lire(message));
+            message.erase(0,lire(message).size()+1);
+            idcompte_epargne2=stoi(lire(message));
+            message.erase(0,lire(message).size()+1);
+            solde_epargne2=stoi(lire(message));
+            message.erase(0,getbefore(message).size()+1);
+
+           
+
+            if(ishere(Bdd_client,id)){
+                  j=getindex(Bdd_client,id);
+                  Bdd_client[j].set_id(id);
+                  Bdd_client[j].set_name(nom);
+                  Bdd_client[j].set_surname(prenom);
+                  Bdd_client[j].set_age(age);
+                  Bdd_client[j].set_password(password);
+                  Bdd_client[j].set_idcompte_courant(idcompte_courant);
+                  Bdd_client[j].set_solde_courant(solde_courant);
+                  Bdd_client[j].set_idcompte_epargne1(idcompte_epargne1);
+                  Bdd_client[j].set_solde_epargne1(solde_epargne1);
+                  Bdd_client[j].set_idcompte_epargne2(idcompte_epargne2);
+                  Bdd_client[j].set_solde_epargne2(solde_epargne2);
+            }
+            else{
+            Bdd_client.push_back(Client(id,id_agence,nom,prenom,age,password,idcompte_courant,solde_courant,idcompte_epargne1,solde_epargne1,idcompte_epargne2,solde_epargne2));
+            }
+            
+      }
+      writer(Bdd_client);
+      
+}
+>>>>>>> Stashed changes
+
+string find_bdd_xml(string message,vector<Client> Client){
+      cout<<"message : "<<message<<endl;
+
       return "0";
 }
 
@@ -117,7 +190,7 @@ string readmessage(string message, std::vector<Agence> &agences){
 
             case '3'://recherhce d'un client
                   message.erase(0,2);
-                  res=find_bdd_xml(message);
+                  res=find_bdd(message);
                   return res;
                   //TODO
                   break;

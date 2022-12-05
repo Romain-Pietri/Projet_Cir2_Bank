@@ -6,6 +6,7 @@
 #include "RapidXml/rapidxml_print.hpp"
 #include <string>
 #include <fstream>
+#include "moteur.hpp"
 #include "xml_parser.hpp"
 #include "client.hpp"
 using std::vector;
@@ -25,6 +26,7 @@ int main(){
     t2.join();
     t3.join();
     t4.join();
+    //send_to_serveur("3/1");
     return 0;
 
 

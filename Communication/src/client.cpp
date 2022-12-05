@@ -35,7 +35,15 @@ void send_to_serveur(string message){
       // request/message from client
       const string msg = message + "\n";
       boost::system::error_code error;
-      boost::asio::write( socket, boost::asio::buffer(msg), error );      
+      boost::asio::write( socket, boost::asio::buffer(msg), error );    
+      boost::asio::streambuf receive_buffer;
+      boost::asio::read(socket, receive_buffer, boost::asio::transfer_all(), error);  
+      if( error && error != boost::asio::error::eof ) {
+            std::cout << "receive failed: " << error.message() << std::endl;
+      } else {
+            const char* data = boost::asio::buffer_cast<const char*>(receive_buffer.data());
+            std::cout << data << std::endl;
+      }
 }
 
 string string_client(Client client){

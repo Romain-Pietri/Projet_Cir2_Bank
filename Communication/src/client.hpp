@@ -4,6 +4,7 @@
 #include <thread>
 #include <fstream>
 #include <string>
+#include <vector>
 using namespace boost::asio;
 using ip::tcp;
 using std::string;

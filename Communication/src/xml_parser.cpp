@@ -1,6 +1,5 @@
 
 #include <fstream>
-
 #include "RapidXml/rapidxml.hpp"
 #include "RapidXml/rapidxml_utils.hpp"
 #include "RapidXml/rapidxml_print.hpp"

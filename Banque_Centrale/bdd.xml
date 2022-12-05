@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Mybankdata>
 <client id="1">
+<id_agence>0</id_agence>
 <name>John</name>
 <surname>Smith</surname>
 <age>25</age>
@@ -8,17 +9,12 @@
 <idcompte_courant>1</idcompte_courant>
 <solde_courant>1000</solde_courant>
 <idcompte_epargne1>2</idcompte_epargne1>
-<<<<<<< Updated upstream
-<solde_epargne1>534510270</solde_epargne1>
+<solde_epargne1>8746</solde_epargne1>
 <idcompte_epargne2>3</idcompte_epargne2>
-<solde_epargne2>311070515</solde_epargne2>
-=======
-<solde_epargne1>8920</solde_epargne1>
-<idcompte_epargne2>3</idcompte_epargne2>
-<solde_epargne2>2729</solde_epargne2>
->>>>>>> Stashed changes
+<solde_epargne2>2504</solde_epargne2>
 </client>
 <client id="2">
+<id_agence>0</id_agence>
 <name>Thomichou</name>
 <surname>Smith</surname>
 <age>20</age>
@@ -26,17 +22,12 @@
 <idcompte_courant>4</idcompte_courant>
 <solde_courant>1000</solde_courant>
 <idcompte_epargne1>5</idcompte_epargne1>
-<<<<<<< Updated upstream
-<solde_epargne1>2927702350</solde_epargne1>
+<solde_epargne1>8792</solde_epargne1>
 <idcompte_epargne2>6</idcompte_epargne2>
-<solde_epargne2>1660190061</solde_epargne2>
-=======
-<solde_epargne1>8967</solde_epargne1>
-<idcompte_epargne2>6</idcompte_epargne2>
-<solde_epargne2>60094</solde_epargne2>
->>>>>>> Stashed changes
+<solde_epargne2>55133</solde_epargne2>
 </client>
 <client id="3">
+<id_agence>0</id_agence>
 <name>Eric</name>
 <surname>Smith</surname>
 <age>25</age>
@@ -44,14 +35,8 @@
 <idcompte_courant>7</idcompte_courant>
 <solde_courant>1000</solde_courant>
 <idcompte_epargne1>8</idcompte_epargne1>
-<<<<<<< Updated upstream
-<solde_epargne1>131360863</solde_epargne1>
+<solde_epargne1>273570</solde_epargne1>
 <idcompte_epargne2>9</idcompte_epargne2>
-<solde_epargne2>1660190061</solde_epargne2>
-=======
-<solde_epargne1>279041</solde_epargne1>
-<idcompte_epargne2>9</idcompte_epargne2>
-<solde_epargne2>71940</solde_epargne2>
->>>>>>> Stashed changes
+<solde_epargne2>66000</solde_epargne2>
 </client>
 </Mybankdata>
