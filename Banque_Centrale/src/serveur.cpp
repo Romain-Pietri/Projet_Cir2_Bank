@@ -2,6 +2,7 @@
 #include <boost/asio.hpp>
 #include <thread>
 #include <vector>
+#include "xml_parser.hpp"
 using namespace boost::asio;
 using ip::tcp;
 using std::string;
@@ -54,9 +55,32 @@ string lire(string message){
       return res;
 }
 
-
-<<<<<<< Updated upstream
-=======
+string getbefore(string message){
+      string res="";
+      for(int i=0;i<message.size();i++){
+            if(message[i]=='\n'){
+                  break;
+            }
+            res+=message[i];
+      }
+      return res;
+}
+int getindex(int id, vector<Client> &Bdd_Client){
+      for(int i=0;i<Bdd_Client.size();i++){
+            if(Bdd_Client[i].get_id()==id){
+                  return i;
+            }
+      }
+      return -1;
+}
+bool ishere(int id, vector<Client> &Bdd_Client){
+      for(int i=0;i<Bdd_Client.size();i++){
+            if(Bdd_Client[i].get_id()==id){
+                  return true;
+            }
+      }
+      return false;
+}
 void push_BDD(string message,vector<Client> &Bdd_client){
       
       int id_agence=stoi(lire(message));
@@ -104,8 +128,8 @@ void push_BDD(string message,vector<Client> &Bdd_client){
 
            
 
-            if(ishere(Bdd_client,id)){
-                  j=getindex(Bdd_client,id);
+            if(ishere(id,Bdd_client)){
+                  j=getindex(id,Bdd_client);
                   Bdd_client[j].set_id(id);
                   Bdd_client[j].set_name(nom);
                   Bdd_client[j].set_surname(prenom);
@@ -126,7 +150,6 @@ void push_BDD(string message,vector<Client> &Bdd_client){
       writer(Bdd_client);
       
 }
->>>>>>> Stashed changes
 
 string find_bdd_xml(string message,vector<Client> Client){
       cout<<"message : "<<message<<endl;
@@ -190,7 +213,7 @@ string readmessage(string message, std::vector<Agence> &agences){
 
             case '3'://recherhce d'un client
                   message.erase(0,2);
-                  res=find_bdd(message);
+                  //res=find_bdd(message);
                   return res;
                   //TODO
                   break;

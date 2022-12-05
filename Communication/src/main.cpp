@@ -9,12 +9,14 @@
 #include "moteur.hpp"
 #include "xml_parser.hpp"
 #include "client.hpp"
+#include <thread>
 using std::vector;
 using std::cout;
 using std::endl;
 using std::vector;
 using namespace rapidxml;
 using std::string;
+using std::thread;
 
 int main(){
     vector<Client> Bdd_client=reader();
