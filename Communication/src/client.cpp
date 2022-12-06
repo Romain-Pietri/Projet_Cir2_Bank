@@ -26,12 +26,12 @@ string recup_info(){
       return id;
 }
 
-void send_to_serveur(string message){
+void send_to_serveur(string message,int port){
       boost::asio::io_service io_service;
       //socket creation
       tcp::socket socket(io_service);
       //connection
-      socket.connect( tcp::endpoint( boost::asio::ip::address::from_string("127.0.0.1"), 1234 ));
+      socket.connect( tcp::endpoint( boost::asio::ip::address::from_string("127.0.0.1"), port ));
       // request/message from client
       const string msg = message + "\n";
       boost::system::error_code error;
@@ -88,10 +88,10 @@ void client_thread(vector<Client> &Bdd_client){
                         //attend 0.1s
                         std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
-                        send_to_serveur("1/"+id+"/"+bdd_to_str(Bdd_client));
+                        send_to_serveur("1/"+id+"/"+bdd_to_str(Bdd_client),1234);
                   }
             }
-     sleep(3);
+     std::this_thread::sleep_for(std::chrono::seconds(3));
      
      }
 }

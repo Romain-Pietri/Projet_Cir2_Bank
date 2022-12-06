@@ -18,19 +18,32 @@ using namespace rapidxml;
 using std::string;
 using std::thread;
 
+void envoie(){
+    cout<<"Envoie au serveur"<<endl;
+    send_to_serveur("3/1",1235);
+
+} 
+
 int main(){
     vector<Client> Bdd_client=reader();
     thread t1(interet_epargne1,std::ref(Bdd_client));
     thread t2(interet_epargne2,std::ref(Bdd_client));
     thread t3(write_every30sec,std::ref(Bdd_client));
     thread t4(client_thread,std::ref(Bdd_client));
+    
+
+    cout<<"coucou je suis bloqué"<<endl;
+    envoie();
+ 
     t1.join();
     t2.join();
     t3.join();
     t4.join();
-    //send_to_serveur("3/1");
+
+    
+    
+    
+    
+
     return 0;
-
-
-        return 0;
 }

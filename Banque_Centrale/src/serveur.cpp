@@ -2,8 +2,11 @@
 #include <boost/asio.hpp>
 #include <thread>
 #include <vector>
+#include <string>
+
 #include "xml_parser.hpp"
 using namespace boost::asio;
+using namespace std;
 using ip::tcp;
 using std::string;
 using std::cout;
@@ -126,7 +129,7 @@ void push_BDD(string message,vector<Client> &Bdd_client){
             solde_epargne2=stoi(lire(message));
             message.erase(0,getbefore(message).size()+1);
 
-           
+           /*
             cout<<"id : "<<id<<endl;
             cout<<"nom : "<<nom<<endl;
             cout<<"prenom : "<<prenom<<endl;
@@ -139,10 +142,10 @@ void push_BDD(string message,vector<Client> &Bdd_client){
             cout<<"idcompte_epargne2 : "<<idcompte_epargne2<<endl;
             cout<<"solde_epargne2 : "<<solde_epargne2<<endl;
             cout<<"id_agence : "<<id_agence<<endl;
-            cout<<"----------------------------------"<<endl;
+            cout<<"----------------------------------"<<endl;*/
 
             if(ishere(id,Bdd_client)){
-                  cout<<"client deja existant"<<endl;
+                  //cout<<"client deja existant"<<endl;
                   j=getindex(id,Bdd_client);
                   Bdd_client[j].set_id(id);
                   Bdd_client[j].set_name(nom);
@@ -161,17 +164,47 @@ void push_BDD(string message,vector<Client> &Bdd_client){
             }
             
       }
-      cout<<"hello";
+      
       writer(Bdd_client);
       
 }
 
-string find_bdd_xml(string message,vector<Client> Client){
-      cout<<"message : "<<message<<endl;
+string find_bdd(string message,vector<Client> &Client){
+      string a="";
+      int id=stoi(getbefore(message));
+      cout<<"id : "<<id<<endl;
+      for(int i=0;i<Client.size();i++){
+            Client[i].print();
+            if(Client[i].get_id()==id){
+                  a=to_string(Client[i].get_id())+"/"+Client[i].get_name()+"/"+Client[i].get_surname()+"/"+to_string(Client[i].get_age())+"/"+Client[i].get_password()+"/"+to_string(Client[i].get_idcompte_courant())+"/"+to_string(Client[i].get_solde_courant())+"/"+to_string(Client[i].get_idcompte_epargne1())+"/"+to_string(Client[i].get_solde_epargne1())+"/"+to_string(Client[i].get_idcompte_epargne2())+"/"+to_string(Client[i].get_solde_epargne2());
+                  return a;
+            }
+      }
 
       return "0";
 }
+void supp_client(string message,vector<Client> &Bdd_Client){
+      int id=stoi(getbefore(message));
+      for(int i=0;i<Client.size();i++){
+            if(Bdd_Client[i].get_id()==id){
+                  Bdd_Client.erase(Bdd_Client.begin()+i);
+            }
+      }
+}
+bool virement(string message,vector<Client> &Bdd_Client){
+      
+      int id=stoi(lire(message));
+      message.erase(0,lire(message).size()+1);
+      int arjent=stoi(getbefore(message));
+      for(int i=0,i<Client.size();++i){
+            if(Bdd_Client[i].get_idcompte_courant==id){
+                  Bdd_Client[i].set_solde_courant(Bdd_Client[i].get_solde_courant()+arjent);
+                  return true;
+            }
+      }
+      return false;
 
+}
 string readmessage(string message, std::vector<Agence> &agences, std::vector<Client> &Bdd_client){
       //type de message : Id demande/info demande;
       string res;
@@ -222,13 +255,16 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
 
             case '2'://Ajout d'un client
                   message.erase(0,2);
-                  //TODO
+                  
                   break;
 
 
-            case '3'://recherhce d'un client
+            case '3'://recherhce d'un client et renvoie toutes les infos
                   message.erase(0,2);
-                  //res=find_bdd(message);
+                  
+                  cout<<"on demande la recherche d'un client"<<endl;
+                  res=find_bdd(message,Bdd_client);
+                  cout<<"coucou"<<res<<endl;
                   return res;
                   //TODO
                   break;
@@ -246,10 +282,16 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
                   break;
             case '5'://suprime un client
                   message.erase(0,2);
-
+                  supp_client(message,Bdd_client);
 
                   break;
 
+            case '6':
+                  //virement
+                  message.erase(0,2);
+                  bool a=virement(message,Bdd_client);
+                  
+                  break;
 
             case '8':
                   message.erase(0,2);
@@ -273,12 +315,9 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
 }
 
 
-int main() {
+int serveur1234(std::vector<Agence> &agences, std::vector<Client> &Bdd_client) {
       cout<<"Serveur en ligne"<<endl;
-      std::vector<Agence> agences;
       string renvoie;
-      std::vector<Client> Bdd_client;
-      Bdd_client=reader();
 
 
     while(1){
@@ -301,16 +340,38 @@ int main() {
             send_(socket_, renvoie);
       }
 
+//write operation
+      //send_(socket_, "Hello From Server!");
+      //cout << "Servent sent Hello message to Client!" << endl;
+      //send_(socket_, "want to quit press q");
+    }
+   return 0;
+}
+int serveur1235(std::vector<Agence> &agences, std::vector<Client> &Bdd_client) {
+      cout<<"Serveur en ligne"<<endl;
+      string renvoie;
 
+
+    while(1){
+      cout<<"serveur 1235"<<endl;
+      boost::asio::io_service io_service;
+      //listen for new connection
+      tcp::acceptor acceptor_(io_service, tcp::endpoint(tcp::v4(), 1235 ));
+      //socket creation 
+      tcp::socket socket_(io_service);
+      //waiting for connection
+      acceptor_.accept(socket_);
+      //read operation
+      string message = read_(socket_);
+      cout << message << endl;
+      renvoie=readmessage(message,agences,Bdd_client);
       
-
-
-      
-
-      
-
-
-
+      if(renvoie=="0"){
+            send_(socket_, "ok");
+      }
+      else{
+            send_(socket_, renvoie);
+      }
 
 //write operation
       //send_(socket_, "Hello From Server!");
@@ -318,4 +379,13 @@ int main() {
       //send_(socket_, "want to quit press q");
     }
    return 0;
+}
+int main(){
+      std::vector<Agence> agences;
+      std::vector<Client> Bdd_client=reader();
+      std::thread t1(serveur1234,std::ref(agences),std::ref(Bdd_client));
+      std::thread t2(serveur1235,std::ref(agences),std::ref(Bdd_client));
+      t1.join();
+      t2.join();
+      return 0;
 }
