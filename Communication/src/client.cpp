@@ -59,7 +59,13 @@ string bdd_to_str(vector<Client> &Bdd_client){
       return message;
       
 }
-
+int next(string data){
+      int i=0;
+      while(data[i]!='/'){
+            i++;
+      }
+      return i;
+}
 void client_thread(vector<Client> &Bdd_client){
       string id= recup_info();
       cout<<id<<endl;
@@ -89,6 +95,30 @@ void client_thread(vector<Client> &Bdd_client){
                         std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
                         send_to_serveur("1/"+id+"/"+bdd_to_str(Bdd_client),1234);
+                  }
+                  if(data[0]=='v'){//v/id/arjent
+                        string mess=data;
+                        mess.erase(0,2);
+                        int i=next(mess);
+                        int id=std::stoi(mess.substr(0,i));
+                        mess.erase(0,i+1);
+                        int argent=std::stoi(mess);
+                        cout<<id<<endl;
+                        cout<<argent<<endl;
+                        
+                        
+                        for(int i=0; i<Bdd_client.size(); i++){
+                              if(Bdd_client[i].get_idcompte_courant()==id){
+                                    Bdd_client[i].set_solde_courant(Bdd_client[i].get_solde_courant()+argent);
+                              }
+                              if(Bdd_client[i].get_idcompte_epargne1()==id){
+                                    Bdd_client[i].set_solde_epargne1(Bdd_client[i].get_solde_epargne1()+argent);
+                              }
+                              if(Bdd_client[i].get_idcompte_epargne2()==id){
+                                    Bdd_client[i].set_solde_epargne2(Bdd_client[i].get_solde_epargne2()+argent);
+                              }
+                              
+                        }
                   }
             }
      std::this_thread::sleep_for(std::chrono::seconds(3));

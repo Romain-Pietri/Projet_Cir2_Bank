@@ -17,10 +17,14 @@ class Agence{
       private : 
       int id;
       int nbappel;
+      bool statement;
+      string message;
       public:
       Agence(int id){
             this->id=id;
             this->nbappel=0;
+            this->statement=false;
+            this->message="v/";
       }
       int getid(){
             return this->id;
@@ -32,6 +36,21 @@ class Agence{
             this->nbappel++;
             this->nbappel=this->nbappel%10;
 
+      }
+      bool getstatement(){
+            return this->statement;
+      }
+      string getmessage(){
+            return this->message;
+      }
+      void setstatement(bool a){
+            statement=a;
+      }
+      void setmessage(string a){
+            message=a;
+      }
+      void increment_message(string a){
+            message += a;
       }
 };
 
@@ -185,24 +204,66 @@ string find_bdd(string message,vector<Client> &Client){
 }
 void supp_client(string message,vector<Client> &Bdd_Client){
       int id=stoi(getbefore(message));
-      for(int i=0;i<Client.size();i++){
+      for(int i=0;i<Bdd_Client.size();i++){
             if(Bdd_Client[i].get_id()==id){
                   Bdd_Client.erase(Bdd_Client.begin()+i);
             }
       }
 }
-bool virement(string message,vector<Client> &Bdd_Client){
+bool Agence_en_ligne(vector<Agence> &Agence, int id){
+      for(int i=0; i<size(Agence);++i){
+            if(Agence[i].getid()==id) return true;
+      }
+      return false;
+}
+int id_vectorAgence_from_idagence(vector<Agence> &Agence,int id){
+       for(int i=0; i<Agence.size();++i){
+            if(Agence[i].getid()==id) return i;
+      }
+      return -1;
+}
+
+
+string virement(string message,vector<Client> &Bdd_Client, vector<Agence> &Agence){
       
       int id=stoi(lire(message));
       message.erase(0,lire(message).size()+1);
       int arjent=stoi(getbefore(message));
-      for(int i=0,i<Client.size();++i){
-            if(Bdd_Client[i].get_idcompte_courant==id){
-                  Bdd_Client[i].set_solde_courant(Bdd_Client[i].get_solde_courant()+arjent);
-                  return true;
+      for(int i=0;i<Bdd_Client.size();++i){
+            if(Bdd_Client[i].get_idcompte_courant()==id){
+                  if(Agence_en_ligne(Agence,Bdd_Client[i].get_idagence())){
+                        Bdd_Client[i].set_solde_courant(Bdd_Client[i].get_solde_courant()+arjent);
+                        Agence[id_vectorAgence_from_idagence(Agence,Bdd_Client[i].get_idagence())].increment_message(to_string(id)+"/"+to_string(arjent)+"\n");//id/arjent\n
+                        Agence[id_vectorAgence_from_idagence(Agence,Bdd_Client[i].get_idagence())].setstatement(true);
+                        cout<<"Client trouvé et agence en ligne"<<endl;
+                        return "1";
+                  }
+                  
             }
+            if(Bdd_Client[i].get_idcompte_epargne1()==id){
+                  if(Agence_en_ligne(Agence,Bdd_Client[i].get_idagence())){
+                        Bdd_Client[i].set_solde_epargne1(Bdd_Client[i].get_solde_epargne1()+arjent);
+                        Agence[id_vectorAgence_from_idagence(Agence,Bdd_Client[i].get_idagence())].increment_message(to_string(id)+"/"+to_string(arjent)+"\n");
+                        Agence[id_vectorAgence_from_idagence(Agence,Bdd_Client[i].get_idagence())].setstatement(true);
+                        cout<<"Client trouvé et agence en ligne"<<endl;
+                        return "1";
+                  }
+                  
+            }
+            if(Bdd_Client[i].get_idcompte_epargne2()==id){
+                  if(Agence_en_ligne(Agence,Bdd_Client[i].get_idagence())){
+                        Bdd_Client[i].set_solde_epargne2(Bdd_Client[i].get_solde_epargne2()+arjent);
+                        Agence[id_vectorAgence_from_idagence(Agence,Bdd_Client[i].get_idagence())].increment_message(to_string(id)+"/"+to_string(arjent)+"\n");
+                        Agence[id_vectorAgence_from_idagence(Agence,Bdd_Client[i].get_idagence())].setstatement(true);
+                        cout<<"Client trouvé et agence en ligne"<<endl;
+                        return "1";
+                  }
+                  
+            }
+            
       }
-      return false;
+      return "0";
+      
 
 }
 string readmessage(string message, std::vector<Agence> &agences, std::vector<Client> &Bdd_client){
@@ -231,6 +292,13 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
                                     if(agences[i].getnbappel()==0){
                                           return "need";
                                     }
+                                    if(agences[i].getstatement()){
+                                          agences[i].setstatement(false);
+                                          string message=agences[i].getmessage();
+                                          agences[i].setmessage("v/");
+                                          return message;
+                                    }
+                                    
                                     
                                     break;
                               }
@@ -286,10 +354,11 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
 
                   break;
 
-            case '6':
+            case '6'://6/Id_compte/argent
                   //virement
+                  cout<<"on demande un virement"<<endl;
                   message.erase(0,2);
-                  bool a=virement(message,Bdd_client);
+                  return virement(message,Bdd_client,agences);
                   
                   break;
 
