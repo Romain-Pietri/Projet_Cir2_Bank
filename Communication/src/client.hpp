@@ -12,5 +12,5 @@ using std::string;
 using std::cout;
 using std::endl;
 
-void send_to_serveur(string message,int port);
+string send_to_serveur(string message,int port);
 void client_thread(vector<Client> &Bdd_client);

@@ -271,7 +271,7 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
       string res;
 
       switch (message[0]){
-            case '0'://U ok ?
+            case '0':// 0/Id_agence
                   message.erase(0,2);
                   res=message;
                   
@@ -313,7 +313,7 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
                   break;
 
 
-            case '1'://Mise a jour de BDD apres demande du serveur
+            case '1'://1/Id_client/nom/prenom/adresse/telephone/Id_compte_courant/solde_courant/Id_compte_epargne1/solde_epargne1/Id_compte_epargne2/solde_epargne2 ...
                   message.erase(0,2);
                   push_BDD(message,Bdd_client);
                   cout<<"BDD mise a jour"<<endl;
@@ -322,12 +322,14 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
 
 
             case '2'://Ajout d'un client
+            //Trouve l'id client max et ajoute 1 et le renvoie
                   message.erase(0,2);
                   
                   break;
 
 
             case '3'://recherhce d'un client et renvoie toutes les infos
+            //3/Id_client
                   message.erase(0,2);
                   
                   cout<<"on demande la recherche d'un client"<<endl;
@@ -339,6 +341,7 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
 
 
             case '4'://Recherche et connection
+                  //4/Id_client
                   message.erase(0,2);
                   //res=find_bdd_xml_id_banque(message);
                   if(res=="-1"){return "-1";}
@@ -349,6 +352,7 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
                   }
                   break;
             case '5'://suprime un client
+                  //5/Id_client
                   message.erase(0,2);
                   supp_client(message,Bdd_client);
 
@@ -356,6 +360,7 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
 
             case '6'://6/Id_compte/argent
                   //virement
+
                   cout<<"on demande un virement"<<endl;
                   message.erase(0,2);
                   return virement(message,Bdd_client,agences);
@@ -369,6 +374,7 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
 
 
             case '9'://Serveur client Fermeture
+                  //9/Id_agence
                   message.erase(0,2);
                   
                   for(int i=0;i<agences.size();i++){
@@ -382,8 +388,21 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
       }
       return "0";
 }
+/*
+Liste des commandes :
+0/Id_agence Envoie toutes les 3sec
+1/id_client/nom/prenom/adresse/telephone/Id_compte_courant/solde_courant/Id_compte_epargne1/solde_epargne1/Id_compte_epargne2/solde_epargne2 ... Envoie la Bdd
+2 Renvoie l'id du prochain client
+3/Id_client Recherche un client et renvoie toutes les infos
+4/Id_client Recherche et connection
+5/Id_client Supprime un client
+6/Id_compte/argent Virement
+
+9/Id_agence Fermeture du serveur client
 
 
+
+*/
 int serveur1234(std::vector<Agence> &agences, std::vector<Client> &Bdd_client) {
       cout<<"Serveur en ligne"<<endl;
       string renvoie;

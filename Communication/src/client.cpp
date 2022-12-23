@@ -26,7 +26,7 @@ string recup_info(){
       return id;
 }
 
-void send_to_serveur(string message,int port){
+string send_to_serveur(string message,int port){
       boost::asio::io_service io_service;
       //socket creation
       tcp::socket socket(io_service);
@@ -43,7 +43,9 @@ void send_to_serveur(string message,int port){
       } else {
             const char* data = boost::asio::buffer_cast<const char*>(receive_buffer.data());
             std::cout << data << std::endl;
+            return data;
       }
+      return "-1";
 }
 
 string string_client(Client client){
