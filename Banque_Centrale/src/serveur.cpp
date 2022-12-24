@@ -202,13 +202,15 @@ string find_bdd(string message,vector<Client> &Client){
 
       return "0";
 }
-void supp_client(string message,vector<Client> &Bdd_Client){
+string supp_client(string message,vector<Client> &Bdd_Client){
       int id=stoi(getbefore(message));
       for(int i=0;i<Bdd_Client.size();i++){
             if(Bdd_Client[i].get_id()==id){
                   Bdd_Client.erase(Bdd_Client.begin()+i);
+                  return "1";
             }
       }
+      return "0";
 }
 bool Agence_en_ligne(vector<Agence> &Agence, int id){
       for(int i=0; i<size(Agence);++i){
@@ -265,6 +267,28 @@ string virement(string message,vector<Client> &Bdd_Client, vector<Agence> &Agenc
       return "0";
       
 
+}
+
+string add_client(string message, vector<Client> &Bdd_Client){
+      int idbank=stoi(getbefore(message));
+      max_id=Bdd_Client[0].get_idagence();
+      for(int i=1;i<Bdd_Client.size();++i){
+            if(Bdd_Client[i].get_idagence()>max_id) max_id=Bdd_Client[i].get_idagence();
+      }
+      max_id++;
+      Client client();
+      client.set_idagence(idbank);
+      client.set_id(max_id);
+      Bdd_Client.push_back(client);
+      return to_string(max_id);
+
+}
+string find_bdd_xml_id_banque(string message, vector<Client> &Bdd_Client){
+      int id=stoi(getbefore(message));
+      for(int i=0, i<Bdd_Client.size(),++i){
+            if(Bdd_Client[i].get_id()==id) return Bdd_Client[i].get_idagence().to_string();
+      }
+      return "-1";
 }
 string readmessage(string message, std::vector<Agence> &agences, std::vector<Client> &Bdd_client){
       //type de message : Id demande/info demande;
@@ -323,7 +347,11 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
 
             case '2'://Ajout d'un client
             //Trouve l'id client max et ajoute 1 et le renvoie
+            
                   message.erase(0,2);
+                  return add_client(message,Bdd_client);
+                  
+
                   
                   break;
 
@@ -343,18 +371,19 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
             case '4'://Recherche et connection
                   //4/Id_client
                   message.erase(0,2);
-                  //res=find_bdd_xml_id_banque(message);
+                  res=find_bdd_xml_id_banque(message);
                   if(res=="-1"){return "-1";}
                   else{
-                        //va dans le fichier agence+res et execute client
-                        std::system(("cd.. &&  cd agence"+res+" && ./client").c_str());
+                        //va dans le fichier agence+res et execute main.exe
+                        
+                        std::system(("cd.. &&  cd agence"+res+" && ./main.exe").c_str());
                         return "0";
                   }
                   break;
             case '5'://suprime un client
                   //5/Id_client
                   message.erase(0,2);
-                  supp_client(message,Bdd_client);
+                  return supp_client(message,Bdd_client);
 
                   break;
 
@@ -377,13 +406,14 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
                   //9/Id_agence
                   message.erase(0,2);
                   
+                  int id=stoi(getbefore(message));
                   for(int i=0;i<agences.size();i++){
-                        if(agences[i].getid()==stoi(message)){
+                        if(agences[i].getid()==id){
                               agences.erase(agences.begin()+i);
                               break;
                         }
                   }
-                  break;
+                  return "1";
             
       }
       return "0";
@@ -392,15 +422,13 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
 Liste des commandes :
 0/Id_agence Envoie toutes les 3sec
 1/id_client/nom/prenom/adresse/telephone/Id_compte_courant/solde_courant/Id_compte_epargne1/solde_epargne1/Id_compte_epargne2/solde_epargne2 ... Envoie la Bdd
-2 Renvoie l'id du prochain client
+2/Id_bank Renvoie l'id du prochain client
 3/Id_client Recherche un client et renvoie toutes les infos
 4/Id_client Recherche et connection
 5/Id_client Supprime un client
 6/Id_compte/argent Virement
 
 9/Id_agence Fermeture du serveur client
-
-
 
 */
 int serveur1234(std::vector<Agence> &agences, std::vector<Client> &Bdd_client) {
