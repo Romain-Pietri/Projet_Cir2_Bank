@@ -111,7 +111,6 @@ bool ishere(int id, vector<Client> &Bdd_Client){
 }
 
 void push_BDD(string message,vector<Client> &Bdd_client){
-      
       int id_agence=stoi(lire(message));
       message.erase(0,lire(message).size()+1);
       int id;
@@ -125,12 +124,9 @@ void push_BDD(string message,vector<Client> &Bdd_client){
       unsigned int solde_epargne1;
       int idcompte_epargne2;
       unsigned int solde_epargne2;
-     
       int j;
       for(int i=0;i<message.size();++i){
-            
             id=stoi(lire(message));
-            
             message.erase(0,lire(message).size()+1);
             nom=lire(message);
             message.erase(0,lire(message).size()+1);
@@ -141,10 +137,8 @@ void push_BDD(string message,vector<Client> &Bdd_client){
             password=lire(message);
             message.erase(0,lire(message).size()+1);
             idcompte_courant=stoi(lire(message));
-
             message.erase(0,lire(message).size()+1);
             solde_courant=stoi(lire(message));
-
             message.erase(0,lire(message).size()+1);
             idcompte_epargne1=stoi(lire(message));
             message.erase(0,lire(message).size()+1);
@@ -154,24 +148,7 @@ void push_BDD(string message,vector<Client> &Bdd_client){
             message.erase(0,lire(message).size()+1);
             solde_epargne2=stoi(lire(message));
             message.erase(0,getbefore(message).size()+1);
-
-           /*
-            cout<<"id : "<<id<<endl;
-            cout<<"nom : "<<nom<<endl;
-            cout<<"prenom : "<<prenom<<endl;
-            cout<<"age : "<<age<<endl;
-            cout<<"password : "<<password<<endl;
-            cout<<"idcompte_courant : "<<idcompte_courant<<endl;
-            cout<<"solde_courant : "<<solde_courant<<endl;
-            cout<<"idcompte_epargne1 : "<<idcompte_epargne1<<endl;
-            cout<<"solde_epargne1 : "<<solde_epargne1<<endl;
-            cout<<"idcompte_epargne2 : "<<idcompte_epargne2<<endl;
-            cout<<"solde_epargne2 : "<<solde_epargne2<<endl;
-            cout<<"id_agence : "<<id_agence<<endl;
-            cout<<"----------------------------------"<<endl;*/
-
             if(ishere(id,Bdd_client)){
-                  //cout<<"client deja existant"<<endl;
                   j=getindex(id,Bdd_client);
                   Bdd_client[j].set_id(id);
                   Bdd_client[j].set_name(nom);
@@ -188,11 +165,8 @@ void push_BDD(string message,vector<Client> &Bdd_client){
             else{
             Bdd_client.push_back(Client(id,id_agence,nom,prenom,age,password,idcompte_courant,solde_courant,idcompte_epargne1,solde_epargne1,idcompte_epargne2,solde_epargne2));
             }
-            
       }
-      
       writer(Bdd_client);
-      
 }
 
 string find_bdd(string message,vector<Client> &Client){
