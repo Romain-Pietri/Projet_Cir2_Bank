@@ -2,6 +2,7 @@
 <Mybankdata>
 <client id="1">
 <name>John</name>
+<id_agence>0</id_agence>
 <surname>Smith</surname>
 <age>25</age>
 <password>1234</password>
@@ -14,6 +15,7 @@
 </client>
 <client id="2">
 <name>Thomichou</name>
+<id_agence>0</id_agence>
 <surname>Smith</surname>
 <age>20</age>
 <password>12345</password>
@@ -26,6 +28,7 @@
 </client>
 <client id="3">
 <name>Eric</name>
+<id_agence>0</id_agence>
 <surname>Smith</surname>
 <age>25</age>
 <password>1234</password>

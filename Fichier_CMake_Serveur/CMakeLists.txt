@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(Agence)
+project(Serveur)
 
 # Ajout de la bibliothèque Boost
 find_package(Boost REQUIRED)
@@ -15,14 +15,12 @@ include_directories(RapidXml)
 
 # Ajout des fichiers sources
 set(SOURCES
-    src/moteur.cpp
+    src/serveur.cpp
     src/xml_parser.cpp
-    src/client.cpp
-    src/main.cpp
 )
 
-# Déclaration de l'exécutable Agence
-add_executable(Agence.exe ${SOURCES})
+# Déclaration de l'exécutable Serveur
+add_executable(Serveur ${SOURCES})
 
-# Liaison des bibliothèques au projet Agence
-target_link_libraries(Agence ${Boost_LIBRARIES} ${SFML_LIBRARIES})
+# Liaison des bibliothèques au projet Serveur
+target_link_libraries(Serveur ${Boost_LIBRARIES} ${SFML_LIBRARIES})

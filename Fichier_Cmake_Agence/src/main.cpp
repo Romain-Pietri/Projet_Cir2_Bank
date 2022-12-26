@@ -5,11 +5,14 @@
 #include "RapidXml/rapidxml_utils.hpp"
 #include "RapidXml/rapidxml_print.hpp"
 #include <string>
-#include <fstream>
+
 #include "moteur.hpp"
 #include "xml_parser.hpp"
 #include "client.hpp"
 #include <thread>
+#include <boost/asio.hpp>
+#include <time.h>   
+
 using std::vector;
 using std::cout;
 using std::endl;
