@@ -180,7 +180,6 @@ string find_bdd(string message,vector<Client> &Client){
                   return a;
             }
       }
-
       return "0";
 }
 
@@ -222,7 +221,6 @@ string virement(string message,vector<Client> &Bdd_Client, vector<Agence> &Agenc
                         cout<<"Client trouvé et agence en ligne"<<endl;
                         return "1";
                   }
-                  
             }
             if(Bdd_Client[i].get_idcompte_epargne1()==id){
                   if(Agence_en_ligne(Agence,Bdd_Client[i].get_idagence())){
@@ -232,7 +230,6 @@ string virement(string message,vector<Client> &Bdd_Client, vector<Agence> &Agenc
                         cout<<"Client trouvé et agence en ligne"<<endl;
                         return "1";
                   }
-                  
             }
             if(Bdd_Client[i].get_idcompte_epargne2()==id){
                   if(Agence_en_ligne(Agence,Bdd_Client[i].get_idagence())){
@@ -242,13 +239,9 @@ string virement(string message,vector<Client> &Bdd_Client, vector<Agence> &Agenc
                         cout<<"Client trouvé et agence en ligne"<<endl;
                         return "1";
                   }
-                  
             }
-            
       }
       return "0";
-      
-
 }
 
 string add_client(string message, vector<Client> &Bdd_Client){
@@ -263,7 +256,6 @@ string add_client(string message, vector<Client> &Bdd_Client){
       client.set_id(max_id);
       Bdd_Client.push_back(client);
       return to_string(max_id);
-
 }
 
 string find_bdd_xml_id_banque(string message, vector<Client> &Bdd_Client){
@@ -290,7 +282,6 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
       */
       
       string res;
-
       switch (message[0]){
             case '0':// 0/Id_agence
                   message.erase(0,2);
@@ -319,8 +310,6 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
                                           agences[i].setmessage("v/");
                                           return message;
                                     }
-                                    
-                                    
                                     break;
                               }
                         }
