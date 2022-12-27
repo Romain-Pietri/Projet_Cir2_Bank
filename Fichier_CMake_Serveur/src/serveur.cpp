@@ -3,7 +3,7 @@
 #include <thread>
 #include <vector>
 #include <string>
-
+#include <time.h>
 #include "xml_parser.hpp"
 using namespace boost::asio;
 using namespace std;
@@ -58,6 +58,13 @@ class Agence{
       }
 };
 
+void write_every_5s(vector<Client> &Bdd_client){
+      while(true){
+            std::this_thread::sleep_for(std::chrono::seconds(5));
+            writer(Bdd_client);
+            cout<<"write"<<endl;
+      }
+}
 
 string read_(tcp::socket & socket) {
        boost::asio::streambuf buf;
@@ -166,7 +173,7 @@ void push_BDD(string message,vector<Client> &Bdd_client){
             Bdd_client.push_back(Client(id,id_agence,nom,prenom,age,password,idcompte_courant,solde_courant,idcompte_epargne1,solde_epargne1,idcompte_epargne2,solde_epargne2));
             }
       }
-      writer(Bdd_client);
+      
 }
 
 string find_bdd(string message,vector<Client> &Client){
@@ -488,7 +495,9 @@ int main(){
       std::vector<Client> Bdd_client=reader();
       std::thread t1(serveur1234,std::ref(agences),std::ref(Bdd_client));
       std::thread t2(serveur1235,std::ref(agences),std::ref(Bdd_client));
+      std::thread t3(write_every_5s,std::ref(Bdd_client));
       t1.join();
       t2.join();
+      t3.join();
       return 0;
 }
