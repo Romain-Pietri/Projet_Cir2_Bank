@@ -368,7 +368,7 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
                         //va dans le fichier agence+res et execute main.exe
                         
                         std::system(("cd.. &&  cd agence"+res+" && ./Agence.exe").c_str());
-                        return "0";
+                        return "ok";
                   }
                   break;
             case '5'://suprime un client
@@ -407,7 +407,7 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
                   return "1";
             
       }
-      return "0";
+      return "ok";
 }
 /*
 Liste des commandes :
@@ -441,12 +441,8 @@ int serveur1234(std::vector<Agence> &agences, std::vector<Client> &Bdd_client) {
       cout << message << endl;
       renvoie=readmessage(message,agences,Bdd_client);
       
-      if(renvoie=="0"){
-            send_(socket_, "ok");
-      }
-      else{
-            send_(socket_, renvoie);
-      }
+      send_(socket_, renvoie);
+      
 
 //write operation
       //send_(socket_, "Hello From Server!");
@@ -475,12 +471,8 @@ int serveur1235(std::vector<Agence> &agences, std::vector<Client> &Bdd_client) {
       cout << message << endl;
       renvoie=readmessage(message,agences,Bdd_client);
       
-      if(renvoie=="0"){
-            send_(socket_, "ok");
-      }
-      else{
-            send_(socket_, renvoie);
-      }
+      send_(socket_, renvoie);
+      
 
 //write operation
       //send_(socket_, "Hello From Server!");
