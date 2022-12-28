@@ -271,6 +271,10 @@ class Carre{
         int resultConf = 0;
         while (window2.isOpen()){
             while (window2.pollEvent(event_)){
+                if (event_.type == sf::Event::Closed){
+                window2.close();
+                shutdown=true;
+            }
                 if(confirmation.isbind(event_.mouseButton.x, event_.mouseButton.y)){
                     confirmation.setclicked(true);
                     string tmp = input.getText();
@@ -442,6 +446,10 @@ class Carre{
         while (window2.isOpen()){
             
             while (window2.pollEvent(event_)){
+                if (event_.type == sf::Event::Closed){
+                    window2.close();
+                    shutdown=true;
+                }
                 if(event_.type==sf::Event::MouseButtonPressed){
                     if(compte1.isbind(event_.mouseButton.x, event_.mouseButton.y)){
                         compte1.setclicked(true);
@@ -666,6 +674,10 @@ class Carre{
         {
             while (window2.pollEvent(event_))
             {
+                if (event_.type == sf::Event::Closed){
+                    window2.close();
+                    shutdown=true;
+                }
                 if(event_.type==sf::Event::MouseButtonPressed){
                     if(event_.mouseButton.button==sf::Mouse::Left){
                         for(int i = 0; i < Bdd_client.size(); ++i){
@@ -758,7 +770,10 @@ void window_1(vector<Client> &Bdd_client, int id_client, bool &shutdown){ // FEN
         sf::Event event;
         while (window.pollEvent(event))
         {
-
+            if (event.type == sf::Event::Closed){
+                window.close();
+                shutdown=true;
+            }
             if(event.type==sf::Event::MouseButtonPressed){
                 if(event.mouseButton.button==sf::Mouse::Left){
                     if(carre.isbind(event.mouseButton.x, event.mouseButton.y)){
@@ -826,7 +841,10 @@ void window_BC(vector<Client> &Bdd_client, vector<Client> &Bdd_banque,int id_cli
         sf::Event event;
         while (window.pollEvent(event))
         {
-
+            if (event.type == sf::Event::Closed){
+                window.close();
+                shutdown=true;
+            }
             if(event.type==sf::Event::MouseButtonPressed){
                 if(event.mouseButton.button==sf::Mouse::Left){
                     if(carre.isbind(event.mouseButton.x, event.mouseButton.y)){
@@ -1019,32 +1037,62 @@ void connexion(vector<Client> &Bdd_client,bool &shutdown){
     sf::RenderWindow window(sf::VideoMode(610, 400), "Bienvenue !",sf::Style::Close);
     Input_text id(10, 240, 390, 280);
     int id_;
-    Input_text password(10,300,390,280);
+    Input_text password(10,300,390,280,true);
     Carre fond(420, 50, 480, 150, 3, 255, 243, 216);
     Carre valider(420, 50, 480, 150, 3, 255, 243, 216, "Se connecter", 115, 0, 0);
     bool trouve=false;
     while(window.isOpen()){
         sf::Event event;
         while(window.pollEvent(event)){
-            if(event_.type==sf::Event::TextEntered){
-                    if(input.getClicked()){
+            if (event.type == sf::Event::Closed){
+                window.close();
+                shutdown=true;
+            }
+         
 
-                        if(event_.text.unicode<128){
-                            if(event_.text.unicode==8){
-                                input.supprime_char();
+            if(event.type==sf::Event::TextEntered){
+                    if(id.getClicked()){
+
+                        if(event.text.unicode<128){
+                            if(event.text.unicode==8){
+                                id.supprime_char();
                             }
-                            else if(event_.text.unicode==13){
-                                input.setClicked(false);
+                            else if(event.text.unicode==13){
+                                id.setClicked(false);
                             }
                             else
                             {
-                                input.ajoute_char(event_.text.unicode);
+                                id.ajoute_char(event.text.unicode);
+                            }
+                        }
+                    }
+                    if(password.getClicked()){
+                        if(event.text.unicode<128){
+                            if(event.text.unicode==8){
+                                password.supprime_char();
+                            }
+                            else if(event.text.unicode==13){
+                                password.setClicked(false);
+                            }
+                            else
+                            {
+                                password.ajoute_char(event.text.unicode);
                             }
                         }
                     }
             }
+
             if(event.type==sf::Event::MouseButtonPressed){
                 if(event.mouseButton.button==sf::Mouse::Left){
+                    if(id.isbind(event.mouseButton.x, event.mouseButton.y)){
+                        id.setClicked(true);
+                    }
+                    else{id.setClicked(false);}
+                    if(password.isbind(event.mouseButton.x, event.mouseButton.y)){
+                        password.setClicked(true);
+                    }
+                    else{password.setClicked(false);}
+
                     if(valider.isbind(event.mouseButton.x, event.mouseButton.y)){
                         if(id.getText()!="" && password.getText()!=""){
                         id_=std::stoi(id.getText());
