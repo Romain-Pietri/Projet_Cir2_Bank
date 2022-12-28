@@ -1026,6 +1026,23 @@ void connexion(vector<Client> &Bdd_client,bool &shutdown){
     while(window.isOpen()){
         sf::Event event;
         while(window.pollEvent(event)){
+            if(event_.type==sf::Event::TextEntered){
+                    if(input.getClicked()){
+
+                        if(event_.text.unicode<128){
+                            if(event_.text.unicode==8){
+                                input.supprime_char();
+                            }
+                            else if(event_.text.unicode==13){
+                                input.setClicked(false);
+                            }
+                            else
+                            {
+                                input.ajoute_char(event_.text.unicode);
+                            }
+                        }
+                    }
+            }
             if(event.type==sf::Event::MouseButtonPressed){
                 if(event.mouseButton.button==sf::Mouse::Left){
                     if(valider.isbind(event.mouseButton.x, event.mouseButton.y)){
