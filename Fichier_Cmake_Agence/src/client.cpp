@@ -49,6 +49,7 @@ string send_to_serveur(string message,int port){
       }
       catch(std::exception& e){
             std::cerr << e.what() << std::endl;
+            std::system(("cd.. &&  cd Banque_Centrale && ./Serveur.exe").c_str());
       }
       return "-1";
 }

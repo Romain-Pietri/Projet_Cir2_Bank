@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Mybankdata>
+<client id="1">
+<name>John</name>
+<id_agence>0</id_agence>
+<surname>Smith</surname>
+<age>25</age>
+<password>1234</password>
+<idcompte_courant>1</idcompte_courant>
+<solde_courant>1400</solde_courant>
+<idcompte_epargne1>2</idcompte_epargne1>
+<solde_epargne1>476166</solde_epargne1>
+<idcompte_epargne2>3</idcompte_epargne2>
+<solde_epargne2>71001416</solde_epargne2>
+</client>
+<client id="2">
+<name>Thomichou</name>
+<id_agence>0</id_agence>
+<surname>Smith</surname>
+<age>20</age>
+<password>12345</password>
+<idcompte_courant>4</idcompte_courant>
+<solde_courant>1000</solde_courant>
+<idcompte_epargne1>5</idcompte_epargne1>
+<solde_epargne1>478775</solde_epargne1>
+<idcompte_epargne2>6</idcompte_epargne2>
+<solde_epargne2>1567200169</solde_epargne2>
+</client>
+<client id="3">
+<name>Eric</name>
+<id_agence>0</id_agence>
+<surname>Smith</surname>
+<age>25</age>
+<password>1234</password>
+<idcompte_courant>7</idcompte_courant>
+<solde_courant>1000</solde_courant>
+<idcompte_epargne1>8</idcompte_epargne1>
+<solde_epargne1>14937005</solde_epargne1>
+<idcompte_epargne2>9</idcompte_epargne2>
+<solde_epargne2>1876147790</solde_epargne2>
+</client>
+</Mybankdata>
