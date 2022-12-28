@@ -26,11 +26,12 @@ void interet_epargne2(vector<Client> &Bdd_client){
     std::this_thread::sleep_for(std::chrono::seconds(20));
     interet_epargne2(Bdd_client);
 }
-void write_every30sec(vector<Client> &Bdd_client){
+void write_every30sec(vector<Client> &Bdd_client,bool &stop){
     writer(Bdd_client);
     cout<<"write"<<endl;
     std::this_thread::sleep_for(std::chrono::seconds(30));
-    write_every30sec(Bdd_client);
+    if(stop==false) write_every30sec(Bdd_client,stop);
+    return;
 }
 /*
 int main(){
