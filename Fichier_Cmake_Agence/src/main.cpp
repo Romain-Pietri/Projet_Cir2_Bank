@@ -25,6 +25,8 @@ using std::thread;
 
 using namespace std;
 //g++ test.cpp -o ok.exe  -lsfml-graphics -lsfml-window -lsfml-system 
+void connexion(vector<Client> &Bdd_client,bool &shutdown, int id_agence);
+void window_1(vector<Client> &Bdd_client, int id_client, bool &shutdown, int id_agence);
 class Input_text{
     private:
         int posxd;
@@ -35,40 +37,60 @@ class Input_text{
         string text;
         bool clicked;
         bool ispassword;
+        int i2;
+        bool onlynumber;
 
 
     public :
-        Input_text(int posxd, int posyd, int posxf, int posyf,bool ispassword=false){
+        Input_text(int posxd, int posyd, int posxf, int posyf,bool ispassword=false, bool onlynumber=true){
             this->posxd = posxd;
             this->posyd = posyd;
             this->posxf = posxf;
             this->posyf = posyf;
             this->vide = true;
             this->text = "";
+            this->i2 = 0;
             clicked=false;
             this->ispassword = ispassword;
+            this->onlynumber = onlynumber;
         }
         void ajoute_char(char c){
+
             if(this->vide){
-                if(isdigit(c) || ispassword==true){
+                if(isdigit(c) || ispassword==true || onlynumber==false){
+                    
                     this->text = c;
                     this->vide = false;
+                    this->i2=1;
                 }
                 else{
+                    
+            
+                     if(this->i2==1){
+                        this->text = c;
+                    }
+                    else this->text += c;
                     this->text = "Veuillez entrer un nombre";
                     this->vide = false;
+                    this->i2=2;
                 }
             }
             else{
-                if(isdigit(c) || ispassword==true){
-                    this->text += c;
+                if(isdigit(c) || ispassword==true ||onlynumber==false){
+                    
+                    
+                    if(this->i2==2){
+                        this->text = c;
+                    }
+                    else this->text += c;
+                    this->i2=1;
                 }
                 else{
                     this->text = "Veuillez entrer un nombre";
+                    this->i2=2;
                 }
             } 
         }
-
 
         void supprime_char(){
             if(this->vide){
@@ -265,6 +287,7 @@ class Carre{
     }
 
     int afficherDR(sf::RenderWindow &window2, sf::Event event_, int DoR, vector<Client> &Bdd_client,int id_client,bool &shutdown, int id_agence){   // AFFICHAGE DES FENETRES DEPOT ET RETRAIT     
+        Carre fond(0,0,610,400,4,255,243,216);
         Input_text input(10, 110, 400, 150);
         string txt = "";
         
@@ -274,17 +297,13 @@ class Carre{
         else{
             txt = "Inserez un montant a retirer : ";
         }
-        Carre explication(10, 10, 400, 100, 1, 255, 0, 0, txt, 255, 255, 255);
-        Carre confirmation(410, 108, 550, 152, 1, 255, 0, 0, "Valider", 255, 255, 255);
+        Carre explication(10, 10, 400, 100, 1, 255,243,216, txt, 115,0,0);
+        Carre confirmation(410, 108, 550, 152, 1, 255,243,216, "Valider", 115,0,0);
         bool bugged=false;
         int resultConf = 0;
         while (window2.isOpen()){
             while (window2.pollEvent(event_)){
-                if (event_.type == sf::Event::Closed){
-                window2.close();
-                shutdown=true;
-                send_to_serveur("9/"+std::to_string(id_agence)+"\n",1235);
-            }
+                
                 if(confirmation.isbind(event_.mouseButton.x, event_.mouseButton.y)){
                     confirmation.setclicked(true);
                     string tmp = input.getText();
@@ -316,12 +335,31 @@ class Carre{
                     }
                     else{
                         if(DoR==1){
-                            Bdd_client[id_client].set_solde_courant(Bdd_client[id_client].get_solde_courant()+stoi(tmp));
+                            if(tmp!=""){
+                                if(stoi(tmp)>0)Bdd_client[id_client].set_solde_courant(Bdd_client[id_client].get_solde_courant()+stoi(tmp));
+                                else{
+                                    explication.setTxt("Veuillez rentrer un nombre positif");
+                                    window_1(Bdd_client, id_client, shutdown, id_agence);
+                                }
+                            }
+                            else{
+                                explication.setTxt("Rentrez un nombre");
+                            }
                         }
                         else{
-                            Bdd_client[id_client].set_solde_courant(Bdd_client[id_client].get_solde_courant()-stoi(tmp));
+                            if(tmp!=""){
+                                if(stoi(tmp)>0)Bdd_client[id_client].set_solde_courant(Bdd_client[id_client].get_solde_courant()-stoi(tmp));
+                                else{
+                                    explication.setTxt("Veuillez rentrer un nombre positif");
+                                    window_1(Bdd_client, id_client, shutdown, id_agence);
+                                }
+                            }
+                            else{
+                                explication.setTxt("Rentrez un nombre");
+                            }
+                            
                         }
-                        goto end;
+                        
                     }
                     
                 }
@@ -348,11 +386,12 @@ class Carre{
                     end:
                     window2.clear();
                     window2.close();
+                    window_1(Bdd_client, id_client, shutdown, id_agence);
                 }
                 
             }
             window2.clear();
-
+            fond.afficher(window2);
             input.afficher(window2);
             explication.afficher(window2);
             confirmation.afficher(window2);
@@ -389,9 +428,9 @@ class Carre{
             type_txt = "virement ";
         }
         string txt = "Confirmer le " + type_txt + "de " + tmp_ + " euros ?";
-        Carre validation(80, 10, 580, 100, 1, 255, 0, 0, txt, 255, 255, 255);
-        Carre confirmer(130, 110, 320, 200, 1, 255, 0, 0, "Confirmer", 255, 255, 255);
-        Carre annuler(330, 110, 520, 200, 1, 255, 0, 0, "Annuler", 255, 255, 255);
+        Carre validation(80, 10, 580, 100, 1, 255,243,216, txt, 115,0,0);
+        Carre confirmer(130, 110, 320, 200, 1, 255,243,216, "Confirmer", 115,0,0);
+        Carre annuler(330, 110, 520, 200, 1, 255,243,216, "Annuler", 115,0,0);
         int counter = 0;
         bool bugged = false;
         while (window3.isOpen()){
@@ -417,6 +456,7 @@ class Carre{
                 }
                 counter+=1;
             }
+            window3.clear();
             validation.afficher(window3);
             confirmer.afficher(window3);
             annuler.afficher(window3);
@@ -426,28 +466,30 @@ class Carre{
     }
     int afficherV(sf::RenderWindow &window2, sf::Event event_, vector<Client> &Bdd_client,int id_client,bool &shutdown, int id_agence){     /// AFFICHAGE DE LA FENETRE VIREMENT
         
-        Carre explication(10, 10, 720, 100, 1, 255, 0, 0, "Inserer le montant du virement et l'id du destinataire : ", 255, 255, 255);
+        
+        Carre fond2(0,0,800,700,35,255,243,216,"",0,0,0);
+        Carre explication(10, 10, 720, 100, 1, 255, 243, 216, "Inserer le montant du virement et l'id du destinataire : ", 115,0,0);
         //creer un carre choix compte qui est centré et qui demande depuis quel compte on veut faire le virement
-        Carre choix_compte(10, 108, 720, 152, 1, 255, 0, 0, "Depuis quel compte voulez-vous faire le virement ?", 255, 255, 255);
+        Carre choix_compte(10, 108, 720, 152, 1, 255, 243, 216, "Depuis quel compte voulez-vous faire le virement ?", 115,0,0);
         //creer 3 carres aligné sur l'horizontale qui contiennent les comptes
-        Carre compte1(10, 160, 240, 200, 1, 255, 0, 0, "Compte 1", 255, 255, 255);
-        Carre compte2(260, 160, 490, 200, 1, 255, 0, 0, "Compte 2", 255, 255, 255);
-        Carre compte3(510, 160, 740, 200, 1, 255, 0, 0, "Compte 3", 255, 255, 255);
+        Carre compte1(10, 160, 240, 200, 1, 255, 243, 216, "Compte 1", 115,0,0);
+        Carre compte2(260, 160, 490, 200, 1, 255, 243, 216, "Compte 2", 115,0,0);
+        Carre compte3(510, 160, 740, 200, 1, 255, 243, 216, "Compte 3", 115,0,0);
         
         //creer un carre qui demande le montant du virement
-        Carre montant(10, 208, 200, 252, 1, 255, 0, 0, "Montant du virement : ", 255, 255, 255);
+        Carre montant(10, 208, 200, 252, 1, 255, 243, 216, "Montant : ",115,0,0);
         //creer une input text qui prend le montant du virement
         Input_text input(10, 260, 200 , 300);
         //creer un carre qui demande l'id du destinataire aligné au milieu
-        Carre id_destinataire(260, 208, 460, 252, 1, 255, 0, 0, "Id du destinataire : ", 255, 255, 255);
+        Carre id_destinataire(260, 208, 460, 252, 1, 255, 243, 216, "Id du destinataire : ", 115,0,0);
         //creer une input text qui prend l'id du destinataire
         Input_text id_(260, 260, 460, 300);
         //creer un carre qui demande le mot de passe du compte
-        Carre mot_de_passe(510, 208, 710, 252, 1, 255, 0, 0, "Mot de passe : ", 255, 255, 255);
+        Carre mot_de_passe(510, 208, 690, 252, 1, 255, 243, 216, "Mot de passe : ", 115,0,0);
         //creer une input text qui prend le mot de passe
-        Input_text mdp_(510, 260, 710, 300, true);
+        Input_text mdp_(510, 260, 690, 300, true);
         //creer un carre qui confirme le virement en bas a droite
-        Carre confirmation(510, 308, 710, 352, 1, 255, 0, 0, "Confirmer", 255, 255, 255);
+        Carre confirmation(510, 308, 710, 352, 1, 255, 243, 216, "Confirmer", 115,0,0);
         
 
         
@@ -464,8 +506,8 @@ class Carre{
             while (window2.pollEvent(event_)){
                 if (event_.type == sf::Event::Closed){
                     window2.close();
-                    shutdown=true;
-                    send_to_serveur("9/"+std::to_string(id_agence)+"\n",1235);
+                    
+                    
                 }
                 if(event_.type==sf::Event::MouseButtonPressed){
                     if(compte1.isbind(event_.mouseButton.x, event_.mouseButton.y)){
@@ -506,7 +548,7 @@ class Carre{
                         string tmp = input.getText();
                         string tmp2 = id_.getText();
                         if(tmp==""||tmp2=="" ||(compte1.getclicked()==false && compte2.getclicked()==false && compte3.getclicked()==false)){
-                            explication.setTxt("Veuillez remplir tous les champs et/ou cliquer sur le compte depuis lequel vous voulez faire le virement");
+                            explication.setTxt("Veuillez remplir tous les champs");
                         }
                     
                         else{
@@ -543,6 +585,9 @@ class Carre{
                             }
                             
                         }
+                    }
+                    else{
+                        confirmation.setclicked(false);
                     }
                 }
                 if(event_.type==sf::Event::TextEntered){
@@ -596,6 +641,7 @@ class Carre{
             }
             window2.clear();
 
+            fond2.afficher(window2);
             explication.afficher(window2);
             confirmation.afficher(window2);
             choix_compte.afficher(window2);
@@ -613,191 +659,18 @@ class Carre{
         return 1;
     }
 
-    void suppression(int id, vector<Client> &Bdd_client, sf::RenderWindow &window3, sf::Event event_,bool &shutdown, int id_agence){ //SUPPRESSION CLIENTS
-        Carre validation(10, 10, 630, 100, 1, 255, 0, 0, "Voulez-vous vraiment supprimer le client " + Bdd_client[id].get_name() + " ?", 255, 255, 255);
-        Carre confirmer(130, 110, 320, 200, 1, 255, 0, 0, "Confirmer", 255, 255, 255);
-        Carre annuler(330, 110, 520, 200, 1, 255, 0, 0, "Annuler", 255, 255, 255);
-        int counter = 0;
-        bool bugged = false;
-        while (window3.isOpen()){
-            while (window3.pollEvent(event_)){
-                if(confirmer.isbind(event_.mouseButton.x, event_.mouseButton.y)){
-                    //if(counter >= 4){ // Si quelqu'un comprend pourquoi le bouton est cliqué automatiquement aux 4 premières itérations...
-                        Bdd_client.erase(Bdd_client.begin()+id);
-                        send_to_serveur("5/"+to_string(id)+"\n",1235);
-                        window3.clear();
-                        window3.close();
-                        
-                        //return Bdd_client;
-                    //}
-                }
-                if(annuler.isbind(event_.mouseButton.x, event_.mouseButton.y)){
-
-                    if(counter >= 4){//Pareil
-                        window3.clear();
-                        window3.close();
-                        //return Bdd_client;
-                    }
-                }
-                if (event_.type == sf::Event::Closed){
-                    window3.clear();
-                    window3.close();
-                }
-                counter+=1;
-            }
-            validation.afficher(window3);
-            confirmer.afficher(window3);
-            annuler.afficher(window3);
-            window3.display();
-        }
-    }
-    void suppressionB(int id, vector<Client> &Bdd_banque, sf::RenderWindow &window3, sf::Event event_,bool &shutdown, int id_agence){ //SUPPRESSION BANQUES
-        Carre validation(10, 10, 630, 100, 1, 255, 0, 0, "Voulez-vous vraiment supprimer l'agence " + Bdd_banque[id].get_name() + " ?", 255, 255, 255);
-        Carre confirmer(130, 110, 320, 200, 1, 255, 0, 0, "Confirmer", 255, 255, 255);
-        Carre annuler(330, 110, 520, 200, 1, 255, 0, 0, "Annuler", 255, 255, 255);
-        int counter = 0;
-        bool bugged = false;
-        while (window3.isOpen()){
-            while (window3.pollEvent(event_)){
-                if(confirmer.isbind(event_.mouseButton.x, event_.mouseButton.y)){
-                    //if(counter >= 4){ // Si quelqu'un comprend pourquoi le bouton est cliqué automatiquement aux 4 premières itérations...
-                        Bdd_banque.erase(Bdd_banque.begin()+id);
-                        window3.clear();
-                        window3.close();
-                        
-                        //return Bdd_client;
-                    //}
-                }
-                if(annuler.isbind(event_.mouseButton.x, event_.mouseButton.y)){
-
-                    if(counter >= 4){//Pareil
-                        window3.clear();
-                        window3.close();
-                        //return Bdd_client;
-                    }
-                }
-                if (event_.type == sf::Event::Closed){
-                    window3.clear();
-                    window3.close();
-                }
-                counter+=1;
-            }
-            validation.afficher(window3);
-            confirmer.afficher(window3);
-            annuler.afficher(window3);
-            window3.display();
-        }
-    }
-    void afficherGC(sf::RenderWindow &window2, sf::Event event_, vector<Client> &Bdd_client, int id_client,bool &shutdown, int id_agence){//GERER CLIENTS
-        debut:
-        Carre info(10, 10, 250, 100, 1, 255, 0, 0, "Liste des clients : ", 255, 255, 255);
-        vector<Carre> MonMoiVector;
-        vector<Carre> MonMoiVectorSuppr;
-        int hauteur1 = 0;
-        int hauteur2 = 0;
-        int nbr_clients = Bdd_client.size() - 1;
-        for(int i = 0; i < Bdd_client.size(); ++i){
-            hauteur1 += 110;
-            hauteur2 = hauteur1 + 90;
-            MonMoiVector.push_back(Carre(10, hauteur1, 200, hauteur2, -1, 255, 0, 0, Bdd_client[i].get_name(), 255, 255, 255));
-            MonMoiVectorSuppr.push_back(Carre(210, hauteur1, 400, hauteur2, i, 255, 0, 0, "Supprimer", 255, 255, 255));
-        }
-        int counter = 0;
-        while (window2.isOpen())
-        {
-            while (window2.pollEvent(event_))
-            {
-                if (event_.type == sf::Event::Closed){
-                    window2.close();
-                    shutdown=true;
-                    send_to_serveur("9/"+std::to_string(id_agence)+"\n",1235);
-                }
-                if(event_.type==sf::Event::MouseButtonPressed){
-                    if(event_.mouseButton.button==sf::Mouse::Left){
-                        for(int i = 0; i < Bdd_client.size(); ++i){
-                            if(MonMoiVectorSuppr[i].isbind(event_.mouseButton.x, event_.mouseButton.y)){
-                                window2.close();
-                                sf::RenderWindow windowSuppr(sf::VideoMode(640, 420), "Suppression",sf::Style::Close);
-                                suppression(i, Bdd_client, windowSuppr, event_, shutdown, id_agence);
-                                goto debut;
-
-
-                            }
-                        }
-                    }
-                }
-                //counter +=1;
-                if (event_.type == sf::Event::Closed)
-                    window2.close();
-            }
-            window2.clear();
-            info.afficher(window2);
-            for(int i = 0; i <= nbr_clients; ++i){
-                MonMoiVector[i].afficher(window2);
-                MonMoiVectorSuppr[i].afficher(window2);
-            }
-            window2.display();
-        }
-    }
-    /*
-    void afficherGB(sf::RenderWindow &window2, sf::Event event_, vector<Client> &Bdd_client, int id_client,bool &shutdown){//GERER BANQUES
-        debut:
-        Carre info(10, 10, 250, 100, 1, 255, 0, 0, "Liste des banques : ", 255, 255, 255);
-        vector<Carre> MonMoiVector;
-        vector<Carre> MonMoiVectorSuppr;
-        int hauteur1 = 0;
-        int hauteur2 = 0;
-        //int nbr_banques = Bdd_banque.size() - 1;
-        for(int i = 0; i < Bdd_banque.size(); ++i){
-            hauteur1 += 110;
-            hauteur2 = hauteur1 + 90;
-            MonMoiVector.push_back(Carre(10, hauteur1, 200, hauteur2, -1, 255, 0, 0, Bdd_banque[i].get_name(), 255, 255, 255));
-            MonMoiVectorSuppr.push_back(Carre(210, hauteur1, 400, hauteur2, i, 255, 0, 0, "Supprimer", 255, 255, 255));
-        }
-        int counter = 0;
-        while (window2.isOpen())
-        {
-            while (window2.pollEvent(event_))
-            {
-                if(event_.type==sf::Event::MouseButtonPressed){
-                    if(event_.mouseButton.button==sf::Mouse::Left){
-                        for(int i = 0; i < Bdd_banque.size(); ++i){
-                            if(MonMoiVectorSuppr[i].isbind(event_.mouseButton.x, event_.mouseButton.y)){
-                                window2.close();
-                                sf::RenderWindow windowSuppr(sf::VideoMode(640, 420), "Suppression",sf::Style::Close);
-                                suppressionB(i, Bdd_banque, windowSuppr, event_, shutdown);
-                                goto debut;
-
-
-                            }
-                        }
-                    }
-                }
-                //counter +=1;
-                if (event_.type == sf::Event::Closed)
-                    window2.close();
-            }
-            window2.clear();
-            info.afficher(window2);
-            for(int i = 0; i <= nbr_banques; ++i){
-                MonMoiVector[i].afficher(window2);
-                MonMoiVectorSuppr[i].afficher(window2);
-            }
-            window2.display();
-        }
-    }*/
+    
 };
-void connexion(vector<Client> &Bdd_client,bool &shutdown, int id_agence);
-void window_1(vector<Client> &Bdd_client, int id_client, bool &shutdown, int id_agence);
+
 void supp(vector<Client> &Bdd_client, int id_client, int id_agence, bool &shutdown){
     //creer une fenetre demandans a l'utilisateur s'il veut vraiment supprimer son compte
     //si oui, supprimer le compte et revenir a la fenetre de connexion
     //si non, revenir a la fenetre de gestion de compte
     sf::RenderWindow windowSuppr(sf::VideoMode(640, 420), "Suppression",sf::Style::Close);
-    Carre fond(0, 0, 640, 420, 1, 255, 0, 0, "", 255, 255, 255);
-    Carre info(10, 10, 250, 100, 1, 255, 0, 0, "Voulez-vous vraiment supprimer votre compte ?", 255, 255, 255);
-    Carre oui(10, 110, 200, 200, 1, 255, 0, 0, "OUI", 255, 255, 255);
-    Carre non(210, 110, 400, 200, 1, 255, 0, 0, "NON", 255, 255, 255);
+    Carre fond(0, 0, 640, 420, 1, 255, 243, 216, "", 255, 255, 255);
+    Carre info(240, 10, 400, 100, 1, 255, 243, 216, "Voulez-vous vraiment supprimer votre compte ?", 115,0,0);
+    Carre oui(250, 110, 300, 200, 1, 255, 243, 216, "OUI", 115,0,0);
+    Carre non(350, 110, 400, 200, 1, 255, 243, 216, "NON", 115,0,0);
     
     while (windowSuppr.isOpen())
     {
@@ -835,14 +708,15 @@ void supp(vector<Client> &Bdd_client, int id_client, int id_agence, bool &shutdo
 void window_1(vector<Client> &Bdd_client, int id_client, bool &shutdown, int id_agence){ // FENETRE CLIENTS
     debut :
 
-    sf::RenderWindow window(sf::VideoMode(610, 400), "Bienvenue !",sf::Style::Close);
+    sf::RenderWindow window(sf::VideoMode(610, 400), "NotStonksBank",sf::Style::Close);
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
     Carre fond(0, 0, 610, 400, 3, 255, 243, 216);
-    Carre carre(10, 10, 200, 100, 1, 116, 103, 82, "DEPOT", 255, 243, 216);
-    Carre carre2(210, 10, 400, 100, 1, 116, 103, 82, "RETRAIT", 255, 243, 216);
-    Carre carre3(410, 10, 600, 100, 1, 116, 103, 82, "VIREMENT", 255, 243, 216);
-    Carre suppression(10, 110, 200, 200, 1, 255, 243, 216, "Supprimer votre compte", 115, 0, 0);
+    Carre txt_bvn(255,100,355,130, 3,255,243,216,"Bonjour " +Bdd_client[id_client].get_name()+" "+Bdd_client[id_client].get_surname()+", que voulez vous faire ?",115,0,0);
+    Carre carre(10, 150, 200, 240, 1, 116, 103, 82, "DEPOT", 255, 243, 216);
+    Carre carre2(210, 150, 400, 240, 1, 116, 103, 82, "RETRAIT", 255, 243, 216);
+    Carre carre3(410, 150, 600, 240, 1, 116, 103, 82, "VIREMENT", 255, 243, 216);
+    Carre suppression(255, 270, 355, 330, 1, 255, 243, 216, "Supprimer votre compte", 115, 0, 0);
     bool bugged=false;
     while (window.isOpen())
     {
@@ -905,6 +779,7 @@ void window_1(vector<Client> &Bdd_client, int id_client, bool &shutdown, int id_
 
         window.clear();
         fond.afficher(window);
+        txt_bvn.afficher(window);
         suppression.afficher(window);
         carre.afficher(window);
         carre2.afficher(window);
@@ -912,233 +787,25 @@ void window_1(vector<Client> &Bdd_client, int id_client, bool &shutdown, int id_
         window.display();
     }
 } 
-void window_BC(vector<Client> &Bdd_client, vector<Client> &Bdd_banque,int id_client,bool &shutdown, int id_agence){ //FENETRE ADMIN
-    debut :
 
-    sf::RenderWindow window(sf::VideoMode(610, 400), "Bienvenue !",sf::Style::Close);
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
-
-    Carre carre(10, 10, 200, 100, 1, 255, 0, 0, "Gerer clients", 255, 255, 255);
-    Carre carre2(210, 10, 400, 100, 1, 255, 0, 0, "Gerer banques", 255, 255, 255);
-    Carre carre3(410, 10, 600, 100, 1, 255, 0, 0, "Logs", 255, 255, 255);
-    
-    bool bugged=false;
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed){
-                window.close();
-                shutdown=true;
-                send_to_serveur("9/"+std::to_string(id_agence)+"\n",1235);
-            }
-            if(event.type==sf::Event::MouseButtonPressed){
-                if(event.mouseButton.button==sf::Mouse::Left){
-                    if(carre.isbind(event.mouseButton.x, event.mouseButton.y)){
-                        window.close();
-                        window.clear();
-                        sf::RenderWindow window2(sf::VideoMode(610, 900), "Gerer clients",sf::Style::Close);
-                        carre.afficherGC(window2, event, Bdd_client, id_client, shutdown, id_agence);//Afficher : gerer clients
-                        goto debut;
-
-                    }
-                    if(carre2.isbind(event.mouseButton.x, event.mouseButton.y)){
-                        carre2.setclicked(true);
-                        window.close();
-                        window.clear();
-                        sf::RenderWindow window2(sf::VideoMode(610, 900), "Gerer banques",sf::Style::Close);
-                        //carre.afficherGB(window2, event, Bdd_banque, id_client, shutdown);//Afficher gerer banques
-                        goto debut;
-                    }
-                    if(carre3.isbind(event.mouseButton.x, event.mouseButton.y)){
-                        carre3.setclicked(true);
-                        window.close();
-                        window.clear();
-                        sf::RenderWindow window2(sf::VideoMode(710, 400), "Logs",sf::Style::Close);
-                        carre.afficherV(window2, event, Bdd_client, id_client, shutdown, id_agence);
-                        goto debut;
-                    }
-                }
-            }
-            if(event.type==sf::Event::MouseButtonReleased){
-                if(event.mouseButton.button==sf::Mouse::Left){
-                    
-                }
-                if(event.mouseButton.button==sf::Mouse::Left){
-                    
-                }
-                if(event.mouseButton.button==sf::Mouse::Left){
-                    
-                }
-            }
-            if (event.type == sf::Event::Closed){
-                window.close();
-            }
-        }
-
-        window.clear();
-        
-        carre.afficher(window);
-        carre2.afficher(window);
-        carre3.afficher(window);
-        window.display();
-    }
-} 
-/*
-void window_2(){
-    sf::RenderWindow window(sf::VideoMode(900, 800), "SFML works!",sf::Style::Close);
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
-
-    Carre texte_bienvenu(420, 50, 480, 150, 3, 255, 243, 216, "Bienvenue ! Que voulez vous faire ?", 115, 0, 0);
-    Carre fond(0,0,900,800,2, 255,243,216);
-    Carre texte_banque(450, 10, 450, 50, 1, 255, 243, 216, "NotStonksBank", 115, 0, 0);
-    Carre texte_recherche(10,150,390,200, 4, 255, 243, 216, "Rechercher une banque", 115, 0, 0);
-    Input_text input(10, 240, 390, 280);
-
-    vector <Carre> Boutons;
-
-    bool bugged=false;
-    if(!doc.LoadFile()){
-        cout<< "erreur lors du chargement" << endl;
-        cout << "error #" << doc.ErrorId() << " : " << doc.ErrorDesc() << endl;
-        //return 1;
-    }
-    TiXmlHandle hdl(&doc);
-    TiXmlElement *elem = hdl.FirstChildElement().FirstChildElement().Element();
-    client cl;
-    if(!elem){
-        cerr << "le nœud à atteindre n'existe pas" << endl;
-        //return 2;
-    }
-    list<client> user_list;
-    vector<string> liste;
-    vector<Carre> Affichage;
-    //list<client>::iterator i;
-    while (elem){
-       cl.name = elem->Attribute("name");
-      //  cout<<cl.name;
-        cl.id = elem->Attribute("id");
-        user_list.push_back(cl);
-        // string txt = elem->Attribute("name");
-        // liste.push_back(txt);
-        //cout<<"coucou?"<<endl;
-        //Carre txt(420, 500, 480, 550, 3, 255, 243, 216, "test", 115, 0, 0);
-        elem = elem->NextSiblingElement(); // iteration 
-
-    }
-
-
-    Carre txt(40, 250, 480, 300, 5, 255, 243, 216, "", 115, 0, 0);
-    while (window.isOpen()){
-        sf::Event event;
-        //cout<<"fenetre"<<endl;
-        while (window.pollEvent(event))
-        {
-           // cout<<"heloo?"<<endl;
-            if(event.type==sf::Event::MouseButtonPressed){
-                if(event.mouseButton.button==sf::Mouse::Left){
-                    if(input.isbind(event.mouseButton.x, event.mouseButton.y)){
-                        input.setClicked(true);
-                    }
-                    else{input.setClicked(false);}
-                    for(int i=0;i<Boutons.size();i++){
-                        if(Boutons[i].isbind(event.mouseButton.x, event.mouseButton.y)){
-                            Boutons[i].setclicked(true);
-                        }
-                        else{
-                            Boutons[i].setclicked(false);
-                        }
-                    }
-                }
-            }
-            if(event.type==sf::Event::MouseButtonReleased){
-                if(event.mouseButton.button==sf::Mouse::Left){
-                    for(int i=0;i<Boutons.size();i++){
-                        if(Boutons[i].isbind(event.mouseButton.x, event.mouseButton.y)){
-                            Boutons[i].setclicked(false);
-                        }
-                    }
-                }
-
-            }
-
-            if(event.type==sf::Event::TextEntered){
-                if(input.getClicked()){
-                    if(event.text.unicode<128){
-                        if(event.text.unicode==8){
-                            input.supprime_char();
-                        }
-                        else if(event.text.unicode==13){
-                            input.setClicked(false);
-                        }
-                        else{
-
-                            input.ajoute_char(event.text.unicode);
-                            cout<<input.getText()<<endl;
-                        }
-                    }
-                }
-            }
-            if (event.type == sf::Event::Closed){
-                window.close();
-            }
-        }
-        list<client>::iterator i;
-        string txt_inte = "";
-        for(i=user_list.begin(); i!=user_list.end(); i++){
-          // cout << i->name << " "<< i->id << endl;
-           txt_inte += i->name + " " + i->id;
-
-           txt_inte += "\n";
-            }
-        txt.setter_carre(txt_inte);
-        window.clear();
-
-        fond.afficher(window);
-
-
-        // for(int i=0;i<Boutons.size();i++){
-        //     Boutons[i].afficher(window);
-        // }
-        // for(int i = 0; i<Affichage.size();i++){
-        //     Affichage[i].afficher(window);
-
-        // }
-        txt.afficher(window);
-        texte_banque.afficher(window);
-        texte_bienvenu.afficher(window);
-        texte_recherche.afficher(window);
-        //carre.afficherText(window);
-        //window.draw(shape);
-        //input.afficher(window);
-        window.display();
-
-
-
-    } 
-}
-*/
 
 void nouveau(vector<Client> &Bdd_client, bool &shutdown, int id_agence){
-    sf::RenderWindow window(sf::VideoMode(610, 400), "Cree un Compte !",sf::Style::Close);
-    Carre fond(0, 0, 610, 400, 3, 255, 243, 216);
+    sf::RenderWindow window(sf::VideoMode(610, 500), "Cree un Compte !",sf::Style::Close);
+    Carre fond(0, 0, 610, 500, 3, 255, 243, 216);
     //creer un ensemble de input_text demandans les informations necessaires pour creer un compte
     // <name>John</name> <surname>Smith</surname> <age>25</age> <password>1234</password>
-    Input_text name(230, 60, 400, 90);
-    Input_text surname(230, 120, 400, 150);
-    Input_text age(230, 180, 400, 210);
-    Input_text password(230, 240, 400, 270,true);
-    Input_text confirme_password(230, 300, 400, 330,true);
-    Carre valider(230, 350, 400, 380, 3, 255, 243, 216, "Valider", 115, 0, 0);
-    Carre retour(230, 380, 400, 410, 3, 255, 243, 216, "Retour", 115, 0, 0);
-    Carre texte_client(295,60,315,80,95,255,243,216,"Veuillez entrer votre Nom",115,0,0);
-    Carre texte_client2(295,120,315,140,95,255,243,216,"Veuillez entrer votre Prenom",115,0,0);
-    Carre texte_client3(295,180,315,200,95,255,243,216,"Veuillez entrer votre Age",115,0,0);
-    Carre texte_client4(295,240,315,260,95,255,243,216,"Veuillez entrer votre Mot de passe",115,0,0);
-    Carre texte_client5(295,300,315,320,95,255,243,216,"Veuillez confirmer votre Mot de passe",115,0,0);
+    Input_text name(230, 50, 400, 80,false,false);
+    Input_text surname(230, 150, 400, 180,false,false);
+    Input_text age(230, 250, 400, 280);
+    Input_text password(230, 350, 400, 380,true,false);
+    Input_text confirme_password(230, 430, 400, 460,true,false);
+    Carre valider(330, 480, 370, 490, 3, 255, 243, 216, "Valider", 115, 0, 0);
+    Carre retour(240, 480, 280, 490, 3, 255, 243, 216, "Retour", 115, 0, 0);
+    Carre texte_client(295,20,315,40,50,255,243,216,"Veuillez entrer votre Nom",115,0,0);
+    Carre texte_client2(295,100,315,130,95,255,243,216,"Veuillez entrer votre Prenom",115,0,0);
+    Carre texte_client3(295,200,315,230,95,255,243,216,"Veuillez entrer votre Age",115,0,0);
+    Carre texte_client4(295,300,315,330,95,255,243,216,"Veuillez entrer votre Mot de passe",115,0,0);
+    Carre texte_client5(295,400,315,430,95,255,243,216,"Veuillez confirmer votre Mot de passe",115,0,0);
     while(window.isOpen()){
         sf::Event event;
         while(window.pollEvent(event)){
@@ -1179,6 +846,7 @@ void nouveau(vector<Client> &Bdd_client, bool &shutdown, int id_agence){
                             else{
                                 valider.setTxt("Les mots de passe ne correspondent pas");
                                 }
+                        }
 
                     }
                     else{
@@ -1192,8 +860,8 @@ void nouveau(vector<Client> &Bdd_client, bool &shutdown, int id_agence){
                     else{
                         retour.setclicked(false);
                     }
+                
                 }
-            }
             if(event.type==sf::Event::MouseButtonReleased){
                 if(event.mouseButton.button==sf::Mouse::Left){
                     if(valider.isbind(event.mouseButton.x, event.mouseButton.y)){
@@ -1203,6 +871,7 @@ void nouveau(vector<Client> &Bdd_client, bool &shutdown, int id_agence){
                         retour.setclicked(false);
                     }
                 }
+            }
             }
             if(event.type==sf::Event::TextEntered){
                 if(name.getClicked()){
@@ -1233,7 +902,49 @@ void nouveau(vector<Client> &Bdd_client, bool &shutdown, int id_agence){
                         }
                     }
                 }
-            }
+                if(age.getClicked()){
+                    if(event.text.unicode<128){
+                        if(event.text.unicode==8){
+                            age.supprime_char();
+                        }
+                        else if(event.text.unicode==13){
+                            age.setClicked(false);
+                        }
+                        else{
+                            age.ajoute_char(event.text.unicode);
+                            cout<<age.getText()<<endl;
+                        }
+                    }
+                }
+                if(password.getClicked()){
+                    if(event.text.unicode<128){
+                        if(event.text.unicode==8){
+                            password.supprime_char();
+                        }
+                        else if(event.text.unicode==13){
+                            password.setClicked(false);
+                        }
+                        else{
+                            password.ajoute_char(event.text.unicode);
+                            cout<<password.getText()<<endl;
+                        }
+                    }
+                }
+                if(confirme_password.getClicked()){
+                    if(event.text.unicode<128){
+                        if(event.text.unicode==8){
+                            confirme_password.supprime_char();
+                        }
+                        else if(event.text.unicode==13){
+                            confirme_password.setClicked(false);
+                        }
+                        else{
+                            confirme_password.ajoute_char(event.text.unicode);
+                            cout<<confirme_password.getText()<<endl;
+                        }
+                    }
+                }
+            
             
         }
         if(event.type==sf::Event::Closed){
@@ -1266,7 +977,7 @@ void nouveau(vector<Client> &Bdd_client, bool &shutdown, int id_agence){
 
 
 void connexion(vector<Client> &Bdd_client,bool &shutdown, int id_agence){
-    sf::RenderWindow window(sf::VideoMode(610, 400), "Bienvenue !",sf::Style::Close);
+    sf::RenderWindow window(sf::VideoMode(610, 400), "Bienvenue  sur l'agence : "+std::to_string(id_agence)+" !",sf::Style::Close);
     
     Carre texte_client(295,60,315,80,95,255,243,216,"Veuillez entrer vos identifiants",115,0,0);
     Input_text id(230, 120, 400, 150);
@@ -1389,6 +1100,13 @@ int main()
     int id_agence= stoi(recup_info());//ABSOLUMENT A CHANGER
     vector<Client> Bdd_client=reader();
     bool shutdown=false;
+    /*try{
+        send_to_serveur("8/"+std::to_string(id_agence)+"\n",1235);
+    }
+    catch(...){
+        cout<<"Serveur non connecté"<<endl;
+        return 0;
+    }*/
     thread t1(write_every30sec,std::ref(Bdd_client),std::ref(shutdown));
     thread t2(connexion,std::ref(Bdd_client),std::ref(shutdown),id_agence);
     thread t3(interet_epargne1,std::ref(Bdd_client),std::ref(shutdown));
