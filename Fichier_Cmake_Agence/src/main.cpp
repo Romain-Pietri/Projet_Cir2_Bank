@@ -1100,13 +1100,13 @@ int main()
     int id_agence= stoi(recup_info());//ABSOLUMENT A CHANGER
     vector<Client> Bdd_client=reader();
     bool shutdown=false;
-    /*try{
+    try{
         send_to_serveur("8/"+std::to_string(id_agence)+"\n",1235);
     }
     catch(...){
         cout<<"Serveur non connecté"<<endl;
         return 0;
-    }*/
+    }
     thread t1(write_every30sec,std::ref(Bdd_client),std::ref(shutdown));
     thread t2(connexion,std::ref(Bdd_client),std::ref(shutdown),id_agence);
     thread t3(interet_epargne1,std::ref(Bdd_client),std::ref(shutdown));
