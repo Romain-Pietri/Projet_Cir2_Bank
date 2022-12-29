@@ -154,7 +154,7 @@ class Carre{
         int posxd;//position x début
         int posyd;//position y début
         int posxf;//position x fin
-        int posyf;
+        int posyf;//position y fin
         sf::RectangleShape carre;//tkt c'est juste un rectangle
         int id;//id pour les fonction apres tkt
         int r;//couleur rgb du carré
