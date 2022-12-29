@@ -712,11 +712,12 @@ void window_1(vector<Client> &Bdd_client, int id_client, bool &shutdown, int id_
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
     Carre fond(0, 0, 610, 400, 3, 255, 243, 216);
-    Carre txt_bvn(255,100,355,130, 3,255,243,216,"Bonjour " +Bdd_client[id_client].get_name()+" "+Bdd_client[id_client].get_surname()+", que voulez vous faire ?",115,0,0);
-    Carre carre(10, 150, 200, 240, 1, 116, 103, 82, "DEPOT", 255, 243, 216);
-    Carre carre2(210, 150, 400, 240, 1, 116, 103, 82, "RETRAIT", 255, 243, 216);
-    Carre carre3(410, 150, 600, 240, 1, 116, 103, 82, "VIREMENT", 255, 243, 216);
-    Carre suppression(255, 270, 355, 330, 1, 255, 243, 216, "Supprimer votre compte", 115, 0, 0);
+    Carre txt_bvn(255,100,355,120, 3,255,243,216,"Bonjour " +Bdd_client[id_client].get_name()+" "+Bdd_client[id_client].get_surname()+", que voulez vous faire ?",115,0,0);
+    Carre carre(10, 170, 200, 250, 1, 116, 103, 82, "DEPOT", 255, 243, 216);
+    Carre carre2(210, 170, 400, 250, 1, 116, 103, 82, "RETRAIT", 255, 243, 216);
+    Carre carre3(410, 170, 600, 250, 1, 116, 103, 82, "VIREMENT", 255, 243, 216);
+    Carre argent(255,130,355,150,3,255,243,216,"Vous avez " + Bdd_client[id_client].get_solde_courant() + "€", 115,0,0);
+    Carre suppression(255, 300, 355, 330, 1, 255, 243, 216, "Supprimer votre compte", 115, 0, 0);
     bool bugged=false;
     while (window.isOpen())
     {
