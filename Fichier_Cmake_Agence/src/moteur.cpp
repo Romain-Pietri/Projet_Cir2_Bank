@@ -10,28 +10,30 @@ using std::thread;
 using std::string;
 
 
-void interet_epargne1(vector<Client> &Bdd_client){
+void interet_epargne1(vector<Client> &Bdd_client,bool &stop){
     for(int i=0;i<Bdd_client.size();i++){
         Bdd_client[i].set_solde_epargne1(Bdd_client[i].get_solde_epargne1()*(1.02));
     }
     cout<<"interet_epargne1"<<endl;
     std::this_thread::sleep_for(std::chrono::seconds(10));
-    interet_epargne1(Bdd_client);
+    if(stop==false)  interet_epargne1(Bdd_client,stop);
+    return;
 }
-void interet_epargne2(vector<Client> &Bdd_client){
+void interet_epargne2(vector<Client> &Bdd_client,bool &stop){
     for(int i=0;i<Bdd_client.size();i++){
         Bdd_client[i].set_solde_epargne2(Bdd_client[i].get_solde_epargne2()*(1.09));
     }
     cout<<"interet_epargne2"<<endl;
     std::this_thread::sleep_for(std::chrono::seconds(20));
-    interet_epargne2(Bdd_client);
+    if(stop==false) interet_epargne2(Bdd_client,stop);
+    return;
 }
 void write_every30sec(vector<Client> &Bdd_client,bool &stop){
     writer(Bdd_client);
     cout<<"write"<<endl;
     std::this_thread::sleep_for(std::chrono::seconds(30));
     if(stop==false) write_every30sec(Bdd_client,stop);
-    return
+    return;
 }
 /*
 int main(){

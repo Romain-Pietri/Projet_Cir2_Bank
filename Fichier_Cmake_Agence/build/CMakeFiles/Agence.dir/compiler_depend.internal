@@ -1303,7 +1303,17 @@ CMakeFiles/Agence.dir/src/client.cpp.o
 CMakeFiles/Agence.dir/src/main.cpp.o
  /home/romain/Documents/Cours/CIR 2/POO/projet/Projet_Cir2_Bank/Fichier_Cmake_Agence/src/main.cpp
  /usr/include/stdc-predef.h
- /usr/include/c++/12/iostream
+ /usr/include/SFML/Graphics.hpp
+ /usr/include/SFML/Window.hpp
+ /usr/include/SFML/System.hpp
+ /usr/include/SFML/Config.hpp
+ /usr/include/SFML/System/Clock.hpp
+ /usr/include/SFML/System/Export.hpp
+ /usr/include/SFML/System/Time.hpp
+ /usr/include/SFML/System/Err.hpp
+ /usr/include/c++/12/ostream
+ /usr/include/c++/12/ios
+ /usr/include/c++/12/iosfwd
  /usr/include/c++/12/x86_64-redhat-linux/bits/c++config.h
  /usr/include/bits/wordsize.h
  /usr/include/c++/12/x86_64-redhat-linux/bits/os_defines.h
@@ -1316,9 +1326,6 @@ CMakeFiles/Agence.dir/src/main.cpp.o
  /usr/include/gnu/stubs-64.h
  /usr/include/c++/12/x86_64-redhat-linux/bits/cpu_defines.h
  /usr/include/c++/12/pstl/pstl_config.h
- /usr/include/c++/12/ostream
- /usr/include/c++/12/ios
- /usr/include/c++/12/iosfwd
  /usr/include/c++/12/bits/stringfwd.h
  /usr/include/c++/12/bits/memoryfwd.h
  /usr/include/c++/12/bits/postypes.h
@@ -1482,26 +1489,126 @@ CMakeFiles/Agence.dir/src/main.cpp.o
  /usr/include/c++/12/bits/locale_facets.tcc
  /usr/include/c++/12/bits/basic_ios.tcc
  /usr/include/c++/12/bits/ostream.tcc
- /usr/include/c++/12/istream
- /usr/include/c++/12/bits/istream.tcc
- /usr/include/c++/12/fstream
+ /usr/include/SFML/System/FileInputStream.hpp
+ /usr/include/SFML/System/InputStream.hpp
+ /usr/include/SFML/System/NonCopyable.hpp
+ /usr/include/SFML/System/Lock.hpp
+ /usr/include/SFML/System/MemoryInputStream.hpp
+ /usr/include/SFML/System/Mutex.hpp
+ /usr/include/SFML/System/Sleep.hpp
+ /usr/include/SFML/System/String.hpp
+ /usr/include/SFML/System/Utf.hpp
+ /usr/include/c++/12/algorithm
+ /usr/include/c++/12/bits/stl_algo.h
+ /usr/include/c++/12/bits/algorithmfwd.h
+ /usr/include/c++/12/bits/stl_heap.h
+ /usr/include/c++/12/bits/stl_tempbuf.h
+ /usr/include/c++/12/bits/uniform_int_dist.h
+ /usr/include/c++/12/pstl/glue_algorithm_defs.h
+ /usr/include/c++/12/pstl/execution_defs.h
+ /usr/include/c++/12/locale
+ /usr/include/c++/12/bits/locale_facets_nonio.h
+ /usr/include/c++/12/ctime
+ /usr/include/c++/12/x86_64-redhat-linux/bits/time_members.h
+ /usr/include/c++/12/x86_64-redhat-linux/bits/messages_members.h
+ /usr/include/libintl.h
  /usr/include/c++/12/bits/codecvt.h
- /usr/include/c++/12/x86_64-redhat-linux/bits/basic_file.h
- /usr/include/c++/12/x86_64-redhat-linux/bits/c++io.h
- /usr/include/c++/12/bits/fstream.tcc
+ /usr/include/c++/12/bits/locale_facets_nonio.tcc
+ /usr/include/c++/12/bits/locale_conv.h
+ /usr/include/SFML/System/Utf.inl
+ /usr/include/c++/12/iterator
+ /usr/include/c++/12/bits/stream_iterator.h
+ /usr/include/SFML/System/String.inl
+ /usr/include/SFML/System/Thread.hpp
+ /usr/include/SFML/System/Thread.inl
+ /usr/include/SFML/System/ThreadLocal.hpp
+ /usr/include/SFML/System/ThreadLocalPtr.hpp
+ /usr/include/SFML/System/ThreadLocalPtr.inl
+ /usr/include/SFML/System/Vector2.hpp
+ /usr/include/SFML/System/Vector2.inl
+ /usr/include/SFML/System/Vector3.hpp
+ /usr/include/SFML/System/Vector3.inl
+ /usr/include/SFML/Window/Clipboard.hpp
+ /usr/include/SFML/Window/Export.hpp
+ /usr/include/SFML/Window/Context.hpp
+ /usr/include/SFML/Window/GlResource.hpp
+ /usr/include/SFML/Window/ContextSettings.hpp
+ /usr/include/SFML/Window/Cursor.hpp
+ /usr/include/SFML/Window/Event.hpp
+ /usr/include/SFML/Window/Joystick.hpp
+ /usr/include/SFML/Window/Keyboard.hpp
+ /usr/include/SFML/Window/Mouse.hpp
+ /usr/include/SFML/Window/Sensor.hpp
+ /usr/include/SFML/Window/Touch.hpp
+ /usr/include/SFML/Window/VideoMode.hpp
  /usr/include/c++/12/vector
  /usr/include/c++/12/bits/stl_uninitialized.h
  /usr/include/c++/12/bits/stl_vector.h
  /usr/include/c++/12/bits/stl_bvector.h
  /usr/include/c++/12/bits/vector.tcc
+ /usr/include/SFML/Window/Window.hpp
+ /usr/include/SFML/Window/WindowHandle.hpp
+ /usr/include/SFML/Window/WindowStyle.hpp
+ /usr/include/SFML/Graphics/BlendMode.hpp
+ /usr/include/SFML/Graphics/Export.hpp
+ /usr/include/SFML/Graphics/CircleShape.hpp
+ /usr/include/SFML/Graphics/Shape.hpp
+ /usr/include/SFML/Graphics/Drawable.hpp
+ /usr/include/SFML/Graphics/RenderStates.hpp
+ /usr/include/SFML/Graphics/Transform.hpp
+ /usr/include/SFML/Graphics/Rect.hpp
+ /usr/include/SFML/Graphics/Rect.inl
+ /usr/include/SFML/Graphics/Transformable.hpp
+ /usr/include/SFML/Graphics/VertexArray.hpp
+ /usr/include/SFML/Graphics/Vertex.hpp
+ /usr/include/SFML/Graphics/Color.hpp
+ /usr/include/SFML/Graphics/PrimitiveType.hpp
+ /usr/include/SFML/Graphics/ConvexShape.hpp
+ /usr/include/SFML/Graphics/Font.hpp
+ /usr/include/SFML/Graphics/Glyph.hpp
+ /usr/include/SFML/Graphics/Texture.hpp
+ /usr/include/SFML/Graphics/Image.hpp
+ /usr/include/c++/12/map
+ /usr/include/c++/12/bits/stl_tree.h
+ /usr/include/c++/12/ext/aligned_buffer.h
+ /usr/include/c++/12/bits/node_handle.h
+ /usr/include/c++/12/bits/stl_map.h
+ /usr/include/c++/12/tuple
+ /usr/include/c++/12/bits/uses_allocator.h
+ /usr/include/c++/12/bits/stl_multimap.h
+ /usr/include/c++/12/bits/erase_if.h
+ /usr/include/SFML/Graphics/RectangleShape.hpp
+ /usr/include/SFML/Graphics/RenderTarget.hpp
+ /usr/include/SFML/Graphics/View.hpp
+ /usr/include/SFML/Graphics/RenderTexture.hpp
+ /usr/include/SFML/Graphics/RenderWindow.hpp
+ /usr/include/SFML/Graphics/Shader.hpp
+ /usr/include/SFML/Graphics/Glsl.hpp
+ /usr/include/SFML/Graphics/Glsl.inl
+ /usr/include/SFML/Graphics/Sprite.hpp
+ /usr/include/SFML/Graphics/Text.hpp
+ /usr/include/SFML/Graphics/VertexBuffer.hpp
+ /usr/include/c++/12/iostream
+ /usr/include/c++/12/istream
+ /usr/include/c++/12/bits/istream.tcc
+ /usr/include/unistd.h
+ /usr/include/bits/posix_opt.h
+ /usr/include/bits/environments.h
+ /usr/include/bits/confname.h
+ /usr/include/bits/getopt_posix.h
+ /usr/include/bits/getopt_core.h
+ /usr/include/bits/unistd_ext.h
+ /usr/include/linux/close_range.h
+ /usr/include/c++/12/fstream
+ /usr/include/c++/12/x86_64-redhat-linux/bits/basic_file.h
+ /usr/include/c++/12/x86_64-redhat-linux/bits/c++io.h
+ /usr/include/c++/12/bits/fstream.tcc
  /home/romain/Documents/Cours/CIR 2/POO/projet/Projet_Cir2_Bank/Fichier_Cmake_Agence/src/RapidXml/rapidxml.hpp
  /usr/include/c++/12/cassert
  /usr/include/assert.h
  /home/romain/Documents/Cours/CIR 2/POO/projet/Projet_Cir2_Bank/Fichier_Cmake_Agence/src/RapidXml/rapidxml_utils.hpp
  /home/romain/Documents/Cours/CIR 2/POO/projet/Projet_Cir2_Bank/Fichier_Cmake_Agence/src/RapidXml/rapidxml.hpp
  /home/romain/Documents/Cours/CIR 2/POO/projet/Projet_Cir2_Bank/Fichier_Cmake_Agence/src/RapidXml/rapidxml_print.hpp
- /usr/include/c++/12/iterator
- /usr/include/c++/12/bits/stream_iterator.h
  /home/romain/Documents/Cours/CIR 2/POO/projet/Projet_Cir2_Bank/Fichier_Cmake_Agence/src/moteur.hpp
  /home/romain/Documents/Cours/CIR 2/POO/projet/Projet_Cir2_Bank/Fichier_Cmake_Agence/src/xml_parser.hpp
  /home/romain/Documents/Cours/CIR 2/POO/projet/Projet_Cir2_Bank/Fichier_Cmake_Agence/src/client.hpp
@@ -1516,14 +1623,6 @@ CMakeFiles/Agence.dir/src/main.cpp.o
  /usr/include/boost/config/detail/select_stdlib_config.hpp
  /usr/include/c++/12/version
  /usr/include/boost/config/stdlib/libstdcpp3.hpp
- /usr/include/unistd.h
- /usr/include/bits/posix_opt.h
- /usr/include/bits/environments.h
- /usr/include/bits/confname.h
- /usr/include/bits/getopt_posix.h
- /usr/include/bits/getopt_core.h
- /usr/include/bits/unistd_ext.h
- /usr/include/linux/close_range.h
  /usr/include/boost/config/detail/select_platform_config.hpp
  /usr/include/boost/config/platform/linux.hpp
  /usr/include/boost/config/detail/posix_features.hpp
@@ -1533,24 +1632,19 @@ CMakeFiles/Agence.dir/src/main.cpp.o
  /usr/include/boost/version.hpp
  /usr/include/linux/version.h
  /usr/include/c++/12/memory
- /usr/include/c++/12/bits/stl_tempbuf.h
  /usr/include/c++/12/bits/stl_raw_storage_iter.h
  /usr/include/c++/12/bits/align.h
  /usr/include/c++/12/bit
- /usr/include/c++/12/bits/uses_allocator.h
  /usr/include/c++/12/bits/unique_ptr.h
- /usr/include/c++/12/tuple
  /usr/include/c++/12/bits/shared_ptr.h
  /usr/include/c++/12/bits/shared_ptr_base.h
  /usr/include/c++/12/bits/allocated_ptr.h
- /usr/include/c++/12/ext/aligned_buffer.h
  /usr/include/c++/12/ext/concurrence.h
  /usr/include/c++/12/bits/shared_ptr_atomic.h
  /usr/include/c++/12/bits/atomic_base.h
  /usr/include/c++/12/bits/atomic_lockfree_defines.h
  /usr/include/c++/12/backward/auto_ptr.h
  /usr/include/c++/12/pstl/glue_memory_defs.h
- /usr/include/c++/12/pstl/execution_defs.h
  /usr/include/boost/asio/associator.hpp
  /usr/include/boost/asio/detail/push_options.hpp
  /usr/include/boost/asio/detail/pop_options.hpp
@@ -1561,15 +1655,9 @@ CMakeFiles/Agence.dir/src/main.cpp.o
  /usr/include/c++/12/bits/hashtable.h
  /usr/include/c++/12/bits/hashtable_policy.h
  /usr/include/c++/12/bits/enable_special_members.h
- /usr/include/c++/12/bits/node_handle.h
  /usr/include/c++/12/bits/unordered_map.h
- /usr/include/c++/12/bits/erase_if.h
  /usr/include/c++/12/array
  /usr/include/c++/12/compare
- /usr/include/c++/12/bits/stl_algo.h
- /usr/include/c++/12/bits/algorithmfwd.h
- /usr/include/c++/12/bits/stl_heap.h
- /usr/include/c++/12/bits/uniform_int_dist.h
  /usr/include/boost/asio/detail/type_traits.hpp
  /usr/include/boost/asio/associated_executor.hpp
  /usr/include/boost/asio/execution/executor.hpp
@@ -1893,7 +1981,6 @@ CMakeFiles/Agence.dir/src/main.cpp.o
  /usr/include/c++/12/chrono
  /usr/include/c++/12/bits/chrono.h
  /usr/include/c++/12/ratio
- /usr/include/c++/12/ctime
  /usr/include/c++/12/bits/parse_numbers.h
  /usr/include/boost/asio/impl/io_context.hpp
  /usr/include/boost/asio/detail/completion_handler.hpp
@@ -1965,8 +2052,6 @@ CMakeFiles/Agence.dir/src/main.cpp.o
  /usr/include/boost/smart_ptr/detail/sp_thread_pause.hpp
  /usr/include/boost/smart_ptr/detail/sp_thread_sleep.hpp
  /usr/include/boost/config/pragma_message.hpp
- /usr/include/c++/12/algorithm
- /usr/include/c++/12/pstl/glue_algorithm_defs.h
  /usr/include/boost/smart_ptr/detail/operator_bool.hpp
  /usr/include/boost/smart_ptr/detail/local_sp_deleter.hpp
  /usr/include/boost/smart_ptr/detail/local_counted_base.hpp

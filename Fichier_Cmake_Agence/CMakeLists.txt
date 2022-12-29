@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.10)
 
 project(Agence)
-
+set(CMAKE_CXX_STANDARD 17)
 # Ajout de la bibliothèque Boost
 find_package(Boost REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
 # Ajout de la bibliothèque SFML
-find_package(SFML 2.5 REQUIRED graphics window system)
+find_package(SFML 2.5 REQUIRED COMPONENTS graphics REQUIRED)
 include_directories(${SFML_INCLUDE_DIR})
 
 # Ajout de la bibliothèque RapidXml
@@ -22,7 +22,7 @@ set(SOURCES
 )
 
 # Déclaration de l'exécutable Agence
-add_executable(Agence.exe ${SOURCES})
+add_executable(Agence ${SOURCES})
 
 # Liaison des bibliothèques au projet Agence
-target_link_libraries(Agence ${Boost_LIBRARIES} ${SFML_LIBRARIES})
+target_link_libraries(Agence ${Boost_LIBRARIES} ${SFML_LIBRARIES} sfml-graphics)

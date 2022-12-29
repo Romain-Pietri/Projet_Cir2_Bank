@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I"/home/romain/Documents/Cours/CIR 2/POO/projet/Projet_Cir2_Bank/Fichier_Cmake_Agence/RapidXml"
 
-CXX_FLAGS = 
+CXX_FLAGS = -std=gnu++17
 

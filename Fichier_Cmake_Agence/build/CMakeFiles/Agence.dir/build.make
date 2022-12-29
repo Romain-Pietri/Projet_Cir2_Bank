@@ -140,6 +140,9 @@ Agence: CMakeFiles/Agence.dir/src/xml_parser.cpp.o
 Agence: CMakeFiles/Agence.dir/src/client.cpp.o
 Agence: CMakeFiles/Agence.dir/src/main.cpp.o
 Agence: CMakeFiles/Agence.dir/build.make
+Agence: /usr/lib64/libsfml-graphics.so.2.5.1
+Agence: /usr/lib64/libsfml-window.so.2.5.1
+Agence: /usr/lib64/libsfml-system.so.2.5.1
 Agence: CMakeFiles/Agence.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/romain/Documents/Cours/CIR 2/POO/projet/Projet_Cir2_Bank/Fichier_Cmake_Agence/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable Agence"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Agence.dir/link.txt --verbose=$(VERBOSE)

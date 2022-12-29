@@ -13,4 +13,5 @@ using std::cout;
 using std::endl;
 
 string send_to_serveur(string message,int port);
-void client_thread(vector<Client> &Bdd_client);
+void client_thread(vector<Client> &Bdd_client,bool &stop);
+string recup_info();

@@ -1301,7 +1301,17 @@ CMakeFiles/Agence.dir/src/client.cpp.o: /home/romain/Documents/Cours/CIR\ 2/POO/
 
 CMakeFiles/Agence.dir/src/main.cpp.o: /home/romain/Documents/Cours/CIR\ 2/POO/projet/Projet_Cir2_Bank/Fichier_Cmake_Agence/src/main.cpp \
   /usr/include/stdc-predef.h \
-  /usr/include/c++/12/iostream \
+  /usr/include/SFML/Graphics.hpp \
+  /usr/include/SFML/Window.hpp \
+  /usr/include/SFML/System.hpp \
+  /usr/include/SFML/Config.hpp \
+  /usr/include/SFML/System/Clock.hpp \
+  /usr/include/SFML/System/Export.hpp \
+  /usr/include/SFML/System/Time.hpp \
+  /usr/include/SFML/System/Err.hpp \
+  /usr/include/c++/12/ostream \
+  /usr/include/c++/12/ios \
+  /usr/include/c++/12/iosfwd \
   /usr/include/c++/12/x86_64-redhat-linux/bits/c++config.h \
   /usr/include/bits/wordsize.h \
   /usr/include/c++/12/x86_64-redhat-linux/bits/os_defines.h \
@@ -1314,9 +1324,6 @@ CMakeFiles/Agence.dir/src/main.cpp.o: /home/romain/Documents/Cours/CIR\ 2/POO/pr
   /usr/include/gnu/stubs-64.h \
   /usr/include/c++/12/x86_64-redhat-linux/bits/cpu_defines.h \
   /usr/include/c++/12/pstl/pstl_config.h \
-  /usr/include/c++/12/ostream \
-  /usr/include/c++/12/ios \
-  /usr/include/c++/12/iosfwd \
   /usr/include/c++/12/bits/stringfwd.h \
   /usr/include/c++/12/bits/memoryfwd.h \
   /usr/include/c++/12/bits/postypes.h \
@@ -1480,26 +1487,126 @@ CMakeFiles/Agence.dir/src/main.cpp.o: /home/romain/Documents/Cours/CIR\ 2/POO/pr
   /usr/include/c++/12/bits/locale_facets.tcc \
   /usr/include/c++/12/bits/basic_ios.tcc \
   /usr/include/c++/12/bits/ostream.tcc \
-  /usr/include/c++/12/istream \
-  /usr/include/c++/12/bits/istream.tcc \
-  /usr/include/c++/12/fstream \
+  /usr/include/SFML/System/FileInputStream.hpp \
+  /usr/include/SFML/System/InputStream.hpp \
+  /usr/include/SFML/System/NonCopyable.hpp \
+  /usr/include/SFML/System/Lock.hpp \
+  /usr/include/SFML/System/MemoryInputStream.hpp \
+  /usr/include/SFML/System/Mutex.hpp \
+  /usr/include/SFML/System/Sleep.hpp \
+  /usr/include/SFML/System/String.hpp \
+  /usr/include/SFML/System/Utf.hpp \
+  /usr/include/c++/12/algorithm \
+  /usr/include/c++/12/bits/stl_algo.h \
+  /usr/include/c++/12/bits/algorithmfwd.h \
+  /usr/include/c++/12/bits/stl_heap.h \
+  /usr/include/c++/12/bits/stl_tempbuf.h \
+  /usr/include/c++/12/bits/uniform_int_dist.h \
+  /usr/include/c++/12/pstl/glue_algorithm_defs.h \
+  /usr/include/c++/12/pstl/execution_defs.h \
+  /usr/include/c++/12/locale \
+  /usr/include/c++/12/bits/locale_facets_nonio.h \
+  /usr/include/c++/12/ctime \
+  /usr/include/c++/12/x86_64-redhat-linux/bits/time_members.h \
+  /usr/include/c++/12/x86_64-redhat-linux/bits/messages_members.h \
+  /usr/include/libintl.h \
   /usr/include/c++/12/bits/codecvt.h \
-  /usr/include/c++/12/x86_64-redhat-linux/bits/basic_file.h \
-  /usr/include/c++/12/x86_64-redhat-linux/bits/c++io.h \
-  /usr/include/c++/12/bits/fstream.tcc \
+  /usr/include/c++/12/bits/locale_facets_nonio.tcc \
+  /usr/include/c++/12/bits/locale_conv.h \
+  /usr/include/SFML/System/Utf.inl \
+  /usr/include/c++/12/iterator \
+  /usr/include/c++/12/bits/stream_iterator.h \
+  /usr/include/SFML/System/String.inl \
+  /usr/include/SFML/System/Thread.hpp \
+  /usr/include/SFML/System/Thread.inl \
+  /usr/include/SFML/System/ThreadLocal.hpp \
+  /usr/include/SFML/System/ThreadLocalPtr.hpp \
+  /usr/include/SFML/System/ThreadLocalPtr.inl \
+  /usr/include/SFML/System/Vector2.hpp \
+  /usr/include/SFML/System/Vector2.inl \
+  /usr/include/SFML/System/Vector3.hpp \
+  /usr/include/SFML/System/Vector3.inl \
+  /usr/include/SFML/Window/Clipboard.hpp \
+  /usr/include/SFML/Window/Export.hpp \
+  /usr/include/SFML/Window/Context.hpp \
+  /usr/include/SFML/Window/GlResource.hpp \
+  /usr/include/SFML/Window/ContextSettings.hpp \
+  /usr/include/SFML/Window/Cursor.hpp \
+  /usr/include/SFML/Window/Event.hpp \
+  /usr/include/SFML/Window/Joystick.hpp \
+  /usr/include/SFML/Window/Keyboard.hpp \
+  /usr/include/SFML/Window/Mouse.hpp \
+  /usr/include/SFML/Window/Sensor.hpp \
+  /usr/include/SFML/Window/Touch.hpp \
+  /usr/include/SFML/Window/VideoMode.hpp \
   /usr/include/c++/12/vector \
   /usr/include/c++/12/bits/stl_uninitialized.h \
   /usr/include/c++/12/bits/stl_vector.h \
   /usr/include/c++/12/bits/stl_bvector.h \
   /usr/include/c++/12/bits/vector.tcc \
+  /usr/include/SFML/Window/Window.hpp \
+  /usr/include/SFML/Window/WindowHandle.hpp \
+  /usr/include/SFML/Window/WindowStyle.hpp \
+  /usr/include/SFML/Graphics/BlendMode.hpp \
+  /usr/include/SFML/Graphics/Export.hpp \
+  /usr/include/SFML/Graphics/CircleShape.hpp \
+  /usr/include/SFML/Graphics/Shape.hpp \
+  /usr/include/SFML/Graphics/Drawable.hpp \
+  /usr/include/SFML/Graphics/RenderStates.hpp \
+  /usr/include/SFML/Graphics/Transform.hpp \
+  /usr/include/SFML/Graphics/Rect.hpp \
+  /usr/include/SFML/Graphics/Rect.inl \
+  /usr/include/SFML/Graphics/Transformable.hpp \
+  /usr/include/SFML/Graphics/VertexArray.hpp \
+  /usr/include/SFML/Graphics/Vertex.hpp \
+  /usr/include/SFML/Graphics/Color.hpp \
+  /usr/include/SFML/Graphics/PrimitiveType.hpp \
+  /usr/include/SFML/Graphics/ConvexShape.hpp \
+  /usr/include/SFML/Graphics/Font.hpp \
+  /usr/include/SFML/Graphics/Glyph.hpp \
+  /usr/include/SFML/Graphics/Texture.hpp \
+  /usr/include/SFML/Graphics/Image.hpp \
+  /usr/include/c++/12/map \
+  /usr/include/c++/12/bits/stl_tree.h \
+  /usr/include/c++/12/ext/aligned_buffer.h \
+  /usr/include/c++/12/bits/node_handle.h \
+  /usr/include/c++/12/bits/stl_map.h \
+  /usr/include/c++/12/tuple \
+  /usr/include/c++/12/bits/uses_allocator.h \
+  /usr/include/c++/12/bits/stl_multimap.h \
+  /usr/include/c++/12/bits/erase_if.h \
+  /usr/include/SFML/Graphics/RectangleShape.hpp \
+  /usr/include/SFML/Graphics/RenderTarget.hpp \
+  /usr/include/SFML/Graphics/View.hpp \
+  /usr/include/SFML/Graphics/RenderTexture.hpp \
+  /usr/include/SFML/Graphics/RenderWindow.hpp \
+  /usr/include/SFML/Graphics/Shader.hpp \
+  /usr/include/SFML/Graphics/Glsl.hpp \
+  /usr/include/SFML/Graphics/Glsl.inl \
+  /usr/include/SFML/Graphics/Sprite.hpp \
+  /usr/include/SFML/Graphics/Text.hpp \
+  /usr/include/SFML/Graphics/VertexBuffer.hpp \
+  /usr/include/c++/12/iostream \
+  /usr/include/c++/12/istream \
+  /usr/include/c++/12/bits/istream.tcc \
+  /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h \
+  /usr/include/bits/environments.h \
+  /usr/include/bits/confname.h \
+  /usr/include/bits/getopt_posix.h \
+  /usr/include/bits/getopt_core.h \
+  /usr/include/bits/unistd_ext.h \
+  /usr/include/linux/close_range.h \
+  /usr/include/c++/12/fstream \
+  /usr/include/c++/12/x86_64-redhat-linux/bits/basic_file.h \
+  /usr/include/c++/12/x86_64-redhat-linux/bits/c++io.h \
+  /usr/include/c++/12/bits/fstream.tcc \
   /home/romain/Documents/Cours/CIR\ 2/POO/projet/Projet_Cir2_Bank/Fichier_Cmake_Agence/src/RapidXml/rapidxml.hpp \
   /usr/include/c++/12/cassert \
   /usr/include/assert.h \
   /home/romain/Documents/Cours/CIR\ 2/POO/projet/Projet_Cir2_Bank/Fichier_Cmake_Agence/src/RapidXml/rapidxml_utils.hpp \
   /home/romain/Documents/Cours/CIR\ 2/POO/projet/Projet_Cir2_Bank/Fichier_Cmake_Agence/src/RapidXml/rapidxml.hpp \
   /home/romain/Documents/Cours/CIR\ 2/POO/projet/Projet_Cir2_Bank/Fichier_Cmake_Agence/src/RapidXml/rapidxml_print.hpp \
-  /usr/include/c++/12/iterator \
-  /usr/include/c++/12/bits/stream_iterator.h \
   /home/romain/Documents/Cours/CIR\ 2/POO/projet/Projet_Cir2_Bank/Fichier_Cmake_Agence/src/moteur.hpp \
   /home/romain/Documents/Cours/CIR\ 2/POO/projet/Projet_Cir2_Bank/Fichier_Cmake_Agence/src/xml_parser.hpp \
   /home/romain/Documents/Cours/CIR\ 2/POO/projet/Projet_Cir2_Bank/Fichier_Cmake_Agence/src/client.hpp \
@@ -1514,14 +1621,6 @@ CMakeFiles/Agence.dir/src/main.cpp.o: /home/romain/Documents/Cours/CIR\ 2/POO/pr
   /usr/include/boost/config/detail/select_stdlib_config.hpp \
   /usr/include/c++/12/version \
   /usr/include/boost/config/stdlib/libstdcpp3.hpp \
-  /usr/include/unistd.h \
-  /usr/include/bits/posix_opt.h \
-  /usr/include/bits/environments.h \
-  /usr/include/bits/confname.h \
-  /usr/include/bits/getopt_posix.h \
-  /usr/include/bits/getopt_core.h \
-  /usr/include/bits/unistd_ext.h \
-  /usr/include/linux/close_range.h \
   /usr/include/boost/config/detail/select_platform_config.hpp \
   /usr/include/boost/config/platform/linux.hpp \
   /usr/include/boost/config/detail/posix_features.hpp \
@@ -1531,24 +1630,19 @@ CMakeFiles/Agence.dir/src/main.cpp.o: /home/romain/Documents/Cours/CIR\ 2/POO/pr
   /usr/include/boost/version.hpp \
   /usr/include/linux/version.h \
   /usr/include/c++/12/memory \
-  /usr/include/c++/12/bits/stl_tempbuf.h \
   /usr/include/c++/12/bits/stl_raw_storage_iter.h \
   /usr/include/c++/12/bits/align.h \
   /usr/include/c++/12/bit \
-  /usr/include/c++/12/bits/uses_allocator.h \
   /usr/include/c++/12/bits/unique_ptr.h \
-  /usr/include/c++/12/tuple \
   /usr/include/c++/12/bits/shared_ptr.h \
   /usr/include/c++/12/bits/shared_ptr_base.h \
   /usr/include/c++/12/bits/allocated_ptr.h \
-  /usr/include/c++/12/ext/aligned_buffer.h \
   /usr/include/c++/12/ext/concurrence.h \
   /usr/include/c++/12/bits/shared_ptr_atomic.h \
   /usr/include/c++/12/bits/atomic_base.h \
   /usr/include/c++/12/bits/atomic_lockfree_defines.h \
   /usr/include/c++/12/backward/auto_ptr.h \
   /usr/include/c++/12/pstl/glue_memory_defs.h \
-  /usr/include/c++/12/pstl/execution_defs.h \
   /usr/include/boost/asio/associator.hpp \
   /usr/include/boost/asio/detail/push_options.hpp \
   /usr/include/boost/asio/detail/pop_options.hpp \
@@ -1559,15 +1653,9 @@ CMakeFiles/Agence.dir/src/main.cpp.o: /home/romain/Documents/Cours/CIR\ 2/POO/pr
   /usr/include/c++/12/bits/hashtable.h \
   /usr/include/c++/12/bits/hashtable_policy.h \
   /usr/include/c++/12/bits/enable_special_members.h \
-  /usr/include/c++/12/bits/node_handle.h \
   /usr/include/c++/12/bits/unordered_map.h \
-  /usr/include/c++/12/bits/erase_if.h \
   /usr/include/c++/12/array \
   /usr/include/c++/12/compare \
-  /usr/include/c++/12/bits/stl_algo.h \
-  /usr/include/c++/12/bits/algorithmfwd.h \
-  /usr/include/c++/12/bits/stl_heap.h \
-  /usr/include/c++/12/bits/uniform_int_dist.h \
   /usr/include/boost/asio/detail/type_traits.hpp \
   /usr/include/boost/asio/associated_executor.hpp \
   /usr/include/boost/asio/execution/executor.hpp \
@@ -1891,7 +1979,6 @@ CMakeFiles/Agence.dir/src/main.cpp.o: /home/romain/Documents/Cours/CIR\ 2/POO/pr
   /usr/include/c++/12/chrono \
   /usr/include/c++/12/bits/chrono.h \
   /usr/include/c++/12/ratio \
-  /usr/include/c++/12/ctime \
   /usr/include/c++/12/bits/parse_numbers.h \
   /usr/include/boost/asio/impl/io_context.hpp \
   /usr/include/boost/asio/detail/completion_handler.hpp \
@@ -1963,8 +2050,6 @@ CMakeFiles/Agence.dir/src/main.cpp.o: /home/romain/Documents/Cours/CIR\ 2/POO/pr
   /usr/include/boost/smart_ptr/detail/sp_thread_pause.hpp \
   /usr/include/boost/smart_ptr/detail/sp_thread_sleep.hpp \
   /usr/include/boost/config/pragma_message.hpp \
-  /usr/include/c++/12/algorithm \
-  /usr/include/c++/12/pstl/glue_algorithm_defs.h \
   /usr/include/boost/smart_ptr/detail/operator_bool.hpp \
   /usr/include/boost/smart_ptr/detail/local_sp_deleter.hpp \
   /usr/include/boost/smart_ptr/detail/local_counted_base.hpp \
@@ -3014,6 +3099,104 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 
 /home/romain/Documents/Cours/CIR\ 2/POO/projet/Projet_Cir2_Bank/Fichier_Cmake_Agence/src/RapidXml/rapidxml_print.hpp:
 
+/usr/include/SFML/Graphics/VertexBuffer.hpp:
+
+/usr/include/SFML/Graphics/Glsl.inl:
+
+/usr/include/SFML/Graphics/Glsl.hpp:
+
+/usr/include/SFML/Graphics/RenderWindow.hpp:
+
+/usr/include/SFML/Graphics/RectangleShape.hpp:
+
+/usr/include/c++/12/bits/stl_multimap.h:
+
+/usr/include/SFML/Graphics/Image.hpp:
+
+/usr/include/SFML/Graphics/Texture.hpp:
+
+/usr/include/SFML/Graphics/Glyph.hpp:
+
+/usr/include/SFML/Graphics/Vertex.hpp:
+
+/usr/include/SFML/Graphics/VertexArray.hpp:
+
+/usr/include/SFML/Graphics/Transformable.hpp:
+
+/usr/include/SFML/Graphics/Rect.inl:
+
+/usr/include/SFML/Graphics/Shape.hpp:
+
+/usr/include/SFML/Graphics/CircleShape.hpp:
+
+/usr/include/SFML/Graphics/Export.hpp:
+
+/usr/include/SFML/Graphics/BlendMode.hpp:
+
+/usr/include/SFML/Window/WindowHandle.hpp:
+
+/usr/include/SFML/Window/Window.hpp:
+
+/usr/include/SFML/Window/Touch.hpp:
+
+/usr/include/SFML/Window/Sensor.hpp:
+
+/usr/include/SFML/Window/Mouse.hpp:
+
+/usr/include/SFML/Window/Keyboard.hpp:
+
+/usr/include/SFML/Window/Event.hpp:
+
+/usr/include/SFML/Window/Cursor.hpp:
+
+/usr/include/SFML/Window/Export.hpp:
+
+/usr/include/SFML/System/Vector3.inl:
+
+/usr/include/SFML/System/Vector3.hpp:
+
+/usr/include/SFML/System/Vector2.inl:
+
+/usr/include/SFML/System/Vector2.hpp:
+
+/usr/include/SFML/System/ThreadLocalPtr.inl:
+
+/usr/include/SFML/System/ThreadLocalPtr.hpp:
+
+/usr/include/SFML/System/Thread.hpp:
+
+/usr/include/SFML/System/String.inl:
+
+/usr/include/c++/12/bits/locale_conv.h:
+
+/usr/include/c++/12/bits/locale_facets_nonio.tcc:
+
+/usr/include/libintl.h:
+
+/usr/include/c++/12/x86_64-redhat-linux/bits/time_members.h:
+
+/usr/include/c++/12/locale:
+
+/usr/include/SFML/System/Utf.hpp:
+
+/usr/include/SFML/System/Lock.hpp:
+
+/usr/include/SFML/System/InputStream.hpp:
+
+/usr/include/SFML/System/FileInputStream.hpp:
+
+/usr/include/SFML/System/Time.hpp:
+
+/usr/include/SFML/System/Clock.hpp:
+
+/usr/include/SFML/Config.hpp:
+
+/usr/include/SFML/System.hpp:
+
+/usr/include/SFML/Graphics/ConvexShape.hpp:
+
+/usr/include/SFML/Window.hpp:
+
 /usr/include/c++/12/x86_64-redhat-linux/bits/c++io.h:
 
 /usr/include/c++/12/thread:
@@ -3025,6 +3208,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 /usr/include/boost/asio/windows/overlapped_ptr.hpp:
 
 /usr/include/boost/asio/windows/object_handle.hpp:
+
+/usr/include/SFML/Window/ContextSettings.hpp:
 
 /usr/include/boost/asio/windows/basic_overlapped_handle.hpp:
 
@@ -3080,6 +3265,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 
 /usr/include/boost/predef/platform/windows_server.h:
 
+/usr/include/SFML/Graphics/Rect.hpp:
+
 /usr/include/boost/predef/platform/windows_phone.h:
 
 /usr/include/boost/predef/platform/windows_desktop.h:
@@ -3089,6 +3276,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 /usr/include/boost/predef/platform/mingw64.h:
 
 /usr/include/boost/predef/platform/mingw.h:
+
+/usr/include/SFML/Window/Clipboard.hpp:
 
 /usr/include/boost/predef/platform/cloudabi.h:
 
@@ -3161,6 +3350,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 /usr/include/boost/predef/compiler/visualc.h:
 
 /usr/include/boost/predef/compiler/tendra.h:
+
+/usr/include/SFML/Graphics/Transform.hpp:
 
 /usr/include/boost/predef/compiler/sunpro.h:
 
@@ -3266,6 +3457,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 
 /usr/include/sys/ioctl.h:
 
+/usr/include/SFML/Graphics/Color.hpp:
+
 /usr/include/boost/asio/detail/socket_types.hpp:
 
 /usr/include/c++/12/bits/basic_string.tcc:
@@ -3318,6 +3511,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 
 /usr/include/bits/sigcontext.h:
 
+/usr/include/SFML/Graphics/PrimitiveType.hpp:
+
 /usr/include/boost/asio/traits/connect_member.hpp:
 
 /usr/include/c++/12/iterator:
@@ -3333,6 +3528,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 /usr/include/boost/asio/detail/limits.hpp:
 
 /usr/include/c++/12/cstdio:
+
+/usr/include/c++/12/map:
 
 /usr/include/boost/asio/detail/impl/scheduler.ipp:
 
@@ -3371,6 +3568,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 /usr/include/boost/asio/detail/fenced_block.hpp:
 
 /usr/include/boost/asio/detail/impl/posix_event.ipp:
+
+/usr/include/SFML/Window/Context.hpp:
 
 /usr/include/boost/preprocessor/control/iif.hpp:
 
@@ -3414,6 +3613,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 
 /usr/include/asm/posix_types_64.h:
 
+/usr/include/SFML/Graphics/Shader.hpp:
+
 /usr/include/bits/siginfo-consts.h:
 
 /usr/include/c++/12/cerrno:
@@ -3438,11 +3639,15 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 
 /usr/include/boost/asio/traits/bulk_execute_member.hpp:
 
+/usr/include/c++/12/x86_64-redhat-linux/bits/messages_members.h:
+
 /usr/include/boost/predef/os/irix.h:
 
 /usr/include/bits/in.h:
 
 /usr/include/boost/asio/detail/impl/throw_error.ipp:
+
+/usr/include/SFML/Graphics/View.hpp:
 
 /usr/include/boost/mpl/aux_/include_preprocessed.hpp:
 
@@ -3555,6 +3760,10 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 /usr/include/bits/uio_lim.h:
 
 /usr/include/boost/asio/traits/set_error_member.hpp:
+
+/usr/include/SFML/Graphics/Text.hpp:
+
+/usr/include/SFML/System/ThreadLocal.hpp:
 
 /usr/include/boost/date_time/posix_time/posix_time_types.hpp:
 
@@ -3696,6 +3905,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 
 /usr/include/boost/config.hpp:
 
+/usr/include/SFML/Graphics/RenderTexture.hpp:
+
 /usr/include/bits/socket_type.h:
 
 /usr/include/boost/asio/traits/query_free.hpp:
@@ -3711,6 +3922,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 /usr/include/sys/uio.h:
 
 /usr/include/boost/asio.hpp:
+
+/usr/include/SFML/Graphics/RenderTarget.hpp:
 
 /usr/include/boost/predef/other/workaround.h:
 
@@ -3845,6 +4058,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 /usr/include/boost/asio/detail/posix_global.hpp:
 
 /usr/include/bits/struct_rwlock.h:
+
+/usr/include/c++/12/bits/stl_tree.h:
 
 /usr/include/boost/asio/detail/reactor.hpp:
 
@@ -4052,6 +4267,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 
 /usr/include/c++/12/bits/align.h:
 
+/usr/include/SFML/System/Mutex.hpp:
+
 /usr/include/c++/12/bits/vector.tcc:
 
 /usr/include/c++/12/tr1/hypergeometric.tcc:
@@ -4090,6 +4307,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 
 /usr/include/boost/asio/detail/scheduler_thread_info.hpp:
 
+/usr/include/c++/12/bits/locale_facets_nonio.h:
+
 /usr/include/boost/asio/query.hpp:
 
 /usr/include/c++/12/tr1/special_function_util.h:
@@ -4105,6 +4324,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 /usr/include/c++/12/memory:
 
 /usr/include/boost/numeric/conversion/detail/meta.hpp:
+
+/usr/include/SFML/System/Export.hpp:
 
 /usr/include/boost/config/detail/posix_features.hpp:
 
@@ -4158,6 +4379,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 
 /usr/include/boost/config/detail/cxx_composite.hpp:
 
+/usr/include/SFML/System/Sleep.hpp:
+
 /usr/include/c++/12/condition_variable:
 
 /usr/include/c++/12/bits/stl_construct.h:
@@ -4195,6 +4418,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 /usr/include/bits/typesizes.h:
 
 /usr/include/c++/12/typeinfo:
+
+/usr/include/SFML/System/MemoryInputStream.hpp:
 
 /usr/include/bits/poll.h:
 
@@ -4290,6 +4515,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 
 /usr/include/boost/mpl/equal_to.hpp:
 
+/usr/include/SFML/System/Utf.inl:
+
 /usr/include/boost/asio/error.hpp:
 
 /usr/include/asm-generic/errno-base.h:
@@ -4322,6 +4549,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 
 /usr/include/bits/errno.h:
 
+/usr/include/SFML/Graphics.hpp:
+
 /usr/include/boost/asio/detail/tss_ptr.hpp:
 
 /usr/include/bits/stdint-uintn.h:
@@ -4333,6 +4562,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 /usr/include/boost/asio/detail/thread_context.hpp:
 
 /usr/include/sys/single_threaded.h:
+
+/usr/include/SFML/Graphics/Drawable.hpp:
 
 /usr/include/boost/preprocessor/repetition/limits/repeat_256.hpp:
 
@@ -4357,6 +4588,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 /usr/include/boost/asio/basic_random_access_file.hpp:
 
 /usr/include/c++/12/bits/exception_ptr.h:
+
+/usr/include/SFML/System/Thread.inl:
 
 /usr/include/boost/mpl/aux_/preprocessed/gcc/equal_to.hpp:
 
@@ -4664,6 +4897,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 
 /usr/include/c++/12/bits/stl_heap.h:
 
+/usr/include/SFML/Graphics/Sprite.hpp:
+
 /usr/include/sys/un.h:
 
 /usr/include/boost/mpl/bool_fwd.hpp:
@@ -4678,6 +4913,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 
 /usr/include/boost/asio/detail/timer_queue_base.hpp:
 
+/usr/include/c++/12/bits/stl_map.h:
+
 /usr/include/sys/timerfd.h:
 
 /usr/include/bits/timex.h:
@@ -4691,6 +4928,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 /usr/include/boost/asio/execution/context.hpp:
 
 /usr/include/boost/asio/detail/dependent_type.hpp:
+
+/usr/include/SFML/System/NonCopyable.hpp:
 
 /usr/include/boost/asio/detail/impl/epoll_reactor.ipp:
 
@@ -4842,6 +5081,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 
 /usr/include/boost/date_time/compiler_config.hpp:
 
+/usr/include/SFML/Graphics/RenderStates.hpp:
+
 /usr/include/boost/asio/ip/basic_resolver_query.hpp:
 
 /usr/include/boost/asio/ip/basic_resolver_results.hpp:
@@ -4973,6 +5214,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 /usr/include/boost/asio/detail/regex_fwd.hpp:
 
 /usr/include/c++/12/tr1/legendre_function.tcc:
+
+/usr/include/SFML/Graphics/Font.hpp:
 
 /usr/include/c++/12/tr1/modified_bessel_func.tcc:
 
@@ -5206,6 +5449,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 
 /usr/include/boost/preprocessor/logical/bitand.hpp:
 
+/usr/include/SFML/System/String.hpp:
+
 /usr/include/c++/12/bits/std_abs.h:
 
 /usr/include/boost/preprocessor/identity.hpp:
@@ -5213,6 +5458,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 /usr/include/boost/asio/detail/null_event.hpp:
 
 /usr/include/boost/preprocessor/facilities/identity.hpp:
+
+/usr/include/SFML/Window/GlResource.hpp:
 
 /usr/include/boost/preprocessor/empty.hpp:
 
@@ -5257,6 +5504,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 /usr/include/boost/preprocessor/facilities/check_empty.hpp:
 
 /usr/include/boost/preprocessor/variadic/has_opt.hpp:
+
+/usr/include/SFML/Window/WindowStyle.hpp:
 
 /usr/include/boost/preprocessor/variadic/limits/size_64.hpp:
 
@@ -5321,6 +5570,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 /usr/include/boost/mpl/aux_/is_msvc_eti_arg.hpp:
 
 /usr/include/boost/mpl/not.hpp:
+
+/usr/include/SFML/Window/Joystick.hpp:
 
 /usr/include/boost/mpl/aux_/preprocessed/gcc/and.hpp:
 
@@ -5478,6 +5729,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 
 /usr/include/boost/asio/compose.hpp:
 
+/usr/include/SFML/Window/VideoMode.hpp:
+
 /usr/include/boost/asio/impl/connect.hpp:
 
 /usr/include/boost/asio/connect_pipe.hpp:
@@ -5501,6 +5754,8 @@ CMakeFiles/Agence.dir/src/xml_parser.cpp.o: /home/romain/Documents/Cours/CIR\ 2/
 /usr/include/boost/preprocessor/variadic/size.hpp:
 
 /usr/include/boost/asio/impl/detached.hpp:
+
+/usr/include/SFML/System/Err.hpp:
 
 /usr/include/boost/asio/executor.hpp:
 

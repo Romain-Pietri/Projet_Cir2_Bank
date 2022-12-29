@@ -27,7 +27,7 @@ string recup_info(){
 }
 
 string send_to_serveur(string message,int port){
-      try{
+      
       boost::asio::io_service io_service;
       //socket creation
       tcp::socket socket(io_service);
@@ -46,11 +46,8 @@ string send_to_serveur(string message,int port){
             std::cout << data << std::endl;
             return data;
       }
-      }
-      catch(std::exception& e){
-            std::cerr << e.what() << std::endl;
-            std::system(("cd.. &&  cd Banque_Centrale && ./Serveur.exe").c_str());
-      }
+      
+      
       return "-1";
 }
 
@@ -74,11 +71,11 @@ int next(string data){
       }
       return i;
 }
-void client_thread(vector<Client> &Bdd_client){
+void client_thread(vector<Client> &Bdd_client,bool &stop){
       string id= recup_info();
       cout<<id<<endl;
       
-     while(1){
+     while(!stop){
       try{
             boost::asio::io_service io_service;
             //socket creation
