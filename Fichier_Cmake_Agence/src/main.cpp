@@ -424,7 +424,6 @@ class Carre{
         }
         return 0;
     }
-
     int afficherV(sf::RenderWindow &window2, sf::Event event_, vector<Client> &Bdd_client,int id_client,bool &shutdown, int id_agence){     /// AFFICHAGE DE LA FENETRE VIREMENT
         
         Carre explication(10, 10, 720, 100, 1, 255, 0, 0, "Inserer le montant du virement et l'id du destinataire : ", 255, 255, 255);
@@ -1069,6 +1068,149 @@ void window_2(){
     } 
 }
 */
+void connexion(vector<Client> &Bdd_client,bool &shutdown, int id_agence);
+void nouveau(vector<Client> &Bdd_client, bool &shutdown, int id_agence){
+    sf::RenderWindow window(sf::VideoMode(610, 400), "Cree un Compte !",sf::Style::Close);
+    Carre fond(0, 0, 610, 400, 3, 255, 243, 216);
+    //creer un ensemble de input_text demandans les informations necessaires pour creer un compte
+    // <name>John</name> <surname>Smith</surname> <age>25</age> <password>1234</password>
+    Input_text name(230, 60, 400, 90);
+    Input_text surname(230, 120, 400, 150);
+    Input_text age(230, 180, 400, 210);
+    Input_text password(230, 240, 400, 270,true);
+    Input_text confirme_password(230, 300, 400, 330,true);
+    Carre valider(230, 350, 400, 380, 3, 255, 243, 216, "Valider", 115, 0, 0);
+    Carre retour(230, 380, 400, 410, 3, 255, 243, 216, "Retour", 115, 0, 0);
+    Carre texte_client(295,60,315,80,95,255,243,216,"Veuillez entrer votre Nom",115,0,0);
+    Carre texte_client2(295,120,315,140,95,255,243,216,"Veuillez entrer votre Prenom",115,0,0);
+    Carre texte_client3(295,180,315,200,95,255,243,216,"Veuillez entrer votre Age",115,0,0);
+    Carre texte_client4(295,240,315,260,95,255,243,216,"Veuillez entrer votre Mot de passe",115,0,0);
+    Carre texte_client5(295,300,315,320,95,255,243,216,"Veuillez confirmer votre Mot de passe",115,0,0);
+    while(window.isOpen()){
+        sf::Event event;
+        while(window.pollEvent(event)){
+            if(event.type==sf::Event::MouseButtonPressed){
+                if(event.mouseButton.button==sf::Mouse::Left){
+                    if(name.isbind(event.mouseButton.x, event.mouseButton.y)){
+                        name.setClicked(true);
+                    }
+                    else{name.setClicked(false);}
+                    if(surname.isbind(event.mouseButton.x, event.mouseButton.y)){
+                        surname.setClicked(true);
+                    }
+                    else{surname.setClicked(false);}
+                    if(age.isbind(event.mouseButton.x, event.mouseButton.y)){
+                        age.setClicked(true);
+                    }
+                    else{age.setClicked(false);}
+                    if(password.isbind(event.mouseButton.x, event.mouseButton.y)){
+                        password.setClicked(true);
+                    }
+                    else{password.setClicked(false);}
+                    if(confirme_password.isbind(event.mouseButton.x, event.mouseButton.y)){
+                        confirme_password.setClicked(true);
+                    }
+                    else{confirme_password.setClicked(false);}
+                    if(valider.isbind(event.mouseButton.x, event.mouseButton.y)){
+                        valider.setclicked(true);
+                        //verifier si les informations sont correctes
+                        if(name.getText()!="" && surname.getText()!="" && age.getText()!="" && password.getText()!="" && confirme_password.getText()!=""){
+                            if(password.getText()==confirme_password.getText()){
+                                //creer un nouveau client
+                                string id = send_to_serveur("2/"+std::to_string(id_agence)+"\n",1235);
+                                if(id[0]=='-') {cout<<"erreur"<<endl; return;}
+                                int id_client = stoi(id);
+                                Client new_client(id_client,name.getText(),surname.getText(),stoi(age.getText()),password.getText(),id_client+1,0,id_client+2,0,id_client,0);
+                                Bdd_client.push_back(new_client);
+                            }
+                            else{
+                                valider.setTxt("Les mots de passe ne correspondent pas");
+                                }
+
+                    }
+                    else{
+                        valider.setclicked(false);
+                    }
+                    if(retour.isbind(event.mouseButton.x, event.mouseButton.y)){
+                        retour.setclicked(true);
+                        window.close();
+                        connexion(Bdd_client, shutdown, id_agence);
+                    }
+                    else{
+                        retour.setclicked(false);
+                    }
+                }
+            }
+            if(event.type==sf::Event::MouseButtonReleased){
+                if(event.mouseButton.button==sf::Mouse::Left){
+                    if(valider.isbind(event.mouseButton.x, event.mouseButton.y)){
+                        valider.setclicked(false);
+                    }
+                    if(retour.isbind(event.mouseButton.x, event.mouseButton.y)){
+                        retour.setclicked(false);
+                    }
+                }
+            }
+            if(event.type==sf::Event::TextEntered){
+                if(name.getClicked()){
+                    if(event.text.unicode<128){
+                        if(event.text.unicode==8){
+                            name.supprime_char();
+                        }
+                        else if(event.text.unicode==13){
+                            name.setClicked(false);
+                        }
+                        else{
+                            name.ajoute_char(event.text.unicode);
+                            cout<<name.getText()<<endl;
+                        }
+                    }
+                }
+                if(surname.getClicked()){
+                    if(event.text.unicode<128){
+                        if(event.text.unicode==8){
+                            surname.supprime_char();
+                        }
+                        else if(event.text.unicode==13){
+                            surname.setClicked(false);
+                        }
+                        else{
+                            surname.ajoute_char(event.text.unicode);
+                            cout<<surname.getText()<<endl;
+                        }
+                    }
+                }
+            }
+            
+        }
+        if(event.type==sf::Event::Closed){
+                window.close();
+                shutdown=true;
+                send_to_serveur("9/"+std::to_string(id_agence)+"\n",1235);
+            }
+        }
+        window.clear();
+        fond.afficher(window);
+        texte_client.afficher(window);
+        texte_client2.afficher(window);
+        texte_client3.afficher(window);
+        texte_client4.afficher(window);
+        texte_client5.afficher(window);
+        name.afficher(window);
+        surname.afficher(window);
+        age.afficher(window);
+        password.afficher(window);
+        confirme_password.afficher(window);
+        valider.afficher(window);
+        retour.afficher(window);
+        window.display();
+
+
+
+    }
+    
+}
+
 
 void connexion(vector<Client> &Bdd_client,bool &shutdown, int id_agence){
     sf::RenderWindow window(sf::VideoMode(610, 400), "Bienvenue !",sf::Style::Close);
@@ -1080,6 +1222,7 @@ void connexion(vector<Client> &Bdd_client,bool &shutdown, int id_agence){
     Input_text password(230, 180, 400, 210,true);
     Carre fond(0, 0, 610, 400, 3, 255, 243, 216);
     Carre valider(230, 230, 400, 300, 3, 255, 243, 216, "Se connecter", 115, 0, 0);
+    Carre creer_compte(230, 300, 400, 330, 3, 255, 243, 216, "Creer un compte", 115, 0, 0);
     bool trouve=false;
     while(window.isOpen()){
         sf::Event event;
@@ -1125,6 +1268,10 @@ void connexion(vector<Client> &Bdd_client,bool &shutdown, int id_agence){
 
             if(event.type==sf::Event::MouseButtonPressed){
                 if(event.mouseButton.button==sf::Mouse::Left){
+                    if(creer_compte.isbind(event.mouseButton.x, event.mouseButton.y)){
+                        window.close();
+                        nouveau(Bdd_client,shutdown,id_agence);
+                    }
                     if(id.isbind(event.mouseButton.x, event.mouseButton.y)){
                         id.setClicked(true);
                     }
@@ -1177,6 +1324,7 @@ void connexion(vector<Client> &Bdd_client,bool &shutdown, int id_agence){
             id.afficher(window);
             password.afficher(window);
             valider.afficher(window);
+            creer_compte.afficher(window);
             window.display();
          
     }
