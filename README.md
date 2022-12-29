@@ -10,6 +10,14 @@ Création d'une banque simplifié
 - Julien : Affichage graphique
 - Romain : Communication des sockets, parsing, morteur
 
+
+## Utilisation :
+ Pour utiliser le projet merci de suivre la démarche suivante : 
+ - Executer le Serveur TCP en executant Serveur.exe dans le dossier Bande_Centrale
+ - Executer l'agence de votre choix dans l'un des dossier Agence
+ - C'est tout bon ! 
+
+
 ### Piste D'amélioration : 
 
 - Faire en sorte qu'une agence puisse recevoir plusieurs virement a la fois ( faut faire du parsing...) Prio 2/5
