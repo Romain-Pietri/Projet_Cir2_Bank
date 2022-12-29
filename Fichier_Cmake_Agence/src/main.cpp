@@ -787,17 +787,62 @@ class Carre{
         }
     }*/
 };
+void connexion(vector<Client> &Bdd_client,bool &shutdown, int id_agence);
+void window_1(vector<Client> &Bdd_client, int id_client, bool &shutdown, int id_agence);
+void supp(vector<Client> &Bdd_client, int id_client, int id_agence, bool &shutdown){
+    //creer une fenetre demandans a l'utilisateur s'il veut vraiment supprimer son compte
+    //si oui, supprimer le compte et revenir a la fenetre de connexion
+    //si non, revenir a la fenetre de gestion de compte
+    sf::RenderWindow windowSuppr(sf::VideoMode(640, 420), "Suppression",sf::Style::Close);
+    Carre fond(0, 0, 640, 420, 1, 255, 0, 0, "", 255, 255, 255);
+    Carre info(10, 10, 250, 100, 1, 255, 0, 0, "Voulez-vous vraiment supprimer votre compte ?", 255, 255, 255);
+    Carre oui(10, 110, 200, 200, 1, 255, 0, 0, "OUI", 255, 255, 255);
+    Carre non(210, 110, 400, 200, 1, 255, 0, 0, "NON", 255, 255, 255);
+    
+    while (windowSuppr.isOpen())
+    {
+        sf::Event event_;
+        while (windowSuppr.pollEvent(event_))
+        {
+            if(event_.type==sf::Event::MouseButtonPressed){
+                if(event_.mouseButton.button==sf::Mouse::Left){
+                    if(oui.isbind(event_.mouseButton.x, event_.mouseButton.y)){
+                        Bdd_client.erase(Bdd_client.begin() + id_client);
+                        windowSuppr.close();
+                        send_to_serveur("5/"+to_string(Bdd_client[id_client].get_id())+"\n",1235);
+                        connexion(Bdd_client, shutdown, id_agence);
+                    }
+                    if(non.isbind(event_.mouseButton.x, event_.mouseButton.y)){
+                        windowSuppr.close();
+                        window_1(Bdd_client, id_client, shutdown, id_agence);
+                    }
+                }
+            }
+            if (event_.type == sf::Event::Closed){
+                windowSuppr.close();
+                window_1(Bdd_client, id_client, shutdown, id_agence);
+            }
+        }
+        windowSuppr.clear();
+        fond.afficher(windowSuppr);
+        info.afficher(windowSuppr);
+        oui.afficher(windowSuppr);
+        non.afficher(windowSuppr);
+        windowSuppr.display();
+    }
+
+}
 void window_1(vector<Client> &Bdd_client, int id_client, bool &shutdown, int id_agence){ // FENETRE CLIENTS
     debut :
 
     sf::RenderWindow window(sf::VideoMode(610, 400), "Bienvenue !",sf::Style::Close);
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
-
-    Carre carre(10, 10, 200, 100, 1, 255, 0, 0, "DEPOT", 255, 255, 255);
-    Carre carre2(210, 10, 400, 100, 1, 255, 0, 0, "RETRAIT", 255, 255, 255);
-    Carre carre3(410, 10, 600, 100, 1, 255, 0, 0, "VIREMENT", 255, 255, 255);
-    
+    Carre fond(0, 0, 610, 400, 3, 255, 243, 216);
+    Carre carre(10, 10, 200, 100, 1, 116, 103, 82, "DEPOT", 255, 243, 216);
+    Carre carre2(210, 10, 400, 100, 1, 116, 103, 82, "RETRAIT", 255, 243, 216);
+    Carre carre3(410, 10, 600, 100, 1, 116, 103, 82, "VIREMENT", 255, 243, 216);
+    Carre suppression(10, 110, 200, 200, 1, 255, 243, 216, "Supprimer votre compte", 115, 0, 0);
     bool bugged=false;
     while (window.isOpen())
     {
@@ -834,6 +879,13 @@ void window_1(vector<Client> &Bdd_client, int id_client, bool &shutdown, int id_
                         carre.afficherV(window2, event, Bdd_client, id_client, shutdown, id_agence);
                         goto debut;
                     }
+                    if(suppression.isbind(event.mouseButton.x, event.mouseButton.y)){
+                        suppression.setclicked(true);
+                        window.close();
+                        window.clear();
+                        supp(Bdd_client, id_client, id_agence, shutdown);
+                        
+                    }
                 }
             }
             if(event.type==sf::Event::MouseButtonReleased){
@@ -852,7 +904,8 @@ void window_1(vector<Client> &Bdd_client, int id_client, bool &shutdown, int id_
         }
 
         window.clear();
-        
+        fond.afficher(window);
+        suppression.afficher(window);
         carre.afficher(window);
         carre2.afficher(window);
         carre3.afficher(window);
@@ -1068,7 +1121,7 @@ void window_2(){
     } 
 }
 */
-void connexion(vector<Client> &Bdd_client,bool &shutdown, int id_agence);
+
 void nouveau(vector<Client> &Bdd_client, bool &shutdown, int id_agence){
     sf::RenderWindow window(sf::VideoMode(610, 400), "Cree un Compte !",sf::Style::Close);
     Carre fond(0, 0, 610, 400, 3, 255, 243, 216);
