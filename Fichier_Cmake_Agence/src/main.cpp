@@ -1135,6 +1135,6 @@ int main()
     t3.join();
     t4.join();
     t5.join();
-
+    writer(Bdd_client);
     return 0;
 }

@@ -491,5 +491,6 @@ int main(){
       t1.join();
       t2.join();
       t3.join();
+      writer(Bdd_client);
       return 0;
 }
