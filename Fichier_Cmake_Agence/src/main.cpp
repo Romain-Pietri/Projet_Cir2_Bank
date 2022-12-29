@@ -296,6 +296,7 @@ class Carre{
                     if(DoR == 0){
                         
                         resultConf = afficherC(window3, event_, tmp,1, Bdd_client, id_client,shutdown, id_agence);
+
                     }
                     else if(DoR == 1){
 
@@ -314,6 +315,12 @@ class Carre{
                         
                     }
                     else{
+                        if(DoR==1){
+                            Bdd_client[id_client].set_solde_courant(Bdd_client[id_client].get_solde_courant()+stoi(tmp));
+                        }
+                        else{
+                            Bdd_client[id_client].set_solde_courant(Bdd_client[id_client].get_solde_courant()-stoi(tmp));
+                        }
                         goto end;
                     }
                     
@@ -517,7 +524,23 @@ class Carre{
                             else{
                                 window2.close();
                                 
-                                send_to_serveur("6/"+tmp2+"/"+tmp+"\n",1235);
+                                if(send_to_serveur("6/"+tmp2+"/"+tmp+"\n",1235)[0]=='1'){
+                                    explication.setTxt("Virement effectué avec succès");
+                                    if(compte1.getclicked()){
+                                        Bdd_client[id_client].set_solde_courant(Bdd_client[id_client].get_solde_courant()-std::stoi(tmp));
+                                    }
+                                    else if(compte2.getclicked()){
+                                        Bdd_client[id_client].set_solde_epargne1(Bdd_client[id_client].get_solde_epargne1()-std::stoi(tmp));
+                                    }
+                                    else if(compte3.getclicked()){
+                                        Bdd_client[id_client].set_solde_epargne2(Bdd_client[id_client].get_solde_epargne2()-std::stoi(tmp));
+                                    }
+                                    
+
+                                }
+                                else{
+                                    explication.setTxt("Virement échoué");
+                                }
                             }
                             
                         }
