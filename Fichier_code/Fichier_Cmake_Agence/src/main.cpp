@@ -436,10 +436,16 @@ class Carre{
         while (window3.isOpen()){
             while (window3.pollEvent(event_)){
                 if(confirmer.isbind(event_.mouseButton.x, event_.mouseButton.y)){
-                    if(counter >= 4){ // Si quelqu'un comprend pourquoi le bouton est cliqué automatiquement aux 4 premières itérations...
+                    if(counter >= 4 && Bdd_client[id_client].get_solde_courant()>std::stoi(tmp_)){ // Si quelqu'un comprend pourquoi le bouton est cliqué automatiquement aux 4 premières itérations...
                         window3.clear();
                         window3.close();
                         return 1;
+                    }
+                    if(Bdd_client[id_client].get_solde_courant()<std::stoi(tmp_)){
+                       txt = "Vous n'avez pas assez d'argent sur votre compte courant";
+                       window3.clear();
+                       window3.close();
+                       return 0;
                     }
                 }
                 if(annuler.isbind(event_.mouseButton.x, event_.mouseButton.y)){
@@ -716,7 +722,7 @@ void window_1(vector<Client> &Bdd_client, int id_client, bool &shutdown, int id_
     Carre carre(10, 170, 200, 250, 1, 116, 103, 82, "DEPOT", 255, 243, 216);
     Carre carre2(210, 170, 400, 250, 1, 116, 103, 82, "RETRAIT", 255, 243, 216);
     Carre carre3(410, 170, 600, 250, 1, 116, 103, 82, "VIREMENT", 255, 243, 216);
-    Carre argent(255,130,355,150,3,255,243,216,"Vous avez " + Bdd_client[id_client].get_solde_courant() + "€", 115,0,0);
+    Carre argent(255,130,355,150,3,255,243,216,"Vous avez " + to_string(Bdd_client[id_client].get_solde_courant()) + "€", 115,0,0);
     Carre suppression(255, 300, 355, 330, 1, 255, 243, 216, "Supprimer votre compte", 115, 0, 0);
     bool bugged=false;
     while (window.isOpen())
