@@ -804,7 +804,27 @@ void window_1(vector<Client> &Bdd_client, int id_client, bool &shutdown, int id_
     }
 } 
 
+void votreid(int id){
+    //creer une fenetre qui affiche votre id
+    sf::RenderWindow window(sf::VideoMode(610, 400), "Votre ID",sf::Style::Close);
+    Carre fond(0, 0, 610, 400, 3, 255, 243, 216);
+    Carre txt_bvn(255,40,355,20, 3,255,243,216,"Votre ID est : " + to_string(id),115,0,0);
+    while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+                
+        }
 
+        window.clear();
+        fond.afficher(window);
+        txt_bvn.afficher(window);
+        window.display();
+    }
+}
 void nouveau(vector<Client> &Bdd_client, bool &shutdown, int id_agence){
     sf::RenderWindow window(sf::VideoMode(610, 500), "Cree un Compte !",sf::Style::Close);
     Carre fond(0, 0, 610, 500, 3, 255, 243, 216);
@@ -858,6 +878,10 @@ void nouveau(vector<Client> &Bdd_client, bool &shutdown, int id_agence){
                                 int id_client = stoi(id);
                                 Client new_client(id_client,name.getText(),surname.getText(),stoi(age.getText()),password.getText(),id_client+1,0,id_client+2,0,id_client,0);
                                 Bdd_client.push_back(new_client);
+                                window.close();
+                                votreid(id_client);
+                                connexion(Bdd_client, shutdown, id_agence);
+
                             }
                             else{
                                 valider.setTxt("Les mots de passe ne correspondent pas");

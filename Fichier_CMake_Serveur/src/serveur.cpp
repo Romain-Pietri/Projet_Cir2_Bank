@@ -253,11 +253,15 @@ string virement(string message,vector<Client> &Bdd_Client, vector<Agence> &Agenc
 
 string add_client(string message, vector<Client> &Bdd_Client){
       int idbank=stoi(getbefore(message));
-      int max_id=Bdd_Client[0].get_idagence();
+      
+      int max_id=Bdd_Client[0].get_id();
       for(int i=1;i<Bdd_Client.size();++i){
-            if(Bdd_Client[i].get_idagence()>max_id) max_id=Bdd_Client[i].get_idagence();
+            if(Bdd_Client[i].get_id()>max_id) max_id=Bdd_Client[i].get_id();
+            
       }
       max_id++;
+     
+
       Client client;
       client.set_idagence(idbank);
       client.set_id(max_id);
@@ -342,6 +346,7 @@ string readmessage(string message, std::vector<Agence> &agences, std::vector<Cli
             //Trouve l'id client max et ajoute 1 et le renvoie
             
                   message.erase(0,2);
+                 
                   return add_client(message,Bdd_client);
 
                   break;
